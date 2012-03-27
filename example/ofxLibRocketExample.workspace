@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Workspace Name="ofxLibRocketExample" Database="./emptyExample.tags">
+  <Project Name="emptyExample" Path="emptyExample.project" Active="Yes"/>
+  <BuildMatrix>
+    <WorkspaceConfiguration Name="Debug" Selected="yes">
+      <Project Name="linux" ConfigName="Debug"/>
+      <Project Name="emptyExample" ConfigName="Debug"/>
+    </WorkspaceConfiguration>
+    <WorkspaceConfiguration Name="Release" Selected="yes">
+      <Project Name="linux" ConfigName="Release"/>
+      <Project Name="emptyExample" ConfigName="Release"/>
+    </WorkspaceConfiguration>
+  </BuildMatrix>
+</CodeLite_Workspace>

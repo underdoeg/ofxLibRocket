@@ -1,0 +1,7 @@
+example/bin/example
+*.so
+*.session
+*.philip_whitfield
+*.d
+*.o
+*.goutpu*
