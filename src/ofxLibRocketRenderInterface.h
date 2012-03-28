@@ -4,7 +4,6 @@
 #include "Rocket/Core/RenderInterface.h"
 #include "Rocket/Core/Texture.h"
 #include "Rocket/Core/Vertex.h"
-#include "ofMain.h"
 
 class ofxLibRocketRenderInterface: public Rocket::Core::RenderInterface {
 

@@ -5,3 +5,6 @@ example/bin/example
 *.d
 *.o
 *.goutpu*
+.DS_Store
+*.app
+*.build

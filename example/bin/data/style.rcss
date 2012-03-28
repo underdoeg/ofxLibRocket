@@ -1,49 +1,121 @@
-/*
-* Default styles for all the basic elements.
-*/
+body{
+	width: 200px;
+	height: 200px;
+	background-color: rgba(0, 0, 0, 150);
+	
+	position: absolute;
+	top: 40px;
+	left: 40px;
 
-div
-{
-	display: block;
+	font-family: "PF Tempesta Seven Condensed";
+	font-weight: normal;
+	font-style: normal;
+	font-size: 8px;
+	
+	color: #FFF;
 }
 
-p
-{
-	display: block;
+div#titleBar{
+	background-color: rgba(0, 0, 0, 200);
+	width: 100%;
+	padding: 0px;
+	
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	
+	margin-bottom: 10px;
+	
 }
 
-h1
-{
-	display: block;
+div#title{
+	margin-left: 5px;
 }
 
-em
-{
-	font-style: italic;
-}
-
-strong
-{
-	font-weight: bold;
-}
-
-datagrid
-{
-	display: block;
-}
-
-select, dataselect, datacombo
-{
-	text-align: left;
-}
-
-tabset tabs
-{
-	display: block;
-}
-
-
-window{
-	display: block;
+button{
 	background-color: red;
+	width: 30px;
+	height: 30px;
+	display: block;
+	float: left;
+	margin: 0px;
+	margin-left: 3px;
+	padding: 0px;
 }
+
+form{
+
+}
+
+input,
+select,
+dataselect
+{
+background-color: red;
+}
+
+input.radio,
+input.checkbox
+{
+	width: 15px;
+	height: 15px;
+	background-color: black;
+	vertical-align: -3px;
+}
+
+input.radio
+{
+}
+
+input.radio:hover
+{
+	background-color: #aaddaa;
+}
+
+input.radio:active
+{
+	background-color: green;
+}
+
+input.radio:checked
+{
+	background-color: green;
+}
+
+input.radio:checked:hover
+{
+	
+}
+
+input.radio:checked:active
+{
+	
+}
+
+input.checkbox
+{
+	
+}
+
+input.checkbox:hover
+{
+}
+
+input.checkbox:active
+{
+}
+
+input.checkbox:checked
+{
+}
+
+input.checkbox:checked:hover
+{
+
+}
+
+input.checkbox:checked:active
+{
+
+}
+

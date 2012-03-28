@@ -28,6 +28,9 @@
 #include "ofxLibRocketRenderInterface.h"
 #include <Rocket/Core.h>
 
+#include "ofMain.h"
+
+
 #define GL_CLAMP_TO_EDGE 0x812F
 
 ofxLibRocketRenderInterface::ofxLibRocketRenderInterface()

@@ -4,7 +4,6 @@
 #include <Rocket/Core/SystemInterface.h>
 #include <Rocket/Core/Log.h>
 #include <Rocket/Core/Types.h>
-#include "ofMain.h"
 
 class ofxLibRocketSystemInterface: public Rocket::Core::SystemInterface {
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "ofxLibRocket.h"
 #include "ofMain.h"
+#include "ofxLibRocket.h"
 
 class testApp : public ofBaseApp {
 public:

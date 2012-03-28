@@ -1,4 +1,6 @@
 #include "ofxLibRocketSystemInterface.h"
+#include "ofMain.h"
+
 
 using namespace Rocket::Core;
 

@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void testApp::setup() {
+	libRocket.loadFont("pf_tempesta_seven_condensed.ttf");
 	libRocket.setup();
 }
 

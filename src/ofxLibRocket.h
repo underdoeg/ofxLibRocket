@@ -1,10 +1,11 @@
 #ifndef OFXLIBROCKET_H
 #define OFXLIBROCKET_H
-
 #include "ofxLibRocketSystemInterface.h"
 #include "ofxLibRocketRenderInterface.h"
 #include "Rocket/Core.h"
 #include "Rocket/Debugger.h"
+#include <Rocket/Controls.h>
+#include "ofMain.h"
 
 class ofxLibRocket {
 
@@ -18,6 +19,9 @@ public:
 	void draw(ofEventArgs& e);
 	void draw();
 
+	//always load font before calling setup
+	void loadFont(string file);
+	
 	void keyPressed  (ofKeyEventArgs& e);
 	void keyReleased(ofKeyEventArgs& e);
 	void mouseMoved(ofMouseEventArgs& e);

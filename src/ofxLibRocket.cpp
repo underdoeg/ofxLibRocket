@@ -7,6 +7,12 @@ static Rocket::Core::Input::KeyIdentifier key_identifier_map[KEYMAP_SIZE];
 
 ofxLibRocket::ofxLibRocket()
 {
+	Rocket::Core::SetRenderInterface(&renderer);
+	Rocket::Core::SetSystemInterface(&systemInterface);
+	
+	Rocket::Core::Initialise();
+	
+	Rocket::Controls::Initialise();
 }
 
 ofxLibRocket::~ofxLibRocket()
@@ -15,11 +21,6 @@ ofxLibRocket::~ofxLibRocket()
 
 void ofxLibRocket::setup()
 {
-	Rocket::Core::SetRenderInterface(&renderer);
-	Rocket::Core::SetSystemInterface(&systemInterface);
-
-	Rocket::Core::Initialise();
-
 	context = Rocket::Core::CreateContext("main", Rocket::Core::Vector2i(ofGetWidth(), ofGetHeight()));
 	if (context == NULL) {
 		Rocket::Core::Shutdown();
@@ -27,6 +28,8 @@ void ofxLibRocket::setup()
 	}
 
 	Rocket::Debugger::Initialise(context);
+	
+	Rocket::Debugger::SetVisible(true);
 
 	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath("demo.rml").c_str());
 	if (document != NULL)
@@ -36,6 +39,11 @@ void ofxLibRocket::setup()
 	}
 
 	registerOfEvents();
+}
+
+void ofxLibRocket::loadFont(string file){
+	string path = ofToDataPath(file, true);
+	Rocket::Core::FontDatabase::LoadFontFace(Rocket::Core::String(path.c_str()));
 }
 
 void ofxLibRocket::update()
