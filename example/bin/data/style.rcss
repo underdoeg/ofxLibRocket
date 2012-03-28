@@ -54,6 +54,64 @@ dataselect
 background-color: red;
 }
 
+
+input.range
+{
+   width: 150px;
+   height: 15px;
+}
+
+input.range slidertrack
+{
+   background-color: #333;
+}
+
+input.range sliderbar
+{
+   margin-left: 4px;
+   width: 15px;
+   min-height: 10px;
+
+   background-color: #777;
+}
+
+input.range sliderbar:hover
+{
+   background-color: #777;
+}
+
+input.range sliderbar:active
+{
+   background-color: gray;
+}
+
+input.range sliderarrowdec
+{
+   width: 0px;
+   height: 24px;
+   display: none;
+}
+
+input.range sliderarrowdec:hover,
+input.range sliderarrowinc:hover
+{
+   
+}
+
+input.range sliderarrowdec:active,
+input.range sliderarrowinc:active
+{
+}
+
+input.range sliderarrowinc
+{
+   width: 0px;
+   height: 24px;
+   
+   background-color: blue;
+}
+
+
 input.radio,
 input.checkbox
 {
