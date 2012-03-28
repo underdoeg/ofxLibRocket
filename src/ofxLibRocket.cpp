@@ -2,25 +2,22 @@
 
 using namespace Rocket::Core;
 
-static const int KEYMAP_SIZE = 256;
+static const int KEYMAP_SIZE = 512;
 static Rocket::Core::Input::KeyIdentifier key_identifier_map[KEYMAP_SIZE];
 
-ofxLibRocket::ofxLibRocket()
-{
+ofxLibRocket::ofxLibRocket() {
 	Rocket::Core::SetRenderInterface(&renderer);
 	Rocket::Core::SetSystemInterface(&systemInterface);
-	
+
 	Rocket::Core::Initialise();
-	
+
 	Rocket::Controls::Initialise();
 }
 
-ofxLibRocket::~ofxLibRocket()
-{
+ofxLibRocket::~ofxLibRocket() {
 }
 
-void ofxLibRocket::setup()
-{
+void ofxLibRocket::setup() {
 	context = Rocket::Core::CreateContext("main", Rocket::Core::Vector2i(ofGetWidth(), ofGetHeight()));
 	if (context == NULL) {
 		Rocket::Core::Shutdown();
@@ -28,78 +25,73 @@ void ofxLibRocket::setup()
 	}
 
 	Rocket::Debugger::Initialise(context);
-	
+
 	Rocket::Debugger::SetVisible(true);
 
 	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath("demo.rml").c_str());
-	if (document != NULL)
-	{
+	if (document != NULL) {
 		document->Show();
 		document->RemoveReference();
 	}
 
 	registerOfEvents();
+
+	initialiseKeyMap();
 }
 
-void ofxLibRocket::loadFont(string file){
+void ofxLibRocket::loadFont(string file) {
 	string path = ofToDataPath(file, true);
 	Rocket::Core::FontDatabase::LoadFontFace(Rocket::Core::String(path.c_str()));
 }
 
-void ofxLibRocket::update()
-{
+void ofxLibRocket::update() {
 	context->Update();
 }
 
-void ofxLibRocket::draw()
-{
+void ofxLibRocket::draw() {
 	context->Render();
 }
 
-void ofxLibRocket::mouseMoved(int x, int y)
-{
-	context->ProcessMouseMove(x, y, ofGetKeyPressed());
+void ofxLibRocket::mouseMoved(int x, int y) {
+	context->ProcessMouseMove(x, y, 0);
 }
 
-void ofxLibRocket::mousePressed(int x, int y, int button)
-{
+void ofxLibRocket::mousePressed(int x, int y, int button) {
 	if(button == 3)
-		context->ProcessMouseWheel(-1, ofGetKeyPressed());
+		context->ProcessMouseWheel(-1, 0);
 	else if(button == 4)
-		context->ProcessMouseWheel(1, ofGetKeyPressed());
+		context->ProcessMouseWheel(1, 0);
 	else
-		context->ProcessMouseButtonDown(button, ofGetKeyPressed());
+		context->ProcessMouseButtonDown(button, 0);
 }
 
-void ofxLibRocket::mouseDragged(int x, int y, int button)
-{
-	context->ProcessMouseMove(x, y, ofGetKeyPressed());
+void ofxLibRocket::mouseDragged(int x, int y, int button) {
+	context->ProcessMouseMove(x, y, 0);
 }
 
-void ofxLibRocket::mouseReleased(int x, int y, int button)
-{
-	context->ProcessMouseButtonUp(button, ofGetKeyPressed());
+void ofxLibRocket::mouseReleased(int x, int y, int button) {
+	context->ProcessMouseButtonUp(button, 0);
 }
 
-void ofxLibRocket::keyPressed(int key)
-{
+void ofxLibRocket::keyPressed(int key) {
+	cout << key << endl;
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
-	context->ProcessKeyDown(key_identifier, ofGetKeyPressed());
+	if (key_identifier != Rocket::Core::Input::KI_UNKNOWN)
+		context->ProcessKeyDown(key_identifier, 0);
+	if(key != OF_KEY_BACKSPACE && key != OF_KEY_DEL && key != OF_KEY_LEFT && key != OF_KEY_RIGHT && key != OF_KEY_DOWN && key != OF_KEY_UP && key != OF_KEY_RETURN)
+		context->ProcessTextInput(key);
 }
 
-void ofxLibRocket::keyReleased(int key)
-{
+void ofxLibRocket::keyReleased(int key) {
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
-	context->ProcessKeyUp(key_identifier, ofGetKeyPressed());
+	context->ProcessKeyUp(key_identifier, 0);
 }
 
-void ofxLibRocket::resize(int w, int h)
-{
+void ofxLibRocket::resize(int w, int h) {
 	context->SetDimensions(Vector2i(w, h));
 }
 
-void ofxLibRocket::registerOfEvents()
-{
+void ofxLibRocket::registerOfEvents() {
 	ofAddListener(ofEvents().update, this, &ofxLibRocket::update);
 	ofAddListener(ofEvents().draw, this, &ofxLibRocket::draw);
 	ofAddListener(ofEvents().keyPressed, this, &ofxLibRocket::keyPressed);
@@ -111,8 +103,7 @@ void ofxLibRocket::registerOfEvents()
 	ofAddListener(ofEvents().windowResized, this, &ofxLibRocket::resize);
 }
 
-void ofxLibRocket::unregisterOfEvents()
-{
+void ofxLibRocket::unregisterOfEvents() {
 	ofRemoveListener(ofEvents().update, this, &ofxLibRocket::update);
 	ofRemoveListener(ofEvents().draw, this, &ofxLibRocket::draw);
 	ofRemoveListener(ofEvents().keyPressed, this, &ofxLibRocket::keyPressed);
@@ -124,92 +115,82 @@ void ofxLibRocket::unregisterOfEvents()
 	ofAddListener(ofEvents().windowResized, this, &ofxLibRocket::resize);
 }
 
-void ofxLibRocket::draw(ofEventArgs& e)
-{
+void ofxLibRocket::draw(ofEventArgs& e) {
 	draw();
 }
 
-void ofxLibRocket::update(ofEventArgs& e)
-{
+void ofxLibRocket::update(ofEventArgs& e) {
 	update();
 }
 
-void ofxLibRocket::keyPressed(ofKeyEventArgs& e)
-{
+void ofxLibRocket::keyPressed(ofKeyEventArgs& e) {
 	keyPressed(e.key);
 }
 
-void ofxLibRocket::keyReleased(ofKeyEventArgs& e)
-{
+void ofxLibRocket::keyReleased(ofKeyEventArgs& e) {
 	keyReleased(e.key);
 }
 
 
-void ofxLibRocket::mouseDragged(ofMouseEventArgs& e)
-{
+void ofxLibRocket::mouseDragged(ofMouseEventArgs& e) {
 	mouseDragged(e.x, e.y, e.button);
 }
 
-void ofxLibRocket::mouseMoved(ofMouseEventArgs& e)
-{
+void ofxLibRocket::mouseMoved(ofMouseEventArgs& e) {
 	mouseMoved(e.x, e.y);
 }
 
-void ofxLibRocket::mousePressed(ofMouseEventArgs& e)
-{
+void ofxLibRocket::mousePressed(ofMouseEventArgs& e) {
 	mousePressed(e.x, e.y, e.button);
 }
 
-void ofxLibRocket::mouseReleased(ofMouseEventArgs& e)
-{
+void ofxLibRocket::mouseReleased(ofMouseEventArgs& e) {
 	mouseReleased(e.x, e.y, e.button);
 }
 
-void ofxLibRocket::resize(ofResizeEventArgs& e)
-{
+void ofxLibRocket::resize(ofResizeEventArgs& e) {
 	resize(e.width, e.height);
 }
 
 
-void ofxLibRocket::initialiseKeyMap(){
+void ofxLibRocket::initialiseKeyMap() {
 	memset(key_identifier_map, sizeof(key_identifier_map), 0);
-
-	key_identifier_map[0x00] = Rocket::Core::Input::KI_A;
-	key_identifier_map[0x01] = Rocket::Core::Input::KI_S;
-	key_identifier_map[0x02] = Rocket::Core::Input::KI_D;
-	key_identifier_map[0x03] = Rocket::Core::Input::KI_F;
-	key_identifier_map[0x04] = Rocket::Core::Input::KI_H;
-	key_identifier_map[0x05] = Rocket::Core::Input::KI_G;
-	key_identifier_map[0x06] = Rocket::Core::Input::KI_Z;
-	key_identifier_map[0x07] = Rocket::Core::Input::KI_X;
-	key_identifier_map[0x08] = Rocket::Core::Input::KI_C;
-	key_identifier_map[0x09] = Rocket::Core::Input::KI_V;
-	key_identifier_map[0x0B] = Rocket::Core::Input::KI_B;
-	key_identifier_map[0x0C] = Rocket::Core::Input::KI_Q;
-	key_identifier_map[0x0D] = Rocket::Core::Input::KI_W;
-	key_identifier_map[0x0E] = Rocket::Core::Input::KI_E;
-	key_identifier_map[0x0F] = Rocket::Core::Input::KI_R;
-	key_identifier_map[0x10] = Rocket::Core::Input::KI_Y;
-	key_identifier_map[0x11] = Rocket::Core::Input::KI_T;
-	key_identifier_map[0x12] = Rocket::Core::Input::KI_1;
-	key_identifier_map[0x13] = Rocket::Core::Input::KI_2;
-	key_identifier_map[0x14] = Rocket::Core::Input::KI_3;
-	key_identifier_map[0x15] = Rocket::Core::Input::KI_4;
-	key_identifier_map[0x16] = Rocket::Core::Input::KI_6;
-	key_identifier_map[0x17] = Rocket::Core::Input::KI_5;
-	key_identifier_map[0x18] = Rocket::Core::Input::KI_OEM_PLUS;
-	key_identifier_map[0x19] = Rocket::Core::Input::KI_9;
-	key_identifier_map[0x1A] = Rocket::Core::Input::KI_7;
-	key_identifier_map[0x1B] = Rocket::Core::Input::KI_OEM_MINUS;
-	key_identifier_map[0x1C] = Rocket::Core::Input::KI_8;
-	key_identifier_map[0x1D] = Rocket::Core::Input::KI_0;
+	key_identifier_map['a'] = Rocket::Core::Input::KI_A;
+	key_identifier_map['s'] = Rocket::Core::Input::KI_S;
+	key_identifier_map['d'] = Rocket::Core::Input::KI_D;
+	key_identifier_map['f'] = Rocket::Core::Input::KI_F;
+	key_identifier_map['h'] = Rocket::Core::Input::KI_H;
+	key_identifier_map['g'] = Rocket::Core::Input::KI_G;
+	key_identifier_map['z'] = Rocket::Core::Input::KI_Z;
+	key_identifier_map['x'] = Rocket::Core::Input::KI_X;
+	key_identifier_map['c'] = Rocket::Core::Input::KI_C;
+	key_identifier_map['v'] = Rocket::Core::Input::KI_V;
+	key_identifier_map['b'] = Rocket::Core::Input::KI_B;
+	key_identifier_map['q'] = Rocket::Core::Input::KI_Q;
+	key_identifier_map['w'] = Rocket::Core::Input::KI_W;
+	key_identifier_map['e'] = Rocket::Core::Input::KI_E;
+	key_identifier_map['r'] = Rocket::Core::Input::KI_R;
+	key_identifier_map['y'] = Rocket::Core::Input::KI_Y;
+	key_identifier_map['t'] = Rocket::Core::Input::KI_T;
+	key_identifier_map['1'] = Rocket::Core::Input::KI_1;
+	key_identifier_map['2'] = Rocket::Core::Input::KI_2;
+	key_identifier_map['3'] = Rocket::Core::Input::KI_3;
+	key_identifier_map['4'] = Rocket::Core::Input::KI_4;
+	key_identifier_map['6'] = Rocket::Core::Input::KI_6;
+	key_identifier_map['5'] = Rocket::Core::Input::KI_5;
+	key_identifier_map['+'] = Rocket::Core::Input::KI_OEM_PLUS;
+	key_identifier_map['9'] = Rocket::Core::Input::KI_9;
+	key_identifier_map['7'] = Rocket::Core::Input::KI_7;
+	key_identifier_map['-'] = Rocket::Core::Input::KI_OEM_MINUS;
+	key_identifier_map['8'] = Rocket::Core::Input::KI_8;
+	key_identifier_map['0'] = Rocket::Core::Input::KI_0;
 	key_identifier_map[0x1E] = Rocket::Core::Input::KI_OEM_6;
 	key_identifier_map[0x1F] = Rocket::Core::Input::KI_O;
 	key_identifier_map[0x20] = Rocket::Core::Input::KI_U;
 	key_identifier_map[0x21] = Rocket::Core::Input::KI_OEM_4;
 	key_identifier_map[0x22] = Rocket::Core::Input::KI_I;
 	key_identifier_map[0x23] = Rocket::Core::Input::KI_P;
-	key_identifier_map[0x24] = Rocket::Core::Input::KI_RETURN;
+	key_identifier_map[OF_KEY_RETURN] = Rocket::Core::Input::KI_RETURN;
 	key_identifier_map[0x25] = Rocket::Core::Input::KI_L;
 	key_identifier_map[0x26] = Rocket::Core::Input::KI_J;
 	key_identifier_map[0x27] = Rocket::Core::Input::KI_OEM_7;
@@ -221,10 +202,10 @@ void ofxLibRocket::initialiseKeyMap(){
 	key_identifier_map[0x2D] = Rocket::Core::Input::KI_N;
 	key_identifier_map[0x2E] = Rocket::Core::Input::KI_M;
 	key_identifier_map[0x2F] = Rocket::Core::Input::KI_OEM_PERIOD;
-	key_identifier_map[0x30] = Rocket::Core::Input::KI_TAB;
-	key_identifier_map[0x31] = Rocket::Core::Input::KI_SPACE;
+	key_identifier_map[9] = Rocket::Core::Input::KI_TAB;
+	key_identifier_map[' '] = Rocket::Core::Input::KI_SPACE;
 	key_identifier_map[0x32] = Rocket::Core::Input::KI_OEM_3;
-	key_identifier_map[0x33] = Rocket::Core::Input::KI_BACK;
+	key_identifier_map[OF_KEY_BACKSPACE] = Rocket::Core::Input::KI_BACK;
 	key_identifier_map[0x35] = Rocket::Core::Input::KI_ESCAPE;
 	key_identifier_map[0x37] = Rocket::Core::Input::KI_LMETA;
 	key_identifier_map[0x38] = Rocket::Core::Input::KI_LSHIFT;
@@ -238,10 +219,10 @@ void ofxLibRocket::initialiseKeyMap(){
 	key_identifier_map[0x4C] = Rocket::Core::Input::KI_NUMPADENTER;
 	key_identifier_map[0x4E] = Rocket::Core::Input::KI_SUBTRACT;
 	key_identifier_map[0x51] = Rocket::Core::Input::KI_OEM_PLUS;
-	key_identifier_map[0x52] = Rocket::Core::Input::KI_NUMPAD0;
-	key_identifier_map[0x53] = Rocket::Core::Input::KI_NUMPAD1;
-	key_identifier_map[0x54] = Rocket::Core::Input::KI_NUMPAD2;
-	key_identifier_map[0x55] = Rocket::Core::Input::KI_NUMPAD3;
+	key_identifier_map[364] = Rocket::Core::Input::KI_NUMPAD0;
+	key_identifier_map[363] = Rocket::Core::Input::KI_NUMPAD1;
+	key_identifier_map[359] = Rocket::Core::Input::KI_NUMPAD2;
+	key_identifier_map[361] = Rocket::Core::Input::KI_NUMPAD3;
 	key_identifier_map[0x56] = Rocket::Core::Input::KI_NUMPAD4;
 	key_identifier_map[0x57] = Rocket::Core::Input::KI_NUMPAD5;
 	key_identifier_map[0x58] = Rocket::Core::Input::KI_NUMPAD6;
@@ -260,16 +241,16 @@ void ofxLibRocket::initialiseKeyMap(){
 	key_identifier_map[0x6D] = Rocket::Core::Input::KI_F10;
 	key_identifier_map[0x6F] = Rocket::Core::Input::KI_F12;
 	key_identifier_map[0x71] = Rocket::Core::Input::KI_F15;
-	key_identifier_map[0x73] = Rocket::Core::Input::KI_HOME;
-	key_identifier_map[0x74] = Rocket::Core::Input::KI_PRIOR;
-	key_identifier_map[0x75] = Rocket::Core::Input::KI_DELETE;
-	key_identifier_map[0x76] = Rocket::Core::Input::KI_F4;
-	key_identifier_map[0x77] = Rocket::Core::Input::KI_END;
-	key_identifier_map[0x78] = Rocket::Core::Input::KI_F2;
-	key_identifier_map[0x79] = Rocket::Core::Input::KI_NEXT;
-	key_identifier_map[0x7A] = Rocket::Core::Input::KI_F1;
-	key_identifier_map[0x7B] = Rocket::Core::Input::KI_LEFT;
-	key_identifier_map[0x7C] = Rocket::Core::Input::KI_RIGHT;
-	key_identifier_map[0x7D] = Rocket::Core::Input::KI_DOWN;
-	key_identifier_map[0x7E] = Rocket::Core::Input::KI_UP;
+	key_identifier_map[OF_KEY_HOME] = Rocket::Core::Input::KI_HOME;
+	key_identifier_map[OF_KEY_PAGE_UP] = Rocket::Core::Input::KI_PRIOR;
+	key_identifier_map[OF_KEY_DEL] = Rocket::Core::Input::KI_DELETE;
+	key_identifier_map[OF_KEY_F4] = Rocket::Core::Input::KI_F4;
+	key_identifier_map[OF_KEY_END] = Rocket::Core::Input::KI_END;
+	key_identifier_map[OF_KEY_F2] = Rocket::Core::Input::KI_F2;
+	key_identifier_map[OF_KEY_PAGE_DOWN] = Rocket::Core::Input::KI_NEXT;
+	key_identifier_map[OF_KEY_F1] = Rocket::Core::Input::KI_F1;
+	key_identifier_map[OF_KEY_LEFT] = Rocket::Core::Input::KI_LEFT;
+	key_identifier_map[OF_KEY_RIGHT] = Rocket::Core::Input::KI_RIGHT;
+	key_identifier_map[OF_KEY_DOWN] = Rocket::Core::Input::KI_DOWN;
+	key_identifier_map[OF_KEY_UP] = Rocket::Core::Input::KI_UP;
 }
