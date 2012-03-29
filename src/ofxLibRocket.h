@@ -22,6 +22,9 @@ public:
 	//always load font before calling setup
 	void loadFont(string file);
 	
+	Rocket::Core::ElementDocument* loadDocument(string docPath);
+
+	
 	void keyPressed  (ofKeyEventArgs& e);
 	void keyReleased(ofKeyEventArgs& e);
 	void mouseMoved(ofMouseEventArgs& e);

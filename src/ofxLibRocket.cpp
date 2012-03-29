@@ -25,14 +25,7 @@ void ofxLibRocket::setup() {
 	}
 
 	Rocket::Debugger::Initialise(context);
-
-	Rocket::Debugger::SetVisible(true);
-
-	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath("demo.rml").c_str());
-	if (document != NULL) {
-		document->Show();
-		document->RemoveReference();
-	}
+	
 
 	registerOfEvents();
 
@@ -42,6 +35,18 @@ void ofxLibRocket::setup() {
 void ofxLibRocket::loadFont(string file) {
 	string path = ofToDataPath(file, true);
 	Rocket::Core::FontDatabase::LoadFontFace(Rocket::Core::String(path.c_str()));
+}
+
+Rocket::Core::ElementDocument* ofxLibRocket::loadDocument(string docPath){
+	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath(docPath).c_str());
+	if (document != NULL) {
+		document->Show();
+		document->RemoveReference();
+	}else{
+		
+	}
+	
+	return document;
 }
 
 void ofxLibRocket::update() {
@@ -83,6 +88,9 @@ void ofxLibRocket::keyPressed(int key) {
 }
 
 void ofxLibRocket::keyReleased(int key) {
+	if(key == '$')
+		Rocket::Debugger::SetVisible(!Rocket::Debugger::IsVisible());
+
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
 	context->ProcessKeyUp(key_identifier, 0);
 }
