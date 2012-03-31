@@ -8,3 +8,6 @@ example/bin/example
 .DS_Store
 *.app
 *.build
+*1v3
+*.pbxuser
+example/example.xcodeproj/phwhitfield.pbxuser
