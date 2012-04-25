@@ -49,6 +49,11 @@ Rocket::Core::ElementDocument* ofxLibRocket::loadDocument(string docPath){
 	return document;
 }
 
+void ofxLibRocket::toggleDebugger()
+{
+	Rocket::Debugger::SetVisible(!Rocket::Debugger::IsVisible());
+}
+
 void ofxLibRocket::update() {
 	context->Update();
 }
@@ -78,8 +83,12 @@ void ofxLibRocket::mouseReleased(int x, int y, int button) {
 	context->ProcessMouseButtonUp(button, 0);
 }
 
+void ofxLibRocket::scrolled(float deltaX, float deltaY)
+{
+	context->ProcessMouseWheel(-deltaY, 0);
+}
+
 void ofxLibRocket::keyPressed(int key) {
-	cout << key << endl;
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
 	if (key_identifier != Rocket::Core::Input::KI_UNKNOWN)
 		context->ProcessKeyDown(key_identifier, 0);
@@ -89,7 +98,7 @@ void ofxLibRocket::keyPressed(int key) {
 
 void ofxLibRocket::keyReleased(int key) {
 	if(key == '$')
-		Rocket::Debugger::SetVisible(!Rocket::Debugger::IsVisible());
+		toggleDebugger();
 
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
 	context->ProcessKeyUp(key_identifier, 0);

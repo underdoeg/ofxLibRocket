@@ -39,6 +39,7 @@ public:
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
 	void mouseReleased(int x, int y, int button);
+	void scrolled(float deltaX, float deltaY);
 
 	void resize(int w, int h);
 
@@ -46,6 +47,8 @@ public:
 	void unregisterOfEvents();
 
 	void initialiseKeyMap();
+
+	void toggleDebugger();
 
 	Rocket::Core::Context* context;
 
