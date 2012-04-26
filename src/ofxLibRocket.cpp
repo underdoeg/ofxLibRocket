@@ -6,6 +6,10 @@ static const int KEYMAP_SIZE = 512;
 static Rocket::Core::Input::KeyIdentifier key_identifier_map[KEYMAP_SIZE];
 
 ofxLibRocket::ofxLibRocket() {
+	for(unsigned int i=0;i<OFX_LIBROCKET_MAX_KEYS;i++){
+		keyState[i] = false;
+	}
+	
 	Rocket::Core::SetRenderInterface(&renderer);
 	Rocket::Core::SetSystemInterface(&systemInterface);
 
@@ -63,27 +67,29 @@ void ofxLibRocket::draw() {
 }
 
 void ofxLibRocket::mouseMoved(int x, int y) {
-	context->ProcessMouseMove(x, y, 0);
+	context->ProcessMouseMove(x, y, getKeyModifier());
 }
 
 void ofxLibRocket::mousePressed(int x, int y, int button) {
-	context->ProcessMouseButtonDown(button, 0);
+	context->ProcessMouseButtonDown(button, getKeyModifier());
 }
 
 void ofxLibRocket::mouseDragged(int x, int y, int button) {
-	context->ProcessMouseMove(x, y, 0);
+	context->ProcessMouseMove(x, y, getKeyModifier());
 }
 
 void ofxLibRocket::mouseReleased(int x, int y, int button) {
-	context->ProcessMouseButtonUp(button, 0);
+	context->ProcessMouseButtonUp(button, getKeyModifier());
 }
 
 void ofxLibRocket::scrolled(float deltaX, float deltaY)
 {
-	context->ProcessMouseWheel(-deltaY, 0);
+	context->ProcessMouseWheel(-deltaY, getKeyModifier());
 }
 
 void ofxLibRocket::keyPressed(int key) {
+	if(key < OFX_LIBROCKET_MAX_KEYS)
+		keyState[key] = true;
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
 	if (key_identifier != Rocket::Core::Input::KI_UNKNOWN)
 		context->ProcessKeyDown(key_identifier, 0);
@@ -91,9 +97,11 @@ void ofxLibRocket::keyPressed(int key) {
 		context->ProcessTextInput(key);
 }
 
-void ofxLibRocket::keyReleased(int key) {
+void ofxLibRocket::keyReleased(int key){
+	if(key < OFX_LIBROCKET_MAX_KEYS)
+		keyState[key] = false;
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
-	context->ProcessKeyUp(key_identifier, 0);
+	context->ProcessKeyUp(key_identifier, getKeyModifier());
 }
 
 void ofxLibRocket::resize(int w, int h) {
@@ -262,4 +270,25 @@ void ofxLibRocket::initialiseKeyMap() {
 	key_identifier_map[OF_KEY_RIGHT] = Rocket::Core::Input::KI_RIGHT;
 	key_identifier_map[OF_KEY_DOWN] = Rocket::Core::Input::KI_DOWN;
 	key_identifier_map[OF_KEY_UP] = Rocket::Core::Input::KI_UP;
+}
+
+int ofxLibRocket::getKeyModifier()
+{
+	int key_modifier_state = 0;
+
+	if (keyState[OF_KEY_SHIFT])
+		key_modifier_state |= Rocket::Core::Input::KM_SHIFT;
+	
+	/*if (keyState[OF_KEY_])
+		key_modifier_state |= Rocket::Core::Input::KM_CAPSLOCK;*/
+	
+	if (keyState[OF_KEY_CTRL])
+		key_modifier_state |= Rocket::Core::Input::KM_CTRL;
+	
+	if (keyState[OF_KEY_ALT])
+		key_modifier_state |= Rocket::Core::Input::KM_ALT;
+	
+	/*if (x_state & Mod2Mask)
+		key_modifier_state |= Rocket::Core::Input::KM_NUMLOCK;*/
+	return key_modifier_state;
 }

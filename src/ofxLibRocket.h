@@ -7,6 +7,8 @@
 #include <Rocket/Controls.h>
 #include "ofMain.h"
 
+#define OFX_LIBROCKET_MAX_KEYS 512
+
 class ofxLibRocket {
 
 public:
@@ -53,6 +55,9 @@ public:
 	Rocket::Core::Context* context;
 
 private:
+	int getKeyModifier();
+	bool keyState[OFX_LIBROCKET_MAX_KEYS];
+
 	ofxLibRocketRenderInterface renderer;
 	ofxLibRocketSystemInterface systemInterface;
 };
