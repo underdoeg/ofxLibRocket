@@ -67,12 +67,7 @@ void ofxLibRocket::mouseMoved(int x, int y) {
 }
 
 void ofxLibRocket::mousePressed(int x, int y, int button) {
-	if(button == 3)
-		context->ProcessMouseWheel(-1, 0);
-	else if(button == 4)
-		context->ProcessMouseWheel(1, 0);
-	else
-		context->ProcessMouseButtonDown(button, 0);
+	context->ProcessMouseButtonDown(button, 0);
 }
 
 void ofxLibRocket::mouseDragged(int x, int y, int button) {
