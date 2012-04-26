@@ -97,9 +97,6 @@ void ofxLibRocket::keyPressed(int key) {
 }
 
 void ofxLibRocket::keyReleased(int key) {
-	if(key == '$')
-		toggleDebugger();
-
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
 	context->ProcessKeyUp(key_identifier, 0);
 }
