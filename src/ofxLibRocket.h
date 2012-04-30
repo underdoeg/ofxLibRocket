@@ -7,7 +7,7 @@
 #include <Rocket/Controls.h>
 #include "ofMain.h"
 
-#define OFX_LIBROCKET_MAX_KEYS 512
+#define OFX_LIBROCKET_MAX_KEYS 1024
 
 class ofxLibRocket {
 

@@ -30,7 +30,6 @@ void ofxLibRocket::setup() {
 
 	Rocket::Debugger::Initialise(context);
 	
-
 	registerOfEvents();
 
 	initialiseKeyMap();
@@ -276,9 +275,9 @@ int ofxLibRocket::getKeyModifier()
 {
 	int key_modifier_state = 0;
 
-	if (keyState[OF_KEY_SHIFT])
+	/*if (keyState[OF_KEY_SHIFT])
 		key_modifier_state |= Rocket::Core::Input::KM_SHIFT;
-	
+	*/
 	/*if (keyState[OF_KEY_])
 		key_modifier_state |= Rocket::Core::Input::KM_CAPSLOCK;*/
 	
