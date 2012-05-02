@@ -46,8 +46,8 @@ ofxLibRocketRenderInterface::~ofxLibRocketRenderInterface()
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
 void ofxLibRocketRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int ROCKET_UNUSED(num_vertices), int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
 {
-	glPushMatrix();
-	glTranslatef(translation.x, translation.y, 0);
+	ofPushMatrix();
+	ofTranslate(translation.x, translation.y);
 
 	glVertexPointer(2, GL_FLOAT, sizeof(Rocket::Core::Vertex), &vertices[0].position);
 	glEnableClientState(GL_COLOR_ARRAY);
@@ -68,7 +68,9 @@ void ofxLibRocketRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices,
 
 	glDrawElements(GL_TRIANGLES, num_indices, GL_UNSIGNED_INT, indices);
 
-	glPopMatrix();
+	glDisableClientState(GL_COLOR_ARRAY);
+
+	ofPopMatrix();
 }
 
 // Called by Rocket when it wants to compile geometry it believes will be static for the forseeable future.
