@@ -38,7 +38,6 @@ ofxLibRocketRenderInterface::ofxLibRocketRenderInterface()
 }
 
 
-
 ofxLibRocketRenderInterface::~ofxLibRocketRenderInterface()
 {
 }
@@ -101,7 +100,7 @@ void ofxLibRocketRenderInterface::EnableScissorRegion(bool enable)
 // Called by Rocket when it wants to change the scissor region.
 void ofxLibRocketRenderInterface::SetScissorRegion(int x, int y, int width, int height)
 {
-	glScissor(x, 768 - (y + height), width, height);
+	glScissor(x, height - (y + height), width, height);
 }
 
 // Set to byte packing, or the compiler will expand our struct, which means it won't read correctly from file
