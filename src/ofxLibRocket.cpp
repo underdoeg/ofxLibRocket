@@ -128,7 +128,7 @@ void ofxLibRocket::unregisterOfEvents() {
 	ofRemoveListener(ofEvents().mousePressed, this, &ofxLibRocket::mousePressed);
 	ofRemoveListener(ofEvents().mouseDragged, this, &ofxLibRocket::mouseDragged);
 	ofRemoveListener(ofEvents().mouseReleased, this, &ofxLibRocket::mouseReleased);
-	ofAddListener(ofEvents().windowResized, this, &ofxLibRocket::resize);
+	ofRemoveListener(ofEvents().windowResized, this, &ofxLibRocket::resize);
 }
 
 void ofxLibRocket::draw(ofEventArgs& e) {
