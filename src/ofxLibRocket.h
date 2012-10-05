@@ -51,6 +51,8 @@ public:
 	void initialiseKeyMap();
 
 	void toggleDebugger();
+	
+	
 
 	Rocket::Core::Context* context;
 
