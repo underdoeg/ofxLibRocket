@@ -141,6 +141,7 @@
       
       
       
+      
       ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -178,6 +179,7 @@
       <General OutputFile="" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
       
       
       
@@ -222,6 +224,8 @@
     <File Name="../src/ofxLibRocketElement.cpp"/>
     <File Name="../src/ofxLibRocketControls.h"/>
     <File Name="../src/ofxLibRocketControls.cpp"/>
+    <File Name="../src/ofxLibRocketDocument.h"/>
+    <File Name="../src/ofxLibRocketDocument.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="templates">
     <File Name="bin/data/demo.rml"/>

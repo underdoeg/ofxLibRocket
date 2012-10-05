@@ -1,6 +1,7 @@
 #ifndef OFXLIBROCKET_H
 #define OFXLIBROCKET_H
 
+#include "ofxLibRocketDocument.h"
 #include "ofxLibRocketControls.h"
 #include "ofxLibRocketSystemInterface.h"
 #include "ofxLibRocketRenderInterface.h"
@@ -11,7 +12,7 @@
 
 #define OFX_LIBROCKET_MAX_KEYS 1024
 
-class ofxLibRocket: public Rocket::Core::EventListener {
+class ofxLibRocket{
 
 public:
 	ofxLibRocket();
@@ -26,8 +27,7 @@ public:
 	//always load font before calling setup
 	void loadFont(string file);
 	
-	Rocket::Core::ElementDocument* loadDocument(string docPath);
-
+	ofxLibRocketDocument* loadDocument(string docPath);
 	
 	void keyPressed  (ofKeyEventArgs& e);
 	void keyReleased(ofKeyEventArgs& e);
@@ -53,12 +53,7 @@ public:
 	void initialiseKeyMap();
 
 	void toggleDebugger();
-	
-	void ProcessEvent(Rocket::Core::Event& event);
-	
-	ofxLibRocketSlider* getSlider(string name);
-	ofxLibRocketSlider* createSlider(string name, float min=0, float max=1, float step=.01);
-	
+		
 	Rocket::Core::Context* context;
 
 private:

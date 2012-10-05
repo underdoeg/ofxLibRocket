@@ -10,4 +10,5 @@ example/bin/example
 *.build
 *1v3
 *.pbxuser
+*.tags
 example/example.xcodeproj/phwhitfield.pbxuser

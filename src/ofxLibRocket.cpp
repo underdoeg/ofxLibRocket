@@ -40,30 +40,17 @@ void ofxLibRocket::loadFont(string file) {
 	Rocket::Core::FontDatabase::LoadFontFace(Rocket::Core::String(path.c_str()));
 }
 
-Rocket::Core::ElementDocument* ofxLibRocket::loadDocument(string docPath){
+ofxLibRocketDocument* ofxLibRocket::loadDocument(string docPath){
 	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath(docPath).c_str());
 	if (document != NULL) {
 		document->Show();
 		document->RemoveReference();
+		return new ofxLibRocketDocument(document);
 	}else{
 		
 	}
 	
-	return document;
-}
-
-void ofxLibRocket::ProcessEvent(Event& event)
-{
-	cout << event.GetType().CString() << endl;
-}
-
-ofxLibRocketSlider* ofxLibRocket::createSlider(string name, float min, float max, float step)
-{
-}
-
-ofxLibRocketSlider* ofxLibRocket::getSlider(string name)
-{
-	
+	return NULL;
 }
 
 void ofxLibRocket::toggleDebugger()
