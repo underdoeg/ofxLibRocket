@@ -52,6 +52,20 @@ Rocket::Core::ElementDocument* ofxLibRocket::loadDocument(string docPath){
 	return document;
 }
 
+void ofxLibRocket::ProcessEvent(Event& event)
+{
+	cout << event.GetType().CString() << endl;
+}
+
+ofxLibRocketSlider* ofxLibRocket::createSlider(string name, float min, float max, float step)
+{
+}
+
+ofxLibRocketSlider* ofxLibRocket::getSlider(string name)
+{
+	
+}
+
 void ofxLibRocket::toggleDebugger()
 {
 	Rocket::Debugger::SetVisible(!Rocket::Debugger::IsVisible());

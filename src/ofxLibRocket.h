@@ -1,5 +1,7 @@
 #ifndef OFXLIBROCKET_H
 #define OFXLIBROCKET_H
+
+#include "ofxLibRocketControls.h"
 #include "ofxLibRocketSystemInterface.h"
 #include "ofxLibRocketRenderInterface.h"
 #include "Rocket/Core.h"
@@ -9,7 +11,7 @@
 
 #define OFX_LIBROCKET_MAX_KEYS 1024
 
-class ofxLibRocket {
+class ofxLibRocket: public Rocket::Core::EventListener {
 
 public:
 	ofxLibRocket();
@@ -52,8 +54,11 @@ public:
 
 	void toggleDebugger();
 	
+	void ProcessEvent(Rocket::Core::Event& event);
 	
-
+	ofxLibRocketSlider* getSlider(string name);
+	ofxLibRocketSlider* createSlider(string name, float min=0, float max=1, float step=.01);
+	
 	Rocket::Core::Context* context;
 
 private:
