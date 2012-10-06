@@ -4,12 +4,13 @@
 void testApp::setup() {
 	libRocket.loadFont("pf_tempesta_seven_condensed.ttf");
 	libRocket.setup();
-	libRocket.loadDocument("demo.rml");
+	doc = libRocket.loadDocument("demo.rml");
+	doc->getSlider("slider");
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
-
+	
 }
 
 //--------------------------------------------------------------
@@ -29,7 +30,7 @@ void testApp::keyReleased(int key) {
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ) {
-
+	
 }
 
 //--------------------------------------------------------------

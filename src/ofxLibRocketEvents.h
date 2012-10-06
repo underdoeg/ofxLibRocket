@@ -4,19 +4,24 @@
 #include "Rocket/Core.h"
 #include "ofMain.h"
 
+class ofxLibRocketElement;
+class ofxLibRocketSlider;
+
 class ofxLibRocketEvent: public ofEventArgs 
 {
 public:
-	ofxLibRocketEvent();
-	~ofxLibRocketEvent();
-	
-	Rocket::Core::Element* element;
-	
+	ofxLibRocketElement* element;
+};
 
+class ofxLibRocketSliderEvent: public ofEventArgs 
+{
+public:
+	ofxLibRocketElement* element;
+	ofxLibRocketSlider* slider;
 };
 
 class ofxLibRocketListener{
-	virtual void onLibrocket
-}
+	
+};
 
 #endif // OFXLIBROCKETEVENTS_H

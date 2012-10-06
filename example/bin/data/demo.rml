@@ -19,7 +19,7 @@
 			<input id="good" type="radio" name="graphics" value="good" /> Good<br />
 			<input id="ok" type="radio" name="graphics" value="ok" checked="true" /> OK<br />
 			<input id="bad" type="radio" name="graphics" value="bad" onchange="bad_graphics" /> Bad<br />
-			<input id="range" type="range" value=".5" onchange="range_change" min="0" max="1" step=".01" orientation="horizontal"/> Bad<br />
+			<input id="slider" type="range" value=".5" onchange="range_change" min="0" max="1" step=".01" /> Bad<br />
 			<input type="text" id="textTest" value="asdada"/><br />
 			<textarea></textarea><br />
 			<input type="submit" value="accept">Accept</input>

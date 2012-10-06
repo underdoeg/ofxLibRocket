@@ -4,13 +4,15 @@
 #include "ofMain.h"
 #include "Rocket/Core.h"
 
-class ofxLibRocketElement
+class ofxLibRocketElement: public Rocket::Core::EventListener
 {
 public:
 	ofxLibRocketElement(Rocket::Core::Element* e);
 	~ofxLibRocketElement();
 	Rocket::Core::Element* getRocketElement();
-private:
+protected:
+	virtual void ProcessEvent(Rocket::Core::Event&){}
+
 	Rocket::Core::Element* rocketElement;
 };
 

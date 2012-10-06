@@ -8,10 +8,6 @@
   <VirtualDirectory Name="libRocket">
     <VirtualDirectory Name="include">
       <VirtualDirectory Name="Rocket">
-        <VirtualDirectory Name="Debugger">
-          <File Name="../libs/libRocket/include/Rocket/Debugger/Debugger.h"/>
-          <File Name="../libs/libRocket/include/Rocket/Debugger/Header.h"/>
-        </VirtualDirectory>
         <VirtualDirectory Name="Controls">
           <File Name="../libs/libRocket/include/Rocket/Controls/Clipboard.h"/>
           <File Name="../libs/libRocket/include/Rocket/Controls/ElementTabSet.h"/>
@@ -32,6 +28,10 @@
           <File Name="../libs/libRocket/include/Rocket/Controls/ElementDataGridExpandButton.h"/>
           <File Name="../libs/libRocket/include/Rocket/Controls/ElementFormControlSelect.h"/>
           <File Name="../libs/libRocket/include/Rocket/Controls/ElementDataGrid.h"/>
+        </VirtualDirectory>
+        <VirtualDirectory Name="Debugger">
+          <File Name="../libs/libRocket/include/Rocket/Debugger/Debugger.h"/>
+          <File Name="../libs/libRocket/include/Rocket/Debugger/Header.h"/>
         </VirtualDirectory>
         <VirtualDirectory Name="Core">
           <File Name="../libs/libRocket/include/Rocket/Core/StyleSheet.h"/>
@@ -142,6 +142,8 @@
       
       
       
+      
+      
       ]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
@@ -179,6 +181,8 @@
       <General OutputFile="" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
+      
       
       
       

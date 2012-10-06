@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CodeLite_Workspace Name="ofxLibRocketExample" Database="./emptyExample.tags">
+  <Environment>
+    <![CDATA[
+  
+  
+  
+  ]]>
+  </Environment>
   <Project Name="emptyExample" Path="emptyExample.project" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
@@ -11,9 +18,4 @@
       <Project Name="emptyExample" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
-  <Environment>
-    <![CDATA[
-  
-  ]]>
-  </Environment>
 </CodeLite_Workspace>

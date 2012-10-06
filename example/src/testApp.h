@@ -18,4 +18,5 @@ public:
 	void gotMessage(ofMessage msg);
 
 	ofxLibRocket libRocket;
+	ofxLibRocketDocument* doc;
 };
