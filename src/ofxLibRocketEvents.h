@@ -7,13 +7,13 @@
 class ofxLibRocketElement;
 class ofxLibRocketSlider;
 
-class ofxLibRocketEvent: public ofEventArgs 
+class ofxLibRocketEventArgs: public ofEventArgs 
 {
 public:
 	ofxLibRocketElement* element;
 };
 
-class ofxLibRocketSliderEvent: public ofEventArgs 
+class ofxLibRocketSliderEventArgs: public ofEventArgs 
 {
 public:
 	ofxLibRocketElement* element;
@@ -22,6 +22,17 @@ public:
 
 class ofxLibRocketListener{
 	
+};
+
+class ofxLibRocketEvents{
+public:
+	/* general events */
+	ofEvent<ofxLibRocketEventArgs> onShow;
+	ofEvent<ofxLibRocketEventArgs> onHide;
+	ofEvent<ofxLibRocketEventArgs> onResize;
+	ofEvent<ofxLibRocketEventArgs> onScroll;
+	ofEvent<ofxLibRocketEventArgs> onFocus;
+	ofEvent<ofxLibRocketEventArgs> onBlur;
 };
 
 #endif // OFXLIBROCKETEVENTS_H

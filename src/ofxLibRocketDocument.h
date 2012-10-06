@@ -1,6 +1,7 @@
 #ifndef OFXLIBROCKETDOCUMENT_H
 #define OFXLIBROCKETDOCUMENT_H
 
+#include "ofxLibRocketEvents.h"
 #include "ofMain.h"
 #include "Rocket/Core.h"
 #include "ofxLibRocketControls.h"
