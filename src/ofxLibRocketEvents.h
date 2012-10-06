@@ -24,15 +24,18 @@ class ofxLibRocketListener{
 	
 };
 
-class ofxLibRocketEvents{
+class ofxLibRocketElementEvents{
 public:
 	/* general events */
-	ofEvent<ofxLibRocketEventArgs> onShow;
-	ofEvent<ofxLibRocketEventArgs> onHide;
-	ofEvent<ofxLibRocketEventArgs> onResize;
-	ofEvent<ofxLibRocketEventArgs> onScroll;
-	ofEvent<ofxLibRocketEventArgs> onFocus;
-	ofEvent<ofxLibRocketEventArgs> onBlur;
+	ofEvent<ofxLibRocketEventArgs> show;
+	ofEvent<ofxLibRocketEventArgs> hide;
+	ofEvent<ofxLibRocketEventArgs> resize;
+	ofEvent<ofxLibRocketEventArgs> scroll;
+	ofEvent<ofxLibRocketEventArgs> focus;
+	ofEvent<ofxLibRocketEventArgs> blur;
+	
+	/*mouse events*/
+	
 };
 
 #endif // OFXLIBROCKETEVENTS_H

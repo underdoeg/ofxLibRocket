@@ -12,10 +12,10 @@ public:
 	~ofxLibRocketElement();
 	Rocket::Core::Element* getRocketElement();
 	
-	ofxLibRocketEvents events;
+	ofxLibRocketElementEvents events;
 	
 protected:
-	virtual void ProcessEvent(Rocket::Core::Event&){}
+	virtual void ProcessEvent(Rocket::Core::Event&);
 
 	Rocket::Core::Element* rocketElement;
 };
