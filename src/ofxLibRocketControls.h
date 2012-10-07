@@ -23,9 +23,13 @@ public:
 	void setMax(float max);
 	void setOrientation(ORIENTATION orientation);
 	float getValue();
+	float setFloatPointer(float* ptr);
+	
+	ofEvent<ofxLibRocketFloatEventArgs> eventChange;
 	
 private:
-	virtual void ProcessEvent(Rocket::Core::Event&);	
+	virtual void ProcessRocketEvent(Rocket::Core::Event&);	
+	float* floatPtr;
 };
 
 /************************************************************************************/

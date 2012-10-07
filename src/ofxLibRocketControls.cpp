@@ -14,6 +14,7 @@ ofxLibRocketSlider::ofxLibRocketSlider(Rocket::Core::Element* e):ofxLibRocketCon
 {
 	rocketElement->AddEventListener("change", this);	
 	//rocketElement->SetAttribute<float>("step",.3);
+	floatPtr = NULL;
 }
 
 float ofxLibRocketSlider::getValue()
@@ -21,10 +22,19 @@ float ofxLibRocketSlider::getValue()
 	return ofToFloat(rocketControl->GetValue().CString());
 }
 
-void ofxLibRocketSlider::ProcessEvent(Rocket::Core::Event& e)
+void ofxLibRocketSlider::ProcessRocketEvent(Rocket::Core::Event& e)
 {
-	float val = getValue();
-	
+	if(e.GetType() == "change"){
+		float val = getValue();
+		ofxLibRocketFloatEventArgs args;
+		args.element = this;
+		args.value = val;
+		ofNotifyEvent(eventChange, args);
+		
+		//update float pointer
+		if(floatPtr != NULL)
+			*floatPtr = val;
+	}
 }
 
 void ofxLibRocketSlider::setMax(float max)
@@ -48,4 +58,10 @@ void ofxLibRocketSlider::setOrientation(ORIENTATION orientation)
 void ofxLibRocketSlider::setStep(float step)
 {
 	rocketElement->SetAttribute<float>("step", step);	
+}
+
+float ofxLibRocketSlider::setFloatPointer(float* ptr)
+{
+	floatPtr = ptr;
+	*floatPtr = getValue();
 }

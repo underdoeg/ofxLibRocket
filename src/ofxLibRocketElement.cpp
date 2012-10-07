@@ -22,29 +22,37 @@ Rocket::Core::Element* ofxLibRocketElement::getRocketElement()
 
 void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 {
+	/* basic events */
 	if(e.GetType() == "show"){
 		static ofxLibRocketEventArgs args;
 		args.element = this;
-		ofNotifyEvent(events.show, args);
+		ofNotifyEvent(eventShow, args);
 	}else if(e.GetType() == "hide"){
 		static ofxLibRocketEventArgs args;
 		args.element = this;
-		ofNotifyEvent(events.hide, args);
+		ofNotifyEvent(eventHide, args);
 	}else if(e.GetType() == "resize"){
 		static ofxLibRocketEventArgs args;
 		args.element = this;
-		ofNotifyEvent(events.resize, args);
+		ofNotifyEvent(eventResize, args);
 	}else if(e.GetType() == "scroll"){
 		static ofxLibRocketEventArgs args;
 		args.element = this;
-		ofNotifyEvent(events.scroll, args);
+		ofNotifyEvent(eventScroll, args);
 	}else if(e.GetType() == "focus"){
 		static ofxLibRocketEventArgs args;
 		args.element = this;
-		ofNotifyEvent(events.focus, args);
+		ofNotifyEvent(eventFocus, args);
 	}else if(e.GetType() == "blur"){
 		static ofxLibRocketEventArgs args;
 		args.element = this;
-		ofNotifyEvent(events.blur, args);
+		ofNotifyEvent(eventBlur, args);
 	}
+	
+	/* mouse events */
+	else if(e.GetType() == ""){
+		
+	}
+	
+	ProcessRocketEvent(e);
 }

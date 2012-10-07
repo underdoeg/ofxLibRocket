@@ -5,12 +5,13 @@ void testApp::setup() {
 	libRocket.loadFont("pf_tempesta_seven_condensed.ttf");
 	libRocket.setup();
 	doc = libRocket.loadDocument("demo.rml");
-	doc->getSlider("slider");
+	ofxLibRocketSlider* slider = doc->getSlider("slider");
+	slider->setFloatPointer(&sliderValue);
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
-	
+	cout << sliderValue << endl;
 }
 
 //--------------------------------------------------------------

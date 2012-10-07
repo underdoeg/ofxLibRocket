@@ -7,35 +7,28 @@
 class ofxLibRocketElement;
 class ofxLibRocketSlider;
 
-class ofxLibRocketEventArgs: public ofEventArgs 
+class ofxLibRocketEventArgs: public ofEventArgs
 {
 public:
 	ofxLibRocketElement* element;
 };
 
-class ofxLibRocketSliderEventArgs: public ofEventArgs 
+class ofxLibRocketResizeEventArgs: public ofxLibRocketEventArgs, public ofResizeEventArgs
+{
+
+};
+
+class ofxLibRocketSliderEventArgs: public ofEventArgs
 {
 public:
 	ofxLibRocketElement* element;
 	ofxLibRocketSlider* slider;
 };
 
-class ofxLibRocketListener{
-	
-};
-
-class ofxLibRocketElementEvents{
+class ofxLibRocketFloatEventArgs: public ofxLibRocketEventArgs
+{
 public:
-	/* general events */
-	ofEvent<ofxLibRocketEventArgs> show;
-	ofEvent<ofxLibRocketEventArgs> hide;
-	ofEvent<ofxLibRocketEventArgs> resize;
-	ofEvent<ofxLibRocketEventArgs> scroll;
-	ofEvent<ofxLibRocketEventArgs> focus;
-	ofEvent<ofxLibRocketEventArgs> blur;
-	
-	/*mouse events*/
-	
+	float value;
 };
 
 #endif // OFXLIBROCKETEVENTS_H

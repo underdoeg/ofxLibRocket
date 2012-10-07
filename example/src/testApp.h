@@ -19,4 +19,6 @@ public:
 
 	ofxLibRocket libRocket;
 	ofxLibRocketDocument* doc;
+	
+	float sliderValue;
 };

@@ -5,17 +5,23 @@
 #include "ofMain.h"
 #include "Rocket/Core.h"
 
-class ofxLibRocketElement: public Rocket::Core::EventListener
+class ofxLibRocketElement: protected Rocket::Core::EventListener
 {
 public:
 	ofxLibRocketElement(Rocket::Core::Element* e);
 	~ofxLibRocketElement();
 	Rocket::Core::Element* getRocketElement();
 	
-	ofxLibRocketElementEvents events;
+	ofEvent<ofxLibRocketEventArgs> eventShow;
+	ofEvent<ofxLibRocketEventArgs> eventHide;
+	ofEvent<ofxLibRocketEventArgs> eventResize;
+	ofEvent<ofxLibRocketEventArgs> eventScroll;
+	ofEvent<ofxLibRocketEventArgs> eventFocus;
+	ofEvent<ofxLibRocketEventArgs> eventBlur;
 	
 protected:
-	virtual void ProcessEvent(Rocket::Core::Event&);
+	virtual void ProcessRocketEvent(Rocket::Core::Event& e){}
+	void ProcessEvent(Rocket::Core::Event&);
 
 	Rocket::Core::Element* rocketElement;
 };
