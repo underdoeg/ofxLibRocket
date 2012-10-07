@@ -6,17 +6,21 @@ void testApp::setup() {
 	libRocket.setup();
 	doc = libRocket.loadDocument("demo.rml");
 	ofxLibRocketSlider* slider = doc->getSlider("slider");
+	slider->setValue(.7);	
 	slider->setFloatPointer(&sliderValue);
+	
+	ofxLibRocketButton* button = doc->getButton("button");
+	button->setBoolPointer(&buttonValue);
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
-	cout << sliderValue << endl;
+	cout << buttonValue << endl;
 }
 
 //--------------------------------------------------------------
 void testApp::draw() {
-	ofEnableAlphaBlending();
+	ofRect(10, 10, sliderValue*200, 100);
 }
 
 //--------------------------------------------------------------

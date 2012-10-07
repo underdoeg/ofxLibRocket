@@ -23,7 +23,8 @@ public:
 	void setMax(float max);
 	void setOrientation(ORIENTATION orientation);
 	float getValue();
-	float setFloatPointer(float* ptr);
+	void setValue(float value);
+	void setFloatPointer(float* ptr);
 	
 	ofEvent<ofxLibRocketFloatEventArgs> eventChange;
 	
@@ -34,5 +35,22 @@ private:
 
 /************************************************************************************/
 
+class ofxLibRocketButton:public ofxLibRocketControl{
+public:
+	enum TYPE{BANG, TOGGLE};
+
+	ofxLibRocketButton(Rocket::Core::Element* e);
+	bool getValue();
+	void setValue(bool);
+	void setType(TYPE type);
+	TYPE getType();
+	void setBoolPointer(bool* ptr);
+	ofEvent<ofxLibRocketBoolEventArgs> eventChange;
+	
+private:
+	void fireEvent(bool value);
+	virtual void ProcessRocketEvent(Rocket::Core::Event&);	
+	bool* boolPtr;
+};
 
 #endif // OFXLIBROCKETCONTROLS_H

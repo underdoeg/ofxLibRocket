@@ -26,3 +26,13 @@ ofxLibRocketSlider* ofxLibRocketDocument::getSlider(string id)
 	return NULL;
 }
 
+ofxLibRocketButton* ofxLibRocketDocument::getButton(string id)
+{
+	Rocket::Core::Element* el = rocketDocument->GetElementById(id.c_str());
+	cout << el->GetTagName().CString() << endl;
+	if(el){
+		if(strcmp(el->GetTagName().CString(), "button") == 0)
+			return new ofxLibRocketButton(el);
+	}
+	return NULL;
+}

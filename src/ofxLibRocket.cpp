@@ -63,7 +63,9 @@ void ofxLibRocket::update() {
 }
 
 void ofxLibRocket::draw() {
+	ofEnableAlphaBlending();
 	context->Render();
+	ofDisableAlphaBlending();
 }
 
 void ofxLibRocket::mouseMoved(int x, int y) {

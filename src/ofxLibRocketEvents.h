@@ -31,4 +31,10 @@ public:
 	float value;
 };
 
+class ofxLibRocketBoolEventArgs: public ofxLibRocketEventArgs
+{
+public:
+	bool value;
+};
+
 #endif // OFXLIBROCKETEVENTS_H

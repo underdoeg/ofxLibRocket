@@ -24,7 +24,6 @@ div#titleBar{
 	top: 0px;
 	
 	margin-bottom: 10px;
-	
 }
 
 div#title{
@@ -38,6 +37,11 @@ button{
 	margin: 0px;
 	margin-left: 3px;
 	padding: 0px;
+	background-color: black;
+}
+
+button:on{
+	background-color: red;
 }
 
 form{

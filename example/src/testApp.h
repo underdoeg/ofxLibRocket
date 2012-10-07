@@ -21,4 +21,5 @@ public:
 	ofxLibRocketDocument* doc;
 	
 	float sliderValue;
+	bool buttonValue;
 };

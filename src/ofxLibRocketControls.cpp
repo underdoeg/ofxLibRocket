@@ -5,15 +5,14 @@ using namespace Rocket::Controls;
 
 ofxLibRocketControl::ofxLibRocketControl(Rocket::Core::Element* e):ofxLibRocketElement(e)
 {
-	rocketControl = static_cast<ElementFormControlInput*>(e);	
+	rocketControl = static_cast<ElementFormControlInput*>(e);
 }
 
 /************************************************************************************/
 
 ofxLibRocketSlider::ofxLibRocketSlider(Rocket::Core::Element* e):ofxLibRocketControl(e)
 {
-	rocketElement->AddEventListener("change", this);	
-	//rocketElement->SetAttribute<float>("step",.3);
+	rocketElement->AddEventListener("change", this);
 	floatPtr = NULL;
 }
 
@@ -24,13 +23,13 @@ float ofxLibRocketSlider::getValue()
 
 void ofxLibRocketSlider::ProcessRocketEvent(Rocket::Core::Event& e)
 {
-	if(e.GetType() == "change"){
+	if(e.GetType() == "change") {
 		float val = getValue();
 		ofxLibRocketFloatEventArgs args;
 		args.element = this;
 		args.value = val;
 		ofNotifyEvent(eventChange, args);
-		
+
 		//update float pointer
 		if(floatPtr != NULL)
 			*floatPtr = val;
@@ -44,7 +43,7 @@ void ofxLibRocketSlider::setMax(float max)
 
 void ofxLibRocketSlider::setMin(float min)
 {
-	rocketElement->SetAttribute<float>("min", min);	
+	rocketElement->SetAttribute<float>("min", min);
 }
 
 void ofxLibRocketSlider::setOrientation(ORIENTATION orientation)
@@ -57,11 +56,84 @@ void ofxLibRocketSlider::setOrientation(ORIENTATION orientation)
 
 void ofxLibRocketSlider::setStep(float step)
 {
-	rocketElement->SetAttribute<float>("step", step);	
+	rocketElement->SetAttribute<float>("step", step);
 }
 
-float ofxLibRocketSlider::setFloatPointer(float* ptr)
+void ofxLibRocketSlider::setFloatPointer(float* ptr)
 {
 	floatPtr = ptr;
 	*floatPtr = getValue();
+}
+
+void ofxLibRocketSlider::setValue(float value)
+{
+	rocketElement->SetAttribute<float>("value", value);
+}
+
+/********************************************************************************************************************/
+ofxLibRocketButton::ofxLibRocketButton(Rocket::Core::Element* e):ofxLibRocketControl(e)
+{
+	boolPtr = NULL;
+}
+
+bool ofxLibRocketButton::getValue()
+{
+	return rocketElement->GetAttribute<bool>("value", false);
+}
+
+void ofxLibRocketButton::setBoolPointer(bool* ptr)
+{
+	boolPtr = ptr;
+}
+
+void ofxLibRocketButton::setValue(bool val)
+{
+	rocketElement->SetPseudoClass("on", val);	
+	rocketElement->SetAttribute<bool>("value", val);
+}
+
+void ofxLibRocketButton::ProcessRocketEvent(Rocket::Core::Event& e)
+{
+	if(e.GetType() == "mousedown") {
+		bool val = getValue();
+		val = !val;
+		setValue(val);
+		fireEvent(val);
+	} else if(e.GetType() == "mouseup") {
+		if(getType() == BANG) {
+			bool val = getValue();
+			val = !val;
+			setValue(val);
+			fireEvent(val);
+		}
+	}
+}
+
+ofxLibRocketButton::TYPE ofxLibRocketButton::getType(void)
+{
+	String type = rocketElement->GetAttribute<String>("type", "bang");
+	if(type == "toggle")
+		return TOGGLE;
+	else
+		return BANG;
+}
+
+void ofxLibRocketButton::setType(TYPE type)
+{
+	string strType = "bang";
+	if(type == TOGGLE)
+		strType = "toggle";
+	rocketElement->SetAttribute<String>("type", strType.c_str());
+}
+
+void ofxLibRocketButton::fireEvent(bool val)
+{
+	ofxLibRocketBoolEventArgs args;
+	args.element = this;
+	args.value = val;
+	ofNotifyEvent(eventChange, args);
+
+	//update float pointer
+	if(boolPtr != NULL)
+		*boolPtr = val;
 }

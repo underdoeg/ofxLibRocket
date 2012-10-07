@@ -14,6 +14,8 @@ public:
 	
 	ofxLibRocketSlider* getSlider(string name);
 	ofxLibRocketSlider* createSlider(string id, float min=0, float max=1, float step=.01);
+	
+	ofxLibRocketButton* getButton(string name);
 private:
 	Rocket::Core::ElementDocument* rocketDocument;
 };
