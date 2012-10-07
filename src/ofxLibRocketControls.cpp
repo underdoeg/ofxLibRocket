@@ -71,6 +71,7 @@ void ofxLibRocketSlider::setValue(float value)
 }
 
 /********************************************************************************************************************/
+
 ofxLibRocketButton::ofxLibRocketButton(Rocket::Core::Element* e):ofxLibRocketControl(e)
 {
 	boolPtr = NULL;
@@ -88,7 +89,7 @@ void ofxLibRocketButton::setBoolPointer(bool* ptr)
 
 void ofxLibRocketButton::setValue(bool val)
 {
-	rocketElement->SetPseudoClass("on", val);	
+	rocketElement->SetPseudoClass("on", val);
 	rocketElement->SetAttribute<bool>("value", val);
 }
 
@@ -109,7 +110,7 @@ void ofxLibRocketButton::ProcessRocketEvent(Rocket::Core::Event& e)
 	}
 }
 
-ofxLibRocketButton::TYPE ofxLibRocketButton::getType(void)
+ofxLibRocketButton::TYPE ofxLibRocketButton::getType()
 {
 	String type = rocketElement->GetAttribute<String>("type", "bang");
 	if(type == "toggle")
@@ -136,4 +137,43 @@ void ofxLibRocketButton::fireEvent(bool val)
 	//update float pointer
 	if(boolPtr != NULL)
 		*boolPtr = val;
+}
+
+/********************************************************************************************************************/
+
+ofxLibRocketTextField::ofxLibRocketTextField(Rocket::Core::Element* e):ofxLibRocketControl(e)
+{
+	stringPtr = NULL;
+	rocketElement->AddEventListener("change", this);
+}
+
+string ofxLibRocketTextField::getValue()
+{
+	return rocketElement->GetAttribute<String>("value", "").CString();
+}
+
+void ofxLibRocketTextField::setStringPointer(string* ptr)
+{
+	stringPtr = ptr;
+	*stringPtr = getValue();
+}
+
+void ofxLibRocketTextField::setValue(string val)
+{
+	rocketElement->SetAttribute<String>("value", val.c_str());
+}
+
+void ofxLibRocketTextField::ProcessRocketEvent(Rocket::Core::Event& e)
+{
+	if(e.GetType() == "change") {
+		string val = getValue();
+		ofxLibRocketStringEventArgs args;
+		args.element = this;
+		args.value = val;
+		ofNotifyEvent(eventChange, args);
+
+		//update float pointer
+		if(stringPtr != NULL)
+			*stringPtr = val;
+	}
 }

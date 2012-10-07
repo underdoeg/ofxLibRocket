@@ -53,4 +53,19 @@ private:
 	bool* boolPtr;
 };
 
+/************************************************************************************/
+
+class ofxLibRocketTextField:public ofxLibRocketControl{
+public:
+	ofxLibRocketTextField(Rocket::Core::Element* e);
+	void setValue(string);
+	string getValue();
+	void setStringPointer(string* ptr);
+	ofEvent<ofxLibRocketStringEventArgs> eventChange;
+	
+private:
+	virtual void ProcessRocketEvent(Rocket::Core::Event&);	
+	string* stringPtr;
+};
+
 #endif // OFXLIBROCKETCONTROLS_H

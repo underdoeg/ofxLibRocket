@@ -36,3 +36,13 @@ ofxLibRocketButton* ofxLibRocketDocument::getButton(string id)
 	}
 	return NULL;
 }
+
+ofxLibRocketTextField* ofxLibRocketDocument::getTextField(string id)
+{
+	Rocket::Core::Element* el = rocketDocument->GetElementById(id.c_str());
+	if(el){
+		if(strcmp(el->GetAttribute<String>("type", "none").CString(), "text") == 0)
+			return new ofxLibRocketTextField(el);
+	}
+	return NULL;
+}

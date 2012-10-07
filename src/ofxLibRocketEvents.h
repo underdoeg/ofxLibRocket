@@ -37,4 +37,10 @@ public:
 	bool value;
 };
 
+class ofxLibRocketStringEventArgs: public ofxLibRocketEventArgs
+{
+public:
+	string value;
+};
+
 #endif // OFXLIBROCKETEVENTS_H

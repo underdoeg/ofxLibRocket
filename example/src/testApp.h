@@ -22,4 +22,5 @@ public:
 	
 	float sliderValue;
 	bool buttonValue;
+	string textValue;
 };

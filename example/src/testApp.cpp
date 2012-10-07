@@ -11,11 +11,14 @@ void testApp::setup() {
 	
 	ofxLibRocketButton* button = doc->getButton("button");
 	button->setBoolPointer(&buttonValue);
+	
+	ofxLibRocketTextField* text = doc->getTextField("text");
+	text->setStringPointer(&textValue);
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
-	cout << buttonValue << endl;
+	cout << textValue << endl;
 }
 
 //--------------------------------------------------------------
