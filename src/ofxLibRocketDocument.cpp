@@ -46,3 +46,21 @@ ofxLibRocketTextField* ofxLibRocketDocument::getTextField(string id)
 	}
 	return NULL;
 }
+
+void ofxLibRocketDocument::hide()
+{
+	rocketDocument->Hide();
+}
+
+void ofxLibRocketDocument::show()
+{
+	rocketDocument->Show();
+}
+
+void ofxLibRocketDocument::toggleVisibility()
+{
+	if(rocketDocument->IsVisible())
+		rocketDocument->Hide();
+	else
+		rocketDocument->Show();
+}

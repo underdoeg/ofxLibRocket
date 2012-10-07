@@ -18,6 +18,11 @@ public:
 	ofxLibRocketButton* getButton(string id);
 	
 	ofxLibRocketTextField* getTextField(string id);
+	
+	void hide();
+	void show();
+	void toggleVisibility();
+	
 private:
 	Rocket::Core::ElementDocument* rocketDocument;
 };
