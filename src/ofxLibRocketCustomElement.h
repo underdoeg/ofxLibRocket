@@ -8,7 +8,6 @@ class ofxLibRocketCustomElement;
 class ofxLibRocketCustomElementInstancer: public Rocket::Core::ElementInstancer
 {
 public:
-	ofxLibRocketCustomElementInstancer();
 	~ofxLibRocketCustomElementInstancer();
 
 	Rocket::Core::Element* InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes);
@@ -20,6 +19,8 @@ public:
 	template <class T>
 	static void addCustomElement(string tagName);
 private:
+	ofxLibRocketCustomElementInstancer();
+
 	static ofxLibRocketCustomElementInstancer* singleton;
 	static map<string, ofxLibRocketCustomElement*(*)(string)> instancers;
 };
