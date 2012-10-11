@@ -8,6 +8,7 @@ T ofxLibRocketCreateCustomElement(string tagName){
 }
 
 map<string, ofxLibRocketCustomElement*(*)(string)> ofxLibRocketCustomElementInstancer::instancers;
+ofxLibRocketCustomElementInstancer* ofxLibRocketCustomElementInstancer::singleton = NULL;
 
 ofxLibRocketCustomElementInstancer::ofxLibRocketCustomElementInstancer()
 {
@@ -36,6 +37,14 @@ template <class T>
 void ofxLibRocketCustomElementInstancer::addCustomElement(string tagName)
 {
 	instancers[tagName] = &ofxLibRocketCreateCustomElement<T>;
+	Rocket::Core::Factory::RegisterElementInstancer(tagName.c_str(), get());
+}
+
+
+ofxLibRocketCustomElementInstancer* ofxLibRocketCustomElementInstancer::get()
+{
+	if(singleton == NULL)
+		singleton = new ofxLibRocketCustomElementInstancer();
 }
 
 /*********************************************************************************/
@@ -53,4 +62,3 @@ void ofxLibRocketCustomElement::ProcessRocketEvent(Rocket::Core::Event& e)
 {
 
 }
-

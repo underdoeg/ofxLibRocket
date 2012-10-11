@@ -15,9 +15,12 @@ public:
 	void Release();
 	void ReleaseElement(Rocket::Core::Element* element);
 	
+	static ofxLibRocketCustomElementInstancer* get();
+	
 	template <class T>
 	static void addCustomElement(string tagName);
 private:
+	static ofxLibRocketCustomElementInstancer* singleton;
 	static map<string, ofxLibRocketCustomElement*(*)(string)> instancers;
 };
 
