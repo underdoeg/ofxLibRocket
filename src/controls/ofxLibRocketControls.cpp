@@ -29,7 +29,7 @@ void ofxLibRocketSlider::ProcessRocketEvent(Rocket::Core::Event& e)
 		args.element = this;
 		args.value = val;
 		ofNotifyEvent(eventChange, args);
-
+		
 		//update float pointer
 		if(floatPtr != NULL)
 			*floatPtr = val;
