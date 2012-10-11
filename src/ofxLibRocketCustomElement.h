@@ -18,7 +18,7 @@ public:
 	template <class T>
 	static void addCustomElement(string tagName);
 private:
-	static map<string, ofxLibRocketCustomElement*()> isntancers;
+	static map<string, ofxLibRocketCustomElement*(*)(string)> instancers;
 };
 
 class ofxLibRocketCustomElement : public Rocket::Core::Element

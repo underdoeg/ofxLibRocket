@@ -3,9 +3,11 @@
 using namespace Rocket::Core;
 
 template <class T>
-T ofxLibRocketCreateCustomElement(){
-	return new T();
+T ofxLibRocketCreateCustomElement(string tagName){
+	return new T(tagName.c_str());
 }
+
+map<string, ofxLibRocketCustomElement*(*)(string)> ofxLibRocketCustomElementInstancer::instancers;
 
 ofxLibRocketCustomElementInstancer::ofxLibRocketCustomElementInstancer()
 {
@@ -17,7 +19,9 @@ ofxLibRocketCustomElementInstancer::~ofxLibRocketCustomElementInstancer()
 
 Rocket::Core::Element* ofxLibRocketCustomElementInstancer::InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes)
 {
-	
+	if(instancers.find(tag.CString()) != instancers.end())
+		return instancers[tag.CString()](tag.CString());
+	return NULL; //shouldn't happen
 }
 
 void ofxLibRocketCustomElementInstancer::Release()
@@ -31,7 +35,7 @@ void ofxLibRocketCustomElementInstancer::ReleaseElement(Rocket::Core::Element* e
 template <class T>
 void ofxLibRocketCustomElementInstancer::addCustomElement(string tagName)
 {
-	
+	instancers[tagName] = &ofxLibRocketCreateCustomElement<T>;
 }
 
 /*********************************************************************************/

@@ -1,7 +1,7 @@
 #ifndef OFXLIBROCKETSLIDER2D_H
 #define OFXLIBROCKETSLIDER2D_H
 
-#include "ofxlibrocketcustomelement.h" // Base class: ofxLibRocketCustomElement
+#include "ofxLibRocketCustomElement.h" // Base class: ofxLibRocketCustomElement
 
 class ofxLibRocketSlider2d : public ofxLibRocketCustomElement
 {
