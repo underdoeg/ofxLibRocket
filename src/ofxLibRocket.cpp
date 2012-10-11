@@ -5,23 +5,29 @@ using namespace Rocket::Core;
 static const int KEYMAP_SIZE = 512;
 static Rocket::Core::Input::KeyIdentifier key_identifier_map[KEYMAP_SIZE];
 
-ofxLibRocket::ofxLibRocket() {
-	for(unsigned int i=0;i<OFX_LIBROCKET_MAX_KEYS;i++){
+ofxLibRocket::ofxLibRocket()
+{
+	for(unsigned int i=0; i<OFX_LIBROCKET_MAX_KEYS; i++) {
 		keyState[i] = false;
 	}
-	
+
 	Rocket::Core::SetRenderInterface(&renderer);
 	Rocket::Core::SetSystemInterface(&systemInterface);
 
 	Rocket::Core::Initialise();
 
 	Rocket::Controls::Initialise();
+
+	//add default ofxLibRocketControls
+	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider2d>("slider2d");
 }
 
-ofxLibRocket::~ofxLibRocket() {
+ofxLibRocket::~ofxLibRocket()
+{
 }
 
-void ofxLibRocket::setup() {
+void ofxLibRocket::setup()
+{
 	context = Rocket::Core::CreateContext("main", Rocket::Core::Vector2i(ofGetWidth(), ofGetHeight()));
 	if (context == NULL) {
 		Rocket::Core::Shutdown();
@@ -29,27 +35,29 @@ void ofxLibRocket::setup() {
 	}
 
 	Rocket::Debugger::Initialise(context);
-	
+
 	registerOfEvents();
 
 	initialiseKeyMap();
 }
 
-void ofxLibRocket::loadFont(string file) {
+void ofxLibRocket::loadFont(string file)
+{
 	string path = ofToDataPath(file, true);
 	Rocket::Core::FontDatabase::LoadFontFace(Rocket::Core::String(path.c_str()));
 }
 
-ofxLibRocketDocument* ofxLibRocket::loadDocument(string docPath){
+ofxLibRocketDocument* ofxLibRocket::loadDocument(string docPath)
+{
 	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath(docPath).c_str());
 	if (document != NULL) {
 		document->Show();
 		document->RemoveReference();
 		return new ofxLibRocketDocument(document);
-	}else{
-		
+	} else {
+
 	}
-	
+
 	return NULL;
 }
 
@@ -58,29 +66,35 @@ void ofxLibRocket::toggleDebugger()
 	Rocket::Debugger::SetVisible(!Rocket::Debugger::IsVisible());
 }
 
-void ofxLibRocket::update() {
+void ofxLibRocket::update()
+{
 	context->Update();
 }
 
-void ofxLibRocket::draw() {
+void ofxLibRocket::draw()
+{
 	ofEnableAlphaBlending();
 	context->Render();
 	ofDisableAlphaBlending();
 }
 
-void ofxLibRocket::mouseMoved(int x, int y) {
+void ofxLibRocket::mouseMoved(int x, int y)
+{
 	context->ProcessMouseMove(x, y, getKeyModifier());
 }
 
-void ofxLibRocket::mousePressed(int x, int y, int button) {
+void ofxLibRocket::mousePressed(int x, int y, int button)
+{
 	context->ProcessMouseButtonDown(button, getKeyModifier());
 }
 
-void ofxLibRocket::mouseDragged(int x, int y, int button) {
+void ofxLibRocket::mouseDragged(int x, int y, int button)
+{
 	context->ProcessMouseMove(x, y, getKeyModifier());
 }
 
-void ofxLibRocket::mouseReleased(int x, int y, int button) {
+void ofxLibRocket::mouseReleased(int x, int y, int button)
+{
 	context->ProcessMouseButtonUp(button, getKeyModifier());
 }
 
@@ -89,7 +103,8 @@ void ofxLibRocket::scrolled(float deltaX, float deltaY)
 	context->ProcessMouseWheel(-deltaY, getKeyModifier());
 }
 
-void ofxLibRocket::keyPressed(int key) {
+void ofxLibRocket::keyPressed(int key)
+{
 	if(key < OFX_LIBROCKET_MAX_KEYS)
 		keyState[key] = true;
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
@@ -99,18 +114,21 @@ void ofxLibRocket::keyPressed(int key) {
 		context->ProcessTextInput(key);
 }
 
-void ofxLibRocket::keyReleased(int key){
+void ofxLibRocket::keyReleased(int key)
+{
 	if(key < OFX_LIBROCKET_MAX_KEYS)
 		keyState[key] = false;
 	Rocket::Core::Input::KeyIdentifier key_identifier = key_identifier_map[key];
 	context->ProcessKeyUp(key_identifier, getKeyModifier());
 }
 
-void ofxLibRocket::resize(int w, int h) {
+void ofxLibRocket::resize(int w, int h)
+{
 	context->SetDimensions(Vector2i(w, h));
 }
 
-void ofxLibRocket::registerOfEvents() {
+void ofxLibRocket::registerOfEvents()
+{
 	ofAddListener(ofEvents().update, this, &ofxLibRocket::update);
 	ofAddListener(ofEvents().draw, this, &ofxLibRocket::draw);
 	ofAddListener(ofEvents().keyPressed, this, &ofxLibRocket::keyPressed);
@@ -122,7 +140,8 @@ void ofxLibRocket::registerOfEvents() {
 	ofAddListener(ofEvents().windowResized, this, &ofxLibRocket::resize);
 }
 
-void ofxLibRocket::unregisterOfEvents() {
+void ofxLibRocket::unregisterOfEvents()
+{
 	ofRemoveListener(ofEvents().update, this, &ofxLibRocket::update);
 	ofRemoveListener(ofEvents().draw, this, &ofxLibRocket::draw);
 	ofRemoveListener(ofEvents().keyPressed, this, &ofxLibRocket::keyPressed);
@@ -134,45 +153,55 @@ void ofxLibRocket::unregisterOfEvents() {
 	ofRemoveListener(ofEvents().windowResized, this, &ofxLibRocket::resize);
 }
 
-void ofxLibRocket::draw(ofEventArgs& e) {
+void ofxLibRocket::draw(ofEventArgs& e)
+{
 	draw();
 }
 
-void ofxLibRocket::update(ofEventArgs& e) {
+void ofxLibRocket::update(ofEventArgs& e)
+{
 	update();
 }
 
-void ofxLibRocket::keyPressed(ofKeyEventArgs& e) {
+void ofxLibRocket::keyPressed(ofKeyEventArgs& e)
+{
 	keyPressed(e.key);
 }
 
-void ofxLibRocket::keyReleased(ofKeyEventArgs& e) {
+void ofxLibRocket::keyReleased(ofKeyEventArgs& e)
+{
 	keyReleased(e.key);
 }
 
 
-void ofxLibRocket::mouseDragged(ofMouseEventArgs& e) {
+void ofxLibRocket::mouseDragged(ofMouseEventArgs& e)
+{
 	mouseDragged(e.x, e.y, e.button);
 }
 
-void ofxLibRocket::mouseMoved(ofMouseEventArgs& e) {
+void ofxLibRocket::mouseMoved(ofMouseEventArgs& e)
+{
 	mouseMoved(e.x, e.y);
 }
 
-void ofxLibRocket::mousePressed(ofMouseEventArgs& e) {
+void ofxLibRocket::mousePressed(ofMouseEventArgs& e)
+{
 	mousePressed(e.x, e.y, e.button);
 }
 
-void ofxLibRocket::mouseReleased(ofMouseEventArgs& e) {
+void ofxLibRocket::mouseReleased(ofMouseEventArgs& e)
+{
 	mouseReleased(e.x, e.y, e.button);
 }
 
-void ofxLibRocket::resize(ofResizeEventArgs& e) {
+void ofxLibRocket::resize(ofResizeEventArgs& e)
+{
 	resize(e.width, e.height);
 }
 
 
-void ofxLibRocket::initialiseKeyMap() {
+void ofxLibRocket::initialiseKeyMap()
+{
 	memset(key_identifier_map, sizeof(key_identifier_map), 0);
 	key_identifier_map['a'] = Rocket::Core::Input::KI_A;
 	key_identifier_map['s'] = Rocket::Core::Input::KI_S;
@@ -283,13 +312,13 @@ int ofxLibRocket::getKeyModifier()
 	*/
 	/*if (keyState[OF_KEY_])
 		key_modifier_state |= Rocket::Core::Input::KM_CAPSLOCK;*/
-	
+
 	if (keyState[OF_KEY_CTRL])
 		key_modifier_state |= Rocket::Core::Input::KM_CTRL;
-	
+
 	if (keyState[OF_KEY_ALT])
 		key_modifier_state |= Rocket::Core::Input::KM_ALT;
-	
+
 	/*if (x_state & Mod2Mask)
 		key_modifier_state |= Rocket::Core::Input::KM_NUMLOCK;*/
 	return key_modifier_state;

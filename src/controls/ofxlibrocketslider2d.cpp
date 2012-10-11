@@ -1,6 +1,10 @@
 #include "ofxlibrocketslider2d.h"
 
-string ofxLibRocketSlider2d::getTagName()
+ofxLibRocketSlider2d::ofxLibRocketSlider2d(string tagName):ofxLibRocketCustomElement(tagName)
 {
-	return "slider2d";
 }
+
+ofxLibRocketSlider2d::~ofxLibRocketSlider2d()
+{
+}
+

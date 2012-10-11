@@ -2,55 +2,45 @@
 
 using namespace Rocket::Core;
 
-template <class T>
-T ofxLibRocketCreateCustomElement(string tagName){
-	return new T(tagName.c_str());
-}
+map<string, ofxLibRocketCustomElementInstancer*> ofxLibRocketCustomElementHandler::instancers;
+ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::singleton = NULL;
 
-map<string, ofxLibRocketCustomElement*(*)(string)> ofxLibRocketCustomElementInstancer::instancers;
-ofxLibRocketCustomElementInstancer* ofxLibRocketCustomElementInstancer::singleton = NULL;
-
-ofxLibRocketCustomElementInstancer::ofxLibRocketCustomElementInstancer()
+ofxLibRocketCustomElementHandler::ofxLibRocketCustomElementHandler()
 {
 }
 
-ofxLibRocketCustomElementInstancer::~ofxLibRocketCustomElementInstancer()
+ofxLibRocketCustomElementHandler::~ofxLibRocketCustomElementHandler()
 {
 }
 
-Rocket::Core::Element* ofxLibRocketCustomElementInstancer::InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes)
+Rocket::Core::Element* ofxLibRocketCustomElementHandler::InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes)
 {
 	if(instancers.find(tag.CString()) != instancers.end())
-		return instancers[tag.CString()](tag.CString());
-	return NULL; //shouldn't happen
+		return instancers[tag.CString()]->createInstance();
+	return NULL; //shouldn't happen	
 }
 
-void ofxLibRocketCustomElementInstancer::Release()
+void ofxLibRocketCustomElementHandler::Release()
 {
 }
 
-void ofxLibRocketCustomElementInstancer::ReleaseElement(Rocket::Core::Element* element)
+void ofxLibRocketCustomElementHandler::ReleaseElement(Rocket::Core::Element* element)
 {
 }
 
-template <class T>
-void ofxLibRocketCustomElementInstancer::addCustomElement(string tagName)
-{
-	instancers[tagName] = &ofxLibRocketCreateCustomElement<T>;
-	Rocket::Core::Factory::RegisterElementInstancer(tagName.c_str(), get());
-}
 
-
-ofxLibRocketCustomElementInstancer* ofxLibRocketCustomElementInstancer::get()
+ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::get()
 {
 	if(singleton == NULL)
-		singleton = new ofxLibRocketCustomElementInstancer();
+		singleton = new ofxLibRocketCustomElementHandler();
+	return singleton;
 }
 
 /*********************************************************************************/
 
 ofxLibRocketCustomElement::ofxLibRocketCustomElement(string tagName):Element(tagName.c_str())
 {
+	
 }
 
 ofxLibRocketCustomElement::~ofxLibRocketCustomElement()
@@ -60,5 +50,5 @@ ofxLibRocketCustomElement::~ofxLibRocketCustomElement()
 
 void ofxLibRocketCustomElement::ProcessRocketEvent(Rocket::Core::Event& e)
 {
-
+	
 }

@@ -12,7 +12,7 @@
 		<button type="bang" id="button">BUTTON</button>
 		<input id="slider" type="range" value=".5" min="0" max="1" step=".01" /> Bad<br />
 		<input type="text" id="text" value="asdada"/><br />
-		
+		<slider2d />
 	</body>
 </rml>
 

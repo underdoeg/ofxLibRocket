@@ -5,24 +5,52 @@
 
 class ofxLibRocketCustomElement;
 
-class ofxLibRocketCustomElementInstancer: public Rocket::Core::ElementInstancer
+/*template <class T>
+T* ofxLibRocketCreateCustomElement(string tagName){
+	return new T(tagName.c_str());
+}*/
+
+class ofxLibRocketCustomElementInstancer{
+public:
+	virtual ofxLibRocketCustomElement* createInstance() = 0;
+	string tagName;
+};
+
+template <class T>
+class ofxLibRocketCustomElementInstancerTemplated: public ofxLibRocketCustomElementInstancer
 {
 public:
-	~ofxLibRocketCustomElementInstancer();
+	ofxLibRocketCustomElement* createInstance(){
+		return new T(tagName);
+	}
+};
+
+class ofxLibRocketCustomElementHandler: public Rocket::Core::ElementInstancer
+{
+public:
+	~ofxLibRocketCustomElementHandler();
 
 	Rocket::Core::Element* InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes);
 	void Release();
 	void ReleaseElement(Rocket::Core::Element* element);
-	
-	static ofxLibRocketCustomElementInstancer* get();
-	
-	template <class T>
-	static void addCustomElement(string tagName);
-private:
-	ofxLibRocketCustomElementInstancer();
 
-	static ofxLibRocketCustomElementInstancer* singleton;
-	static map<string, ofxLibRocketCustomElement*(*)(string)> instancers;
+	static ofxLibRocketCustomElementHandler* get();
+
+	template <class T>
+	static void addCustomElement(string tagName) {
+		//ofxLibRocketCreateCustomElement<T>(tagName);
+		//ofxLibRocketCustomElement*(functionPtr)(string) = ofxLibRocketCreateCustomElement<T>;
+		//instancers[tagName] = 
+		ofxLibRocketCustomElementInstancer* instancer = new ofxLibRocketCustomElementInstancerTemplated<T>();
+		instancer->tagName = tagName;
+		instancers[tagName] = instancer;
+		Rocket::Core::Factory::RegisterElementInstancer(tagName.c_str(), get());
+	}
+private:
+	ofxLibRocketCustomElementHandler();
+
+	static ofxLibRocketCustomElementHandler* singleton;
+	static map<string, ofxLibRocketCustomElementInstancer*> instancers;
 };
 
 class ofxLibRocketCustomElement : public Rocket::Core::Element

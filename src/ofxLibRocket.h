@@ -8,6 +8,8 @@
 #include "Rocket/Core.h"
 #include "Rocket/Debugger.h"
 #include <Rocket/Controls.h>
+#include "ofxlibrocketslider2d.h"
+#include "ofxLibRocketCustomElement.h"
 #include "ofMain.h"
 
 #define OFX_LIBROCKET_MAX_KEYS 1024
