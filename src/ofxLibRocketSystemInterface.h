@@ -17,7 +17,6 @@ class ofxLibRocketSystemInterface: public Rocket::Core::SystemInterface {
 public:
 	ofxLibRocketSystemInterface();
 	~ofxLibRocketSystemInterface();
-
 };
 
 #endif // OFXLIBROCKETSYSTEMINTERFACE_H

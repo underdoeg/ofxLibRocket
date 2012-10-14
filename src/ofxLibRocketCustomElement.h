@@ -38,9 +38,6 @@ public:
 
 	template <class T>
 	static void addCustomElement(string tagName) {
-		//ofxLibRocketCreateCustomElement<T>(tagName);
-		//ofxLibRocketCustomElement*(functionPtr)(string) = ofxLibRocketCreateCustomElement<T>;
-		//instancers[tagName] = 
 		ofxLibRocketCustomElementInstancer* instancer = new ofxLibRocketCustomElementInstancerTemplated<T>();
 		instancer->tagName = tagName;
 		instancers[tagName] = instancer;
@@ -53,7 +50,7 @@ private:
 	static map<string, ofxLibRocketCustomElementInstancer*> instancers;
 };
 
-class ofxLibRocketCustomElement : public Rocket::Core::Element
+class ofxLibRocketCustomElement : public Rocket::Core::Element, public Rocket::Core::EventListener
 {
 public:
 	ofxLibRocketCustomElement(string tagName);
@@ -68,7 +65,9 @@ public:
 	virtual void onMouseEnter(int x, int y) {};
 
 public:
-	void ProcessRocketEvent(Rocket::Core::Event& e);
+	void ProcessEvent(Rocket::Core::Event& e);
+	void OnUpdate();
+	bool isSetup;
 };
 
 #endif // OFXLIBROCKETCUSTOMELEMENT_H

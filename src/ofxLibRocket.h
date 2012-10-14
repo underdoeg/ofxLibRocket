@@ -51,11 +51,11 @@ public:
 
 	void registerOfEvents();
 	void unregisterOfEvents();
-
+	
 	void initialiseKeyMap();
-
+	
 	void toggleDebugger();
-		
+	
 	Rocket::Core::Context* context;
 
 private:

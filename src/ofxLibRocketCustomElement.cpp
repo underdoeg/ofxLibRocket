@@ -15,8 +15,10 @@ ofxLibRocketCustomElementHandler::~ofxLibRocketCustomElementHandler()
 
 Rocket::Core::Element* ofxLibRocketCustomElementHandler::InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes)
 {
-	if(instancers.find(tag.CString()) != instancers.end())
-		return instancers[tag.CString()]->createInstance();
+	if(instancers.find(tag.CString()) != instancers.end()){
+		ofxLibRocketCustomElement* el = instancers[tag.CString()]->createInstance();
+		return el;
+	}
 	return NULL; //shouldn't happen	
 }
 
@@ -26,8 +28,8 @@ void ofxLibRocketCustomElementHandler::Release()
 
 void ofxLibRocketCustomElementHandler::ReleaseElement(Rocket::Core::Element* element)
 {
+	
 }
-
 
 ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::get()
 {
@@ -40,7 +42,7 @@ ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::get()
 
 ofxLibRocketCustomElement::ofxLibRocketCustomElement(string tagName):Element(tagName.c_str())
 {
-	
+	isSetup = false;
 }
 
 ofxLibRocketCustomElement::~ofxLibRocketCustomElement()
@@ -48,7 +50,15 @@ ofxLibRocketCustomElement::~ofxLibRocketCustomElement()
 
 }
 
-void ofxLibRocketCustomElement::ProcessRocketEvent(Rocket::Core::Event& e)
+void ofxLibRocketCustomElement::ProcessEvent(Rocket::Core::Event& e)
 {
 	
+}
+
+void ofxLibRocketCustomElement::OnUpdate()
+{
+	if(!isSetup){
+		setup();
+		isSetup = true;
+	}
 }
