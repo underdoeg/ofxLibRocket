@@ -17,7 +17,8 @@ Rocket::Core::Element* ofxLibRocketCustomElementHandler::InstanceElement(Rocket:
 {
 	if(instancers.find(tag.CString()) != instancers.end()){
 		ofxLibRocketCustomElement* el = instancers[tag.CString()]->createInstance();
-		return el;
+		Rocket::Core::Element* elRet = el->createRocketElement(tag.CString());
+		return elRet;
 	}
 	return NULL; //shouldn't happen	
 }
@@ -40,7 +41,7 @@ ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::get()
 
 /*********************************************************************************/
 
-ofxLibRocketCustomElement::ofxLibRocketCustomElement(string tagName):Element(tagName.c_str())
+ofxLibRocketCustomElement::ofxLibRocketCustomElement()
 {
 	isSetup = false;
 }
@@ -61,4 +62,14 @@ void ofxLibRocketCustomElement::OnUpdate()
 		setup();
 		isSetup = true;
 	}
+}
+
+Rocket::Core::Element* ofxLibRocketCustomElement::createRocketElement(string tagName)
+{
+	return new Rocket::Core::Element(tagName.c_str());
+}
+
+
+void ofxLibRocketCustomElement::setRootElement(ofxLibRocketElement* el){
+	rootElement = el;
 }

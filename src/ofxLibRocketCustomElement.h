@@ -21,7 +21,7 @@ class ofxLibRocketCustomElementInstancerTemplated: public ofxLibRocketCustomElem
 {
 public:
 	ofxLibRocketCustomElement* createInstance(){
-		return new T(tagName);
+		return new T();
 	}
 };
 
@@ -50,10 +50,11 @@ private:
 	static map<string, ofxLibRocketCustomElementInstancer*> instancers;
 };
 
-class ofxLibRocketCustomElement : public Rocket::Core::Element, public Rocket::Core::EventListener
+/******************************************************************************************************************/
+class ofxLibRocketCustomElement
 {
 public:
-	ofxLibRocketCustomElement(string tagName);
+	ofxLibRocketCustomElement();
 	~ofxLibRocketCustomElement();
 
 	virtual void setup() {};
@@ -63,11 +64,15 @@ public:
 	virtual void onMouseUp(int x, int y, int button) {};
 	virtual void onMouseDrag(int x, int y, int button) {};
 	virtual void onMouseEnter(int x, int y) {};
-
-public:
+	
+	
+	virtual Rocket::Core::Element* createRocketElement(string tagName);
+	void setRootElement(ofxLibRocketElement* el);
+protected:
 	void ProcessEvent(Rocket::Core::Event& e);
 	void OnUpdate();
 	bool isSetup;
+	ofxLibRocketElement* rootElement;
 };
 
 #endif // OFXLIBROCKETCUSTOMELEMENT_H

@@ -6,11 +6,11 @@
 class ofxLibRocketSlider2d : public ofxLibRocketCustomElement
 {
 public:
-	ofxLibRocketSlider2d(string tagName);
+	ofxLibRocketSlider2d();
 	~ofxLibRocketSlider2d();
-	void setup(){cout << "HOHOHOHO" << endl;}
+	void setup();
 public:
-	
+	ofxLibRocketElement* handle;
 };
 
 #endif // OFXLIBROCKETSLIDER2D_H

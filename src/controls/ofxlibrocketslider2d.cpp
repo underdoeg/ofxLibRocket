@@ -1,6 +1,8 @@
 #include "ofxlibrocketslider2d.h"
 
-ofxLibRocketSlider2d::ofxLibRocketSlider2d(string tagName):ofxLibRocketCustomElement(tagName)
+using namespace Rocket::Core;
+
+ofxLibRocketSlider2d::ofxLibRocketSlider2d()
 {
 }
 
@@ -8,3 +10,7 @@ ofxLibRocketSlider2d::~ofxLibRocketSlider2d()
 {
 }
 
+void ofxLibRocketSlider2d::setup()
+{
+	//Element* handle = Factory::InstanceElement(this, "*", "slidertrack", Rocket::Core::XMLAttributes());
+}

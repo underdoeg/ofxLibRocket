@@ -3,6 +3,7 @@
 ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* e)
 {
 	rocketElement = e;
+
 	rocketElement->AddEventListener("show", this);
 	rocketElement->AddEventListener("hide", this);
 	rocketElement->AddEventListener("resize", this);
@@ -19,14 +20,7 @@ ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* e)
 	rocketElement->AddEventListener("mouseup", this);
 	rocketElement->AddEventListener("mousedown", this);
 	rocketElement->AddEventListener("mousescroll", this);
-	/*
-	dblclick
-	mouseover
-	mouseout
-	mousemove
-	mouseup
-	mousedown
-	mousescroll*/
+	
 }
 
 ofxLibRocketElement::~ofxLibRocketElement()
