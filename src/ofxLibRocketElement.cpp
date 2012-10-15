@@ -77,25 +77,25 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 
 	/* mouse events */
 	else if(e.GetType() == "click") {
-		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseClick, args);
 	}else if(e.GetType() == "dblclick") {
-		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseDoubleClick, args);
 	}else if(e.GetType() == "mouseover") {
-		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseOver, args);
 	}else if(e.GetType() == "mouseout") {
-		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseOut, args);
 	}else if(e.GetType() == "mousemove") {
-		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseMove, args);
 	}else if(e.GetType() == "mouseup") {
-		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseUp, args);
 	}else if(e.GetType() == "mousedown") {
-		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseDown, args);
 	}else if(e.GetType() == "mousescroll") {
 		//TODO
@@ -114,5 +114,5 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName, std::map
 
 ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)
 {
-	createElement(tagName, std::map<string, string>());
+	return createElement(tagName, std::map<string, string>());
 }
