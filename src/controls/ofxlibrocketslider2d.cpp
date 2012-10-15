@@ -12,5 +12,5 @@ ofxLibRocketSlider2d::~ofxLibRocketSlider2d()
 
 void ofxLibRocketSlider2d::setup()
 {
-	//Element* handle = Factory::InstanceElement(this, "*", "slidertrack", Rocket::Core::XMLAttributes());
+	rootElement->createElement("handle");
 }

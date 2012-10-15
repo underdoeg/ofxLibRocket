@@ -19,6 +19,9 @@ public:
 	ofEvent<ofxLibRocketEventArgs> eventFocus;
 	ofEvent<ofxLibRocketEventArgs> eventBlur;
 	
+	ofxLibRocketElement* createElement(string tagName);
+	ofxLibRocketElement* createElement(string tagName, std::map<string, string> attributes);
+		
 protected:
 	virtual void ProcessRocketEvent(Rocket::Core::Event& e){}
 	void ProcessEvent(Rocket::Core::Event&);

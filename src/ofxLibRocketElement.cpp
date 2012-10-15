@@ -1,25 +1,27 @@
 #include "ofxLibRocketElement.h"
 
+using namespace Rocket::Core;
+
 ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* e)
 {
 	rocketElement = e;
 
-	rocketElement->AddEventListener("show", this);
-	rocketElement->AddEventListener("hide", this);
-	rocketElement->AddEventListener("resize", this);
-	rocketElement->AddEventListener("scroll", this);
-	rocketElement->AddEventListener("focus", this);
-	rocketElement->AddEventListener("blur", this);
+	getRocketElement()->AddEventListener("show", this);
+	getRocketElement()->AddEventListener("hide", this);
+	getRocketElement()->AddEventListener("resize", this);
+	getRocketElement()->AddEventListener("scroll", this);
+	getRocketElement()->AddEventListener("focus", this);
+	getRocketElement()->AddEventListener("blur", this);
 
 	/*mouse events*/
-	rocketElement->AddEventListener("click", this);
-	rocketElement->AddEventListener("dblclick", this);
-	rocketElement->AddEventListener("mouseover", this);
-	rocketElement->AddEventListener("mouseout", this);
-	rocketElement->AddEventListener("mousemove", this);
-	rocketElement->AddEventListener("mouseup", this);
-	rocketElement->AddEventListener("mousedown", this);
-	rocketElement->AddEventListener("mousescroll", this);
+	getRocketElement()->AddEventListener("click", this);
+	getRocketElement()->AddEventListener("dblclick", this);
+	getRocketElement()->AddEventListener("mouseover", this);
+	getRocketElement()->AddEventListener("mouseout", this);
+	getRocketElement()->AddEventListener("mousemove", this);
+	getRocketElement()->AddEventListener("mouseup", this);
+	getRocketElement()->AddEventListener("mousedown", this);
+	getRocketElement()->AddEventListener("mousescroll", this);
 	
 }
 
@@ -67,4 +69,16 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 	}
 
 	ProcessRocketEvent(e);
+}
+
+ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName, std::map<string, string> attributes)
+{
+	XMLAttributes rocketAttributes();
+	Element* el = Factory::InstanceElement(getRocketElement(), "*", tagName.c_str(), XMLAttributes());
+	return new ofxLibRocketElement(el);
+}
+
+ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)
+{
+	createElement(tagName, std::map<string, string>());
 }

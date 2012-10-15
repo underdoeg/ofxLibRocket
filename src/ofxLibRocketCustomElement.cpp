@@ -18,6 +18,8 @@ Rocket::Core::Element* ofxLibRocketCustomElementHandler::InstanceElement(Rocket:
 	if(instancers.find(tag.CString()) != instancers.end()){
 		ofxLibRocketCustomElement* el = instancers[tag.CString()]->createInstance();
 		Rocket::Core::Element* elRet = el->createRocketElement(tag.CString());
+		el->setRootElement(new ofxLibRocketElement(elRet));
+		el->setup();
 		return elRet;
 	}
 	return NULL; //shouldn't happen	

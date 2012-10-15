@@ -186,3 +186,9 @@ slider2d{
 	display: block;
 	margin-top: 10px;
 }
+
+slider2d handler{
+	margin: 10px;
+	background-color: blue;
+	display: block;
+}
