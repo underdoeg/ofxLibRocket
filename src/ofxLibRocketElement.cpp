@@ -22,7 +22,7 @@ ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* e)
 	getRocketElement()->AddEventListener("mouseup", this);
 	getRocketElement()->AddEventListener("mousedown", this);
 	getRocketElement()->AddEventListener("mousescroll", this);
-	
+
 }
 
 ofxLibRocketElement::~ofxLibRocketElement()
@@ -32,6 +32,18 @@ ofxLibRocketElement::~ofxLibRocketElement()
 Rocket::Core::Element* ofxLibRocketElement::getRocketElement()
 {
 	return rocketElement;
+}
+
+//little helper function to convert the mouse position and button to the event args
+ofxLibRocketMouseEventArgs rocketMouseEventToOfx(Rocket::Core::Event& e, ofxLibRocketElement* el)
+{
+	static ofxLibRocketMouseEventArgs args;
+	args.element = el;
+	Vector2f off = el->getRocketElement()->GetAbsoluteOffset();
+	args.x = e.GetParameter<int>("mouse_x", 0)-off.x;
+	args.y = e.GetParameter<int>("mouse_y", 0)-off.y;
+	args.button = e.GetParameter<int>("button", 0);
+	return args;
 }
 
 void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
@@ -64,8 +76,29 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 	}
 
 	/* mouse events */
-	else if(e.GetType() == "") {
-
+	else if(e.GetType() == "click") {
+		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		ofNotifyEvent(eventMouseClick, args);
+	}else if(e.GetType() == "dblclick") {
+		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		ofNotifyEvent(eventMouseDoubleClick, args);
+	}else if(e.GetType() == "mouseover") {
+		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		ofNotifyEvent(eventMouseOver, args);
+	}else if(e.GetType() == "mouseout") {
+		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		ofNotifyEvent(eventMouseOut, args);
+	}else if(e.GetType() == "mousemove") {
+		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		ofNotifyEvent(eventMouseMove, args);
+	}else if(e.GetType() == "mouseup") {
+		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		ofNotifyEvent(eventMouseUp, args);
+	}else if(e.GetType() == "mousedown") {
+		static ofxLibRocketMouseEventArgs args =rocketMouseEventToOfx(e, this);
+		ofNotifyEvent(eventMouseDown, args);
+	}else if(e.GetType() == "mousescroll") {
+		//TODO
 	}
 
 	ProcessRocketEvent(e);
@@ -75,6 +108,7 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName, std::map
 {
 	XMLAttributes rocketAttributes();
 	Element* el = Factory::InstanceElement(getRocketElement(), "*", tagName.c_str(), XMLAttributes());
+	getRocketElement()->AppendChild(el);
 	return new ofxLibRocketElement(el);
 }
 

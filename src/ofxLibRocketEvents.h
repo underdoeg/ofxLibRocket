@@ -13,6 +13,11 @@ public:
 	ofxLibRocketElement* element;
 };
 
+class ofxLibRocketMouseEventArgs: public ofxLibRocketEventArgs, public ofMouseEventArgs
+{
+	
+};
+
 class ofxLibRocketResizeEventArgs: public ofxLibRocketEventArgs, public ofResizeEventArgs
 {
 

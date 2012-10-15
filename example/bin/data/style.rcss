@@ -182,13 +182,14 @@ input.checkbox:checked:active
 slider2d{
 	width: 100%;
 	height: 100px;
-	background-color: red;
+	background-color: black;
 	display: block;
 	margin-top: 10px;
 }
 
-slider2d handler{
-	margin: 10px;
-	background-color: blue;
+slider2d handle{
 	display: block;
+	width: 10px;
+	height: 10px;
+	background-color: #ccc;
 }
