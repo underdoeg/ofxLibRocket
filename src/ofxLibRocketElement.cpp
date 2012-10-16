@@ -116,3 +116,21 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)
 {
 	return createElement(tagName, std::map<string, string>());
 }
+
+int ofxLibRocketElement::getX(){
+	return rocketElement->GetAbsoluteLeft();
+}
+
+int ofxLibRocketElement::getY(){
+	return rocketElement->GetAbsoluteTop();
+}
+
+int ofxLibRocketElement::getHeight()
+{
+	return rocketElement->GetClientHeight();
+}
+
+int ofxLibRocketElement::getWidth()
+{
+	return rocketElement->GetClientWidth();
+}

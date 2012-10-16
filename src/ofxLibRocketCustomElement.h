@@ -51,6 +51,16 @@ private:
 	static map<string, ofxLibRocketCustomElementInstancer*> instancers;
 };
 
+class ofxLibRocketCustomElement;
+
+class ofxLibRocketCustomElementWrapper: public Rocket::Core::Element{
+public:
+	ofxLibRocketCustomElementWrapper(string tagName, ofxLibRocketCustomElement* el);
+	void OnRender();
+	void OnUpdate();
+	ofxLibRocketCustomElement* customElement;
+};
+
 /******************************************************************************************************************/
 class ofxLibRocketCustomElement
 {
@@ -59,6 +69,7 @@ public:
 	~ofxLibRocketCustomElement();
 
 	virtual void setup() {};
+	virtual void update() {};
 	virtual void draw() {};
 	virtual void onMouseMove(int x, int y) {};
 	virtual void onMousePress(int x, int y, int button) {};

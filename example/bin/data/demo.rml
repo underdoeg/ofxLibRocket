@@ -3,16 +3,29 @@
 		<title>Demo</title>
 		<link type="text/rcss" href="style.rcss"/>
 	</head>
-	<body class="window">
-		<div id="titleBar">
-			<div id="title">Title</div>
-		</div>
-		<br />
-
+	<body>
+		<!--
 		<button type="bang" id="button">BUTTON</button>
 		<input id="slider" type="range" value=".5" min="0" max="1" step=".01" /> Bad<br />
 		<input type="text" id="text" value="asdada"/><br />
-		<slider2d />
+		<slider2d /> -->
+		<!--<navigation>
+		
+		</navigation>-->
+		<div id="views">
+			<view>
+			
+			</view>
+			<view>
+			
+			</view>
+			<view>
+			
+			</view>
+			<view>
+			
+			</view>
+		</div>
 	</body>
 </rml>
 

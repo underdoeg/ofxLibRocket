@@ -113,6 +113,8 @@
     <File Name="src/testApp.cpp"/>
     <File Name="src/testApp.h"/>
     <File Name="src/main.cpp"/>
+    <File Name="src/view.h"/>
+    <File Name="src/view.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="config">
     <File Name="Makefile"/>
@@ -138,6 +140,7 @@
       <General OutputFile="" IntermediateDirectory="./Debug" Command="./example" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/bin" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
       
       
       
@@ -183,6 +186,7 @@
       <General OutputFile="" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
       
       
       
@@ -243,6 +247,7 @@
   </VirtualDirectory>
   <VirtualDirectory Name="templates">
     <File Name="bin/data/demo.rml"/>
+    <File Name="bin/data/style_controls.rcss"/>
     <File Name="bin/data/style.rcss"/>
   </VirtualDirectory>
 </CodeLite_Project>

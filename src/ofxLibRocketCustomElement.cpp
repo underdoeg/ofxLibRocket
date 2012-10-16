@@ -2,6 +2,23 @@
 
 using namespace Rocket::Core;
 
+ofxLibRocketCustomElementWrapper::ofxLibRocketCustomElementWrapper(string tagName, ofxLibRocketCustomElement* el):Element(tagName.c_str())
+{	
+	customElement = el;
+}
+
+void ofxLibRocketCustomElementWrapper::OnUpdate()
+{
+	customElement->update();
+}
+
+void ofxLibRocketCustomElementWrapper::OnRender()
+{
+	customElement->draw();
+}
+
+/******************************************************************************************************************************************************************************/
+
 map<string, ofxLibRocketCustomElementInstancer*> ofxLibRocketCustomElementHandler::instancers;
 ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::singleton = NULL;
 
@@ -68,7 +85,7 @@ void ofxLibRocketCustomElement::OnUpdate()
 
 Rocket::Core::Element* ofxLibRocketCustomElement::createRocketElement(string tagName)
 {
-	return new Rocket::Core::Element(tagName.c_str());
+	return new ofxLibRocketCustomElementWrapper(tagName, this);
 }
 
 

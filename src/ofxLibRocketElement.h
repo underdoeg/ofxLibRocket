@@ -32,7 +32,10 @@ public:
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseOut;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseScroll;
 	
-	
+	int getWidth();
+	int getHeight();
+	int getX();
+	int getY();
 	
 	ofxLibRocketElement* createElement(string tagName);
 	ofxLibRocketElement* createElement(string tagName, std::map<string, string> attributes);

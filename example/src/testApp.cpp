@@ -1,19 +1,13 @@
+#include "view.h"
 #include "testApp.h"
 
 //--------------------------------------------------------------
 void testApp::setup() {
+	ofSetFrameRate(60);
 	libRocket.loadFont("pf_tempesta_seven_condensed.ttf");
 	libRocket.setup();
+	ofxLibRocketCustomElementHandler::addCustomElement<View>("view");
 	doc = libRocket.loadDocument("demo.rml");
-	ofxLibRocketSlider* slider = doc->getSlider("slider");
-	slider->setValue(.7);	
-	slider->setFloatPointer(&sliderValue);
-	
-	ofxLibRocketButton* button = doc->getButton("button");
-	button->setBoolPointer(&buttonValue);
-	
-	ofxLibRocketTextField* text = doc->getTextField("text");
-	text->setStringPointer(&textValue);
 }
 
 //--------------------------------------------------------------
