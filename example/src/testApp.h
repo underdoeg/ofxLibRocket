@@ -19,8 +19,4 @@ public:
 
 	ofxLibRocket libRocket;
 	ofxLibRocketDocument* doc;
-	
-	float sliderValue;
-	bool buttonValue;
-	string textValue;
 };

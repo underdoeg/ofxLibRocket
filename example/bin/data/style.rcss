@@ -2,19 +2,26 @@ body{
 	background-color: black;
 	width: 100%;
 	height: 100%;
+	font-family: "PF Tempesta Seven Condensed";
+	font-weight: normal;
+	font-style: normal;
+	font-size: 8px;
+	color: #000;
 }
 
-navigation{
+#navigation{
 	display: block;
-	width: 300px;
+	width: 200px;
 	height: 100%;
 	float: left;
-	background-color: white;
+	background-color: #222;
+	color: #FFF;
 }
 
 #views{
 	display: block;
 	height: 100%;
+	margin-left: 200px;
 }
 
 view{
@@ -23,4 +30,14 @@ view{
 	display: block;
 	background-color: black;
 	float: left;
+	color: white;
+}
+
+view p{
+	margin: 10px;
+}
+
+h1{
+	margin: 5px;
+	display: block;
 }

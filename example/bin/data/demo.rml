@@ -1,6 +1,7 @@
 <rml>
 	<head>
 		<title>Demo</title>
+		<link type="text/rcss" href="controls.rcss"/>
 		<link type="text/rcss" href="style.rcss"/>
 	</head>
 	<body>
@@ -12,12 +13,17 @@
 		<!--<navigation>
 		
 		</navigation>-->
+		<div id="navigation">
+			<h1>Navigation</h1>
+			<button type="bang" id="button">TOGGLE DEBUGGER</button>
+			<button type="bang" id="button">SOME BUTTON</button>
+		</div>
 		<div id="views">
 			<view>
-			
+				<h1>VIEW 1</h1>
 			</view>
 			<view>
-			
+				<h1>VIEW 2</h1>
 			</view>
 			<view>
 			

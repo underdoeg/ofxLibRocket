@@ -8,6 +8,8 @@ void testApp::setup() {
 	libRocket.setup();
 	ofxLibRocketCustomElementHandler::addCustomElement<View>("view");
 	doc = libRocket.loadDocument("demo.rml");
+	
+	
 }
 
 //--------------------------------------------------------------
@@ -16,7 +18,6 @@ void testApp::update() {
 
 //--------------------------------------------------------------
 void testApp::draw() {
-	ofRect(10, 10, sliderValue*200, 100);
 }
 
 //--------------------------------------------------------------

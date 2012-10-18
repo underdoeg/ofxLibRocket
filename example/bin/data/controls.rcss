@@ -1,0 +1,18 @@
+button{
+	display: block;
+	margin: 0px;
+	margin-left: 3px;
+	padding: 4px;
+	width: 186px;
+	background-color: #777;
+	color: black;
+	margin-bottom: 3px;
+}
+
+button:hover{
+	background-color: #ddd;
+}
+
+button:on{
+	background-color: red;
+}
