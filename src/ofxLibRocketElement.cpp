@@ -144,3 +144,13 @@ ofxLibRocketDocument* ofxLibRocketElement::getDocument()
 {
 	return ofxLibRocket::getDocumentFromRocket(rocketElement->GetOwnerDocument());
 }
+
+void ofxLibRocketElement::addListener(ofxLibRocketElementListener* listener)
+{
+	//ofAddListener(event)
+}
+
+void ofxLibRocketElement::removeListener(ofxLibRocketElementListener* listener)
+{
+}
+

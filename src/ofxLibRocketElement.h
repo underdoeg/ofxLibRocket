@@ -7,6 +7,30 @@
 
 class ofxLibRocketDocument;
 
+class ofxLibRocketElementListener{
+public:
+	virtual void onMouseMove(int x, int y) {};
+	virtual void onMousePress(int x, int y, int button) {};
+	virtual void onMouseUp(int x, int y, int button) {};
+	virtual void onMouseDrag(int x, int y, int button) {};
+	virtual void onMouseEnter(int x, int y) {};
+	virtual void onMouseOut(int x, int y){};
+	
+	virtual void onMouseMove(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onMousePress(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onMouseUp(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onMouseDrag(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onMouseEnter(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onMouseOut(ofxLibRocketMouseEventArgs &e){};
+private:
+	void _mouseMove(ofxLibRocketMouseEventArgs &e) {onMouseMove(e);onMouseMove(e.x, e.y);};
+	void _mousePress(ofxLibRocketMouseEventArgs &e) {onMousePress(e);onMousePress(e.x, e.y, e.button);};
+	void _mouseUp(ofxLibRocketMouseEventArgs &e) {onMousePress(e);onMousePress(e.x, e.y, e.button);};
+	void _mouseDrag(ofxLibRocketMouseEventArgs &e) {onMouseDrag(e);onMouseDrag(e.x, e.y, e.button);};
+	void _mouseEnter(ofxLibRocketMouseEventArgs &e) {onMouseEnter(e);onMouseEnter(e.x, e.y);};
+	void _mouseOut(ofxLibRocketMouseEventArgs &e){onMouseOut(e);onMouseOut(e.x, e.y);};
+};
+
 class ofxLibRocketElement: protected Rocket::Core::EventListener
 {
 public:
@@ -44,6 +68,9 @@ public:
 	ofxLibRocketElement* createElement(string tagName, std::map<string, string> attributes);
 	
 	ofxLibRocketDocument* getDocument();
+	
+	void addListener(ofxLibRocketElementListener* listener);
+	void removeListener(ofxLibRocketElementListener* listener);
 	
 protected:
 	virtual void ProcessRocketEvent(Rocket::Core::Event& e){}

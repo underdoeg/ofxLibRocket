@@ -71,11 +71,6 @@ public:
 	virtual void setup() {};
 	virtual void update() {};
 	virtual void draw() {};
-	virtual void onMouseMove(int x, int y) {};
-	virtual void onMousePress(int x, int y, int button) {};
-	virtual void onMouseUp(int x, int y, int button) {};
-	virtual void onMouseDrag(int x, int y, int button) {};
-	virtual void onMouseEnter(int x, int y) {};
 
 	virtual Rocket::Core::Element* createRocketElement(string tagName);
 
