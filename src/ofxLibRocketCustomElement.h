@@ -83,7 +83,7 @@ protected:
 	void ProcessEvent(Rocket::Core::Event& e);
 	void OnUpdate();
 	bool isSetup;
-	ofxLibRocketElement* rootElement;
+	ofxLibRocketElement* element;
 
 private:
 	void setRootElement(ofxLibRocketElement* el);

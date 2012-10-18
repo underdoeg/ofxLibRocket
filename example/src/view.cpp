@@ -28,12 +28,12 @@ void View::update()
 
 void View::draw(){
 	ofPushView();
-	ofViewport(rootElement->getX(), rootElement->getY(), rootElement->getWidth(), rootElement->getHeight());
-	ofSetupScreenPerspective(rootElement->getWidth(), rootElement->getHeight());
+	ofViewport(element->getX(), element->getY(), element->getWidth(), element->getHeight());
+	ofSetupScreenPerspective(element->getWidth(), element->getHeight());
 	ofNoFill();
 	ofSetColor(255);
 	ofPushMatrix();
-	ofTranslate(rootElement->getWidth()*.5, rootElement->getHeight()*.5, 0);
+	ofTranslate(element->getWidth()*.5, element->getHeight()*.5, 0);
 	ofRotateX(ofNoise(rotX)*360);
 	ofRotateY(ofNoise(rotY)*360);
 	float s = (ofNoise(scale)-.5)*30;

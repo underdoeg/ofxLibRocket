@@ -90,5 +90,5 @@ Rocket::Core::Element* ofxLibRocketCustomElement::createRocketElement(string tag
 
 
 void ofxLibRocketCustomElement::setRootElement(ofxLibRocketElement* el){
-	rootElement = el;
+	element = el;
 }

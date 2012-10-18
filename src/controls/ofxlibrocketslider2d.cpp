@@ -12,5 +12,5 @@ ofxLibRocketSlider2d::~ofxLibRocketSlider2d()
 
 void ofxLibRocketSlider2d::setup()
 {
-	rootElement->createElement("handle");
+	element->createElement("handle");
 }
