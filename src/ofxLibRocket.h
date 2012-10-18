@@ -56,14 +56,18 @@ public:
 	
 	void toggleDebugger();
 	
-	Rocket::Core::Context* context;
-
+	static ofxLibRocketDocument* getDocumentFromRocket(Rocket::Core::ElementDocument* doc);
+	
 private:
 	int getKeyModifier();
 	bool keyState[OFX_LIBROCKET_MAX_KEYS];
 
+	static std::map<Rocket::Core::ElementDocument*, ofxLibRocketDocument*> rocketDocuments;
+
 	ofxLibRocketRenderInterface renderer;
 	ofxLibRocketSystemInterface systemInterface;
+	Rocket::Core::Context* context;
+	
 };
 
 #endif // OFXLIBROCKET_H

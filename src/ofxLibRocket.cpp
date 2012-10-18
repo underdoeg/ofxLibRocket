@@ -4,6 +4,7 @@ using namespace Rocket::Core;
 
 static const int KEYMAP_SIZE = 512;
 static Rocket::Core::Input::KeyIdentifier key_identifier_map[KEYMAP_SIZE];
+map<Rocket::Core::ElementDocument*, ofxLibRocketDocument*> ofxLibRocket::rocketDocuments;
 
 ofxLibRocket::ofxLibRocket()
 {
@@ -53,11 +54,22 @@ ofxLibRocketDocument* ofxLibRocket::loadDocument(string docPath)
 	if (document != NULL) {
 		document->Show();
 		document->RemoveReference();
-		return new ofxLibRocketDocument(document);
+		ofxLibRocketDocument* doc =  new ofxLibRocketDocument(document);
+		rocketDocuments[document] = doc;
+		return doc;
 	} else {
 
 	}
 
+	return NULL;
+}
+
+
+ofxLibRocketDocument* ofxLibRocket::getDocumentFromRocket(Rocket::Core::ElementDocument* doc)
+{
+	if(rocketDocuments.find(doc) != rocketDocuments.end()){
+		return rocketDocuments[doc];
+	}
 	return NULL;
 }
 

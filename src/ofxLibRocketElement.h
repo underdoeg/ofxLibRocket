@@ -5,6 +5,8 @@
 #include "ofMain.h"
 #include "Rocket/Core.h"
 
+class ofxLibRocketDocument;
+
 class ofxLibRocketElement: protected Rocket::Core::EventListener
 {
 public:
@@ -36,9 +38,12 @@ public:
 	int getHeight();
 	int getX();
 	int getY();
+	string getId();
 	
 	ofxLibRocketElement* createElement(string tagName);
 	ofxLibRocketElement* createElement(string tagName, std::map<string, string> attributes);
+	
+	ofxLibRocketDocument* getDocument();
 	
 protected:
 	virtual void ProcessRocketEvent(Rocket::Core::Event& e){}

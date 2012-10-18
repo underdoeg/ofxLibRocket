@@ -19,12 +19,15 @@ public:
 	
 	ofxLibRocketTextField* getTextField(string id);
 	
+	ofxLibRocketElement* getElement(string id);
+	
 	void hide();
 	void show();
 	void toggleVisibility();
 	
 private:
 	Rocket::Core::ElementDocument* rocketDocument;
+	map<string, ofxLibRocketElement*> elements;
 };
 
 #endif // OFXLIBROCKETDOCUMENT_H

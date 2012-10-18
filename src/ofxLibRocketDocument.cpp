@@ -11,6 +11,11 @@ ofxLibRocketDocument::~ofxLibRocketDocument()
 {
 }
 
+ofxLibRocketElement* ofxLibRocketDocument::getElement(string id)
+{
+	
+}
+
 ofxLibRocketSlider* ofxLibRocketDocument::createSlider(string name, float min, float max, float step)
 {
 	
@@ -20,7 +25,7 @@ ofxLibRocketSlider* ofxLibRocketDocument::getSlider(string id)
 {
 	Rocket::Core::Element* el = rocketDocument->GetElementById(id.c_str());
 	if(el){
-		if(strcmp(el->GetAttribute<String>("type", "none").CString(), "range") == 0)
+		if(el->GetAttribute<String>("type", "none") ==  "range")
 			return new ofxLibRocketSlider(el);
 	}
 	return NULL;

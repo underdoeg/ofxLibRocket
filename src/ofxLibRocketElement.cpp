@@ -1,3 +1,4 @@
+#include "ofxLibRocket.h"
 #include "ofxLibRocketElement.h"
 
 using namespace Rocket::Core;
@@ -22,7 +23,6 @@ ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* e)
 	getRocketElement()->AddEventListener("mouseup", this);
 	getRocketElement()->AddEventListener("mousedown", this);
 	getRocketElement()->AddEventListener("mousescroll", this);
-
 }
 
 ofxLibRocketElement::~ofxLibRocketElement()
@@ -133,4 +133,14 @@ int ofxLibRocketElement::getHeight()
 int ofxLibRocketElement::getWidth()
 {
 	return rocketElement->GetClientWidth();
+}
+
+string ofxLibRocketElement::getId()
+{
+	return rocketElement->GetId().CString();
+}
+
+ofxLibRocketDocument* ofxLibRocketElement::getDocument()
+{
+	return ofxLibRocket::getDocumentFromRocket(rocketElement->GetOwnerDocument());
 }

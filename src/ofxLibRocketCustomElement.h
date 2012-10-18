@@ -77,8 +77,8 @@ public:
 	virtual void onMouseDrag(int x, int y, int button) {};
 	virtual void onMouseEnter(int x, int y) {};
 
-
 	virtual Rocket::Core::Element* createRocketElement(string tagName);
+
 protected:
 	void ProcessEvent(Rocket::Core::Event& e);
 	void OnUpdate();
