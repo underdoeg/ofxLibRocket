@@ -5,5 +5,5 @@ using namespace Rocket::Core;
 
 void ofxLibRocketSlider2d::setup()
 {
-	element->createElement("handle");
+	createElement("handle");
 }
