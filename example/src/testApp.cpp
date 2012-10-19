@@ -8,8 +8,7 @@ void testApp::setup() {
 	libRocket.setup();
 	ofxLibRocketCustomElementHandler::addCustomElement<View>("view");
 	doc = libRocket.loadDocument("demo.rml");
-	
-	
+	ofAddListener(doc->getButton("toggleDebugger")->eventChange, this, &testApp::toggleDebugger);
 }
 
 //--------------------------------------------------------------
@@ -18,12 +17,12 @@ void testApp::update() {
 
 //--------------------------------------------------------------
 void testApp::draw() {
+	
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key) {
-	if(key == 'd')
-		libRocket.toggleDebugger();
+	
 }
 
 //--------------------------------------------------------------
@@ -63,4 +62,12 @@ void testApp::gotMessage(ofMessage msg) {
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo) {
 
+}
+
+void testApp::toggleDebugger(ofxLibRocketBoolEventArgs& args)
+{
+	if(args.value)
+		libRocket.showDebugger();
+	else
+		libRocket.hideDebugger();
 }

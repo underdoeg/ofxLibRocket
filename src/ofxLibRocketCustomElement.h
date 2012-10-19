@@ -55,14 +55,14 @@ class ofxLibRocketCustomElement;
 
 class ofxLibRocketCustomElementWrapper: public Rocket::Core::Element{
 public:
-	ofxLibRocketCustomElementWrapper(string tagName, ofxLibRocketCustomElement* el);
+	ofxLibRocketCustomElementWrapper(string tagName);
 	void OnRender();
 	void OnUpdate();
 	ofxLibRocketCustomElement* customElement;
 };
 
 /******************************************************************************************************************/
-class ofxLibRocketCustomElement
+class ofxLibRocketCustomElement: public ofxLibRocketElement
 {
 public:
 	ofxLibRocketCustomElement();
@@ -72,16 +72,12 @@ public:
 	virtual void update() {};
 	virtual void draw() {};
 
-	virtual Rocket::Core::Element* createRocketElement(string tagName);
-
 protected:
 	void ProcessEvent(Rocket::Core::Event& e);
 	void OnUpdate();
 	bool isSetup;
-	ofxLibRocketElement* element;
 
 private:
-	void setRootElement(ofxLibRocketElement* el);
 
 	friend class ofxLibRocketCustomElementHandler;
 };

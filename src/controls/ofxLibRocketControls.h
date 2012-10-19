@@ -35,6 +35,12 @@ private:
 
 /************************************************************************************/
 
+class ofxLibRocketButton;
+class ofxLibRocketButtonEventArgs: public ofxLibRocketBoolEventArgs{
+public:
+	ofxLibRocketButton* button;
+};
+
 class ofxLibRocketButton:public ofxLibRocketControl{
 public:
 	enum TYPE{BANG, TOGGLE};

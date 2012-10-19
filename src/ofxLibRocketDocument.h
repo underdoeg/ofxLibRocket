@@ -19,7 +19,14 @@ public:
 	
 	ofxLibRocketTextField* getTextField(string id);
 	
-	ofxLibRocketElement* getElement(string id);
+	ofxLibRocketElement* getElementById(string id);
+	
+	template <class T>
+	T* getElementById(string id){
+		return static_cast<T*>(getElementById(id));
+	}
+	
+	ofxLibRocketElementList* getElementsByTag(string id);
 	
 	void hide();
 	void show();

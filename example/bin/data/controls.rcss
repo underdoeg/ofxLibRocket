@@ -3,6 +3,7 @@ button{
 	margin: 0px;
 	margin-left: 3px;
 	padding: 4px;
+	padding-top: 3px;
 	width: 186px;
 	background-color: #777;
 	color: black;
@@ -14,5 +15,5 @@ button:hover{
 }
 
 button:on{
-	background-color: red;
+	background-color: #cdc;
 }

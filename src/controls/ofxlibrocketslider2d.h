@@ -6,8 +6,7 @@
 class ofxLibRocketSlider2d : public ofxLibRocketCustomElement
 {
 public:
-	ofxLibRocketSlider2d();
-	~ofxLibRocketSlider2d();
+
 	void setup();
 public:
 	ofxLibRocketElement* handle;

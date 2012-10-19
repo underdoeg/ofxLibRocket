@@ -6,8 +6,6 @@
 class View : public ofxLibRocketCustomElement
 {
 public:
-	View();
-	~View();
 	
 	void setup();
 	void draw();

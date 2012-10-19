@@ -55,6 +55,8 @@ public:
 	void initialiseKeyMap();
 	
 	void toggleDebugger();
+	void showDebugger();
+	void hideDebugger();
 	
 	static ofxLibRocketDocument* getDocumentFromRocket(Rocket::Core::ElementDocument* doc);
 	

@@ -3,9 +3,23 @@
 
 using namespace Rocket::Core;
 
-ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* e)
+ofxLibRocketElement::ofxLibRocketElement()
 {
-	rocketElement = e;
+	
+}
+
+ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* el)
+{
+	setRocketElement(el);
+}
+
+ofxLibRocketElement::~ofxLibRocketElement()
+{
+}
+
+void ofxLibRocketElement::setRocketElement(Rocket::Core::Element* el)
+{
+	rocketElement = el;
 
 	getRocketElement()->AddEventListener("show", this);
 	getRocketElement()->AddEventListener("hide", this);
@@ -23,10 +37,6 @@ ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* e)
 	getRocketElement()->AddEventListener("mouseup", this);
 	getRocketElement()->AddEventListener("mousedown", this);
 	getRocketElement()->AddEventListener("mousescroll", this);
-}
-
-ofxLibRocketElement::~ofxLibRocketElement()
-{
 }
 
 Rocket::Core::Element* ofxLibRocketElement::getRocketElement()
@@ -109,7 +119,7 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName, std::map
 	XMLAttributes rocketAttributes();
 	Element* el = Factory::InstanceElement(getRocketElement(), "*", tagName.c_str(), XMLAttributes());
 	getRocketElement()->AppendChild(el);
-	return new ofxLibRocketElement(el);
+	return new ofxLibRocketElement();
 }
 
 ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)

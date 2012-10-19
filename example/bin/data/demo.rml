@@ -10,12 +10,9 @@
 		<input id="slider" type="range" value=".5" min="0" max="1" step=".01" /> Bad<br />
 		<input type="text" id="text" value="asdada"/><br />
 		<slider2d /> -->
-		<!--<navigation>
-		
-		</navigation>-->
 		<div id="navigation">
 			<h1>Navigation</h1>
-			<button type="bang" id="button">TOGGLE DEBUGGER</button>
+			<button type="toggle" id="toggleDebugger">TOGGLE DEBUGGER</button>
 			<button type="bang" id="button">SOME BUTTON</button>
 		</div>
 		<div id="views">

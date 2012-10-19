@@ -4,7 +4,7 @@ using namespace Rocket::Core;
 using namespace Rocket::Controls;
 
 ofxLibRocketControl::ofxLibRocketControl(Rocket::Core::Element* e):ofxLibRocketElement(e)
-{
+{	
 	rocketControl = static_cast<ElementFormControlInput*>(e);
 }
 
@@ -129,9 +129,10 @@ void ofxLibRocketButton::setType(TYPE type)
 
 void ofxLibRocketButton::fireEvent(bool val)
 {
-	ofxLibRocketBoolEventArgs args;
+	ofxLibRocketButtonEventArgs args;
 	args.element = this;
 	args.value = val;
+	args.button = this;
 	ofNotifyEvent(eventChange, args);
 
 	//update float pointer

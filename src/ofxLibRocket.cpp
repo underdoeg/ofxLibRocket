@@ -78,6 +78,16 @@ void ofxLibRocket::toggleDebugger()
 	Rocket::Debugger::SetVisible(!Rocket::Debugger::IsVisible());
 }
 
+void ofxLibRocket::hideDebugger()
+{
+	Rocket::Debugger::SetVisible(false);
+}
+
+void ofxLibRocket::showDebugger()
+{
+	Rocket::Debugger::SetVisible(true);
+}
+
 void ofxLibRocket::update()
 {
 	context->Update();
@@ -335,3 +345,4 @@ int ofxLibRocket::getKeyModifier()
 		key_modifier_state |= Rocket::Core::Input::KM_NUMLOCK;*/
 	return key_modifier_state;
 }
+

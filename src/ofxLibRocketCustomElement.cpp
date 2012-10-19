@@ -2,19 +2,21 @@
 
 using namespace Rocket::Core;
 
-ofxLibRocketCustomElementWrapper::ofxLibRocketCustomElementWrapper(string tagName, ofxLibRocketCustomElement* el):Element(tagName.c_str())
+ofxLibRocketCustomElementWrapper::ofxLibRocketCustomElementWrapper(string tagName):Element(tagName.c_str())
 {	
-	customElement = el;
+	customElement = NULL;
 }
 
 void ofxLibRocketCustomElementWrapper::OnUpdate()
 {
-	customElement->update();
+	if(customElement)
+		customElement->update();
 }
 
 void ofxLibRocketCustomElementWrapper::OnRender()
 {
-	customElement->draw();
+	if(customElement)
+		customElement->draw();
 }
 
 /******************************************************************************************************************************************************************************/
@@ -33,9 +35,10 @@ ofxLibRocketCustomElementHandler::~ofxLibRocketCustomElementHandler()
 Rocket::Core::Element* ofxLibRocketCustomElementHandler::InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes)
 {
 	if(instancers.find(tag.CString()) != instancers.end()){
+		ofxLibRocketCustomElementWrapper* elRet = new ofxLibRocketCustomElementWrapper(tag.CString());		
 		ofxLibRocketCustomElement* el = instancers[tag.CString()]->createInstance();
-		Rocket::Core::Element* elRet = el->createRocketElement(tag.CString());
-		el->setRootElement(new ofxLibRocketElement(elRet));
+		elRet->customElement = el;
+		el->setRocketElement(elRet);
 		el->setup();
 		return elRet;
 	}
@@ -81,14 +84,4 @@ void ofxLibRocketCustomElement::OnUpdate()
 		setup();
 		isSetup = true;
 	}
-}
-
-Rocket::Core::Element* ofxLibRocketCustomElement::createRocketElement(string tagName)
-{
-	return new ofxLibRocketCustomElementWrapper(tagName, this);
-}
-
-
-void ofxLibRocketCustomElement::setRootElement(ofxLibRocketElement* el){
-	element = el;
 }

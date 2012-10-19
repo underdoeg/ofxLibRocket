@@ -34,8 +34,11 @@ private:
 class ofxLibRocketElement: protected Rocket::Core::EventListener
 {
 public:
-	ofxLibRocketElement(Rocket::Core::Element* e);
+	ofxLibRocketElement();
+	ofxLibRocketElement(Rocket::Core::Element* el);
 	~ofxLibRocketElement();
+	
+	void setRocketElement(Rocket::Core::Element* el);
 	Rocket::Core::Element* getRocketElement();
 	
 	ofEvent<ofxLibRocketEventArgs> eventUpdate;
@@ -77,6 +80,10 @@ protected:
 	void ProcessEvent(Rocket::Core::Event&);
 
 	Rocket::Core::Element* rocketElement;
+};
+
+class ofxLibRocketElementList: public std::vector<ofxLibRocketElement*>{
+	
 };
 
 #endif // OFXLIBROCKETELEMENT_H

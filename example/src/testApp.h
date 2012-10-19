@@ -17,6 +17,8 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
+	void toggleDebugger(ofxLibRocketBoolEventArgs& args);
+
 	ofxLibRocket libRocket;
 	ofxLibRocketDocument* doc;
 };

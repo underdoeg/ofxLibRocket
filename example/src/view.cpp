@@ -1,14 +1,5 @@
 #include "view.h"
 
-View::View()
-{
-	
-}
-
-View::~View()
-{
-}
-
 void View::setup()
 {
 	rotX = ofRandom(2000);
@@ -26,14 +17,15 @@ void View::update()
 	scale += scaleSpeed;
 }
 
-void View::draw(){
+void View::draw()
+{
 	ofPushView();
-	ofViewport(element->getX(), element->getY(), element->getWidth(), element->getHeight());
-	ofSetupScreenPerspective(element->getWidth(), element->getHeight());
+	ofViewport(getX(), getY(), getWidth(), getHeight());
+	ofSetupScreenPerspective(getWidth(), getHeight());
 	ofNoFill();
 	ofSetColor(255);
 	ofPushMatrix();
-	ofTranslate(element->getWidth()*.5, element->getHeight()*.5, 0);
+	ofTranslate(getWidth()*.5, getHeight()*.5, 0);
 	ofRotateX(ofNoise(rotX)*360);
 	ofRotateY(ofNoise(rotY)*360);
 	float s = (ofNoise(scale)-.5)*30;
@@ -42,5 +34,3 @@ void View::draw(){
 	ofPopMatrix();
 	ofPopView();
 }
-
-
