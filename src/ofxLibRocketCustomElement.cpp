@@ -1,3 +1,5 @@
+#include "ofxLibRocket.h"
+#include "ofxLibRocketDocument.h"
 #include "ofxLibRocketCustomElement.h"
 
 using namespace Rocket::Core;
@@ -34,9 +36,14 @@ ofxLibRocketCustomElementHandler::~ofxLibRocketCustomElementHandler()
 
 Rocket::Core::Element* ofxLibRocketCustomElementHandler::InstanceElement(Rocket::Core::Element* parent, const Rocket::Core::String& tag, const Rocket::Core::XMLAttributes& attributes)
 {
+	if(parent == NULL)
+		return NULL;
 	if(instancers.find(tag.CString()) != instancers.end()){
+		ofxLibRocketDocument* doc = ofxLibRocket::getDocumentFromRocket(parent->GetOwnerDocument());
 		ofxLibRocketCustomElementWrapper* elRet = new ofxLibRocketCustomElementWrapper(tag.CString());		
 		ofxLibRocketCustomElement* el = instancers[tag.CString()]->createInstance();
+		if(doc)
+			doc->addElement(el);
 		elRet->customElement = el;
 		el->setRocketElement(elRet);
 		el->setup();

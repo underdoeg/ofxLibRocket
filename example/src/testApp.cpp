@@ -4,11 +4,21 @@
 //--------------------------------------------------------------
 void testApp::setup() {
 	ofSetFrameRate(60);
+	
+	//you have to load the fonts before calling setup
 	libRocket.loadFont("pf_tempesta_seven_condensed.ttf");
 	libRocket.setup();
-	ofxLibRocketCustomElementHandler::addCustomElement<View>("view");
+	
+	//custom elements must be added before loading a document
+	libRocket.addCustomElement<View>("view");
+	
+	//load the demo document
 	doc = libRocket.loadDocument("demo.rml");
+	
+	//attach events to elements
 	ofAddListener(doc->getButton("toggleDebugger")->eventChange, this, &testApp::toggleDebugger);
+	
+	
 }
 
 //--------------------------------------------------------------

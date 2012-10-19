@@ -25,16 +25,18 @@ public:
 	T* getElementById(string id){
 		return static_cast<T*>(getElementById(id));
 	}
-	
+		
 	ofxLibRocketElementList* getElementsByTag(string id);
 	
 	void hide();
 	void show();
 	void toggleVisibility();
 	
+	void addElement(ofxLibRocketElement* el);
+	
 private:
 	Rocket::Core::ElementDocument* rocketDocument;
-	map<string, ofxLibRocketElement*> elements;
+	std::vector<ofxLibRocketElement*> elements;
 };
 
 #endif // OFXLIBROCKETDOCUMENT_H

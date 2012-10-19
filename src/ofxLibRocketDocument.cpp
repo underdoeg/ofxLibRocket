@@ -13,7 +13,7 @@ ofxLibRocketDocument::~ofxLibRocketDocument()
 
 ofxLibRocketElement* ofxLibRocketDocument::getElementById(string id)
 {
-	
+	return new ofxLibRocketElement(rocketDocument->GetElementById(id.c_str()));
 }
 
 ofxLibRocketSlider* ofxLibRocketDocument::createSlider(string name, float min, float max, float step)
@@ -67,4 +67,9 @@ void ofxLibRocketDocument::toggleVisibility()
 		rocketDocument->Hide();
 	else
 		rocketDocument->Show();
+}
+
+void ofxLibRocketDocument::addElement(ofxLibRocketElement* el)
+{
+	elements.push_back(el);
 }

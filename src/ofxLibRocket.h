@@ -58,6 +58,11 @@ public:
 	void showDebugger();
 	void hideDebugger();
 	
+	template <class T>
+	void addCustomElement(string tagName){
+		ofxLibRocketCustomElementHandler::addCustomElement<T>(tagName);
+	}
+	
 	static ofxLibRocketDocument* getDocumentFromRocket(Rocket::Core::ElementDocument* doc);
 	
 private:

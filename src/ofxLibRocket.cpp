@@ -52,10 +52,10 @@ ofxLibRocketDocument* ofxLibRocket::loadDocument(string docPath)
 {
 	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath(docPath).c_str());
 	if (document != NULL) {
-		document->Show();
-		document->RemoveReference();
 		ofxLibRocketDocument* doc =  new ofxLibRocketDocument(document);
 		rocketDocuments[document] = doc;
+		document->Show();
+		document->RemoveReference();
 		return doc;
 	} else {
 
@@ -345,4 +345,3 @@ int ofxLibRocket::getKeyModifier()
 		key_modifier_state |= Rocket::Core::Input::KM_NUMLOCK;*/
 	return key_modifier_state;
 }
-
