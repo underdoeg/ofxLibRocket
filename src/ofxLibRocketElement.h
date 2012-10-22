@@ -65,6 +65,10 @@ public:
 	int getHeight();
 	int getX();
 	int getY();
+	
+	void hide();
+	void show();
+	
 	string getId();
 	
 	ofxLibRocketElement* createElement(string tagName);
@@ -78,11 +82,15 @@ public:
 protected:
 	virtual void ProcessRocketEvent(Rocket::Core::Event& e){}
 	void ProcessEvent(Rocket::Core::Event&);
-
 	Rocket::Core::Element* rocketElement;
 };
 
-class ofxLibRocketElementList: public std::vector<ofxLibRocketElement*>{
+template <class T>
+class ofxLibRocketElementList_: public std::vector<T*>{
+	
+};
+
+class ofxLibRocketElementList: public ofxLibRocketElementList_<ofxLibRocketElement>{
 	
 };
 

@@ -9,6 +9,7 @@ body{
 	color: #000;
 }
 
+
 #navigation{
 	display: block;
 	width: 200px;
@@ -31,6 +32,10 @@ view{
 	background-color: black;
 	float: left;
 	color: white;
+}
+
+view.first{
+	background-color: #000;
 }
 
 view p{

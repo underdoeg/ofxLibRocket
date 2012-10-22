@@ -164,3 +164,13 @@ void ofxLibRocketElement::removeListener(ofxLibRocketElementListener* listener)
 {
 }
 
+void ofxLibRocketElement::hide()
+{
+	rocketElement->SetProperty("display", "none");
+}
+
+void ofxLibRocketElement::show()
+{
+	rocketElement->SetProperty("display", "block");
+}
+

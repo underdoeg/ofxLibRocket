@@ -18,7 +18,8 @@ void testApp::setup() {
 	//attach events to elements
 	ofAddListener(doc->getButton("toggleDebugger")->eventChange, this, &testApp::toggleDebugger);
 	
-	
+	View* view1 = doc->getElementById<View>("view1");
+	view1->hide();
 }
 
 //--------------------------------------------------------------

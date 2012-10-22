@@ -23,10 +23,15 @@ public:
 	
 	template <class T>
 	T* getElementById(string id){
-		return static_cast<T*>(getElementById(id));
-	}
+		ofxLibRocketElement* el = getElementById(id);
 		
-	ofxLibRocketElementList* getElementsByTag(string id);
+		if(el ==  NULL)
+			return NULL;
+		return static_cast<T*>(el);
+	}
+	
+	ofxLibRocketElementList getElementsByTagName(string tagName);
+	ofxLibRocketElement* getElementByRocket(Rocket::Core::Element* rocketElement);
 	
 	void hide();
 	void show();
@@ -36,7 +41,8 @@ public:
 	
 private:
 	Rocket::Core::ElementDocument* rocketDocument;
-	std::vector<ofxLibRocketElement*> elements;
+	ofxLibRocketElementList elementList;
+	std::map<Rocket::Core::Element*, ofxLibRocketElement*> elementMap;
 };
 
 #endif // OFXLIBROCKETDOCUMENT_H

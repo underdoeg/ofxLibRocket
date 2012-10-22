@@ -1,4 +1,4 @@
-button{
+button, select, option{
 	display: block;
 	margin: 0px;
 	margin-left: 3px;
@@ -16,4 +16,9 @@ button:hover{
 
 button:on{
 	background-color: #cdc;
+}
+
+option{
+	background-color: #666;
+	margin: 0px;
 }

@@ -14,7 +14,7 @@
 
 #define OFX_LIBROCKET_MAX_KEYS 1024
 
-class ofxLibRocket{
+class ofxLibRocket: private Rocket::Core::Plugin{
 
 public:
 	ofxLibRocket();
@@ -66,6 +66,10 @@ public:
 	static ofxLibRocketDocument* getDocumentFromRocket(Rocket::Core::ElementDocument* doc);
 	
 private:
+	void OnDocumentLoad(Rocket::Core::ElementDocument* document);
+	void OnElementCreate(Rocket::Core::Element* element);
+	
+
 	int getKeyModifier();
 	bool keyState[OFX_LIBROCKET_MAX_KEYS];
 

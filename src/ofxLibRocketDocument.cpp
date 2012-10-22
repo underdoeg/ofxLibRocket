@@ -13,7 +13,10 @@ ofxLibRocketDocument::~ofxLibRocketDocument()
 
 ofxLibRocketElement* ofxLibRocketDocument::getElementById(string id)
 {
-	return new ofxLibRocketElement(rocketDocument->GetElementById(id.c_str()));
+	Element* rocketElement = rocketDocument->GetElementById(id.c_str());
+	if(rocketElement == NULL)
+		return NULL;
+	return getElementByRocket(rocketElement);
 }
 
 ofxLibRocketSlider* ofxLibRocketDocument::createSlider(string name, float min, float max, float step)
@@ -71,5 +74,24 @@ void ofxLibRocketDocument::toggleVisibility()
 
 void ofxLibRocketDocument::addElement(ofxLibRocketElement* el)
 {
-	elements.push_back(el);
+	elementList.push_back(el);
+	elementMap[el->getRocketElement()] = el;
+}
+
+ofxLibRocketElementList ofxLibRocketDocument::getElementsByTagName(string tagName)
+{
+	ofxLibRocketElementList ret;
+	ElementList list;
+	rocketDocument->GetElementsByTagName(list, tagName.c_str());
+	ElementList::iterator it = list.begin();
+	while(it != list.end()){
+		ret.push_back(getElementByRocket(*it));
+		it++;
+	}
+	return ret;
+}
+
+ofxLibRocketElement* ofxLibRocketDocument::getElementByRocket(Rocket::Core::Element* rocketElement)
+{
+	return elementMap[rocketElement];
 }

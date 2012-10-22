@@ -12,11 +12,12 @@ ofxLibRocket::ofxLibRocket()
 		keyState[i] = false;
 	}
 
+
 	Rocket::Core::SetRenderInterface(&renderer);
 	Rocket::Core::SetSystemInterface(&systemInterface);
 
-	Rocket::Core::Initialise();
 
+	Rocket::Core::Initialise();
 	Rocket::Controls::Initialise();
 
 	//add default ofxLibRocketControls
@@ -37,6 +38,8 @@ void ofxLibRocket::setup()
 
 	Rocket::Debugger::Initialise(context);
 
+	Rocket::Core::RegisterPlugin(this);	
+
 	registerOfEvents();
 
 	initialiseKeyMap();
@@ -52,22 +55,40 @@ ofxLibRocketDocument* ofxLibRocket::loadDocument(string docPath)
 {
 	Rocket::Core::ElementDocument* document = context->LoadDocument(ofToDataPath(docPath).c_str());
 	if (document != NULL) {
-		ofxLibRocketDocument* doc =  new ofxLibRocketDocument(document);
-		rocketDocuments[document] = doc;
 		document->Show();
 		document->RemoveReference();
-		return doc;
+		return getDocumentFromRocket(document);
 	} else {
-
+		
 	}
-
+	
 	return NULL;
 }
 
+void ofxLibRocket::OnDocumentLoad(ElementDocument* document)
+{
+	/*if(rocketDocuments.find(document) != rocketDocuments.end())
+		return;
+	
+	ofxLibRocketDocument* doc =  new ofxLibRocketDocument(document);
+	rocketDocuments[document] = doc;*/
+}
+
+void ofxLibRocket::OnElementCreate(Rocket::Core::Element* element)
+{
+	/*
+	ofxLibRocketDocument* doc = getDocumentFromRocket(element->GetOwnerDocument());
+	ofxLibRocketElement* el = new ofxLibRocketElement(element);
+	doc->addElement(el);
+	*/
+}
 
 ofxLibRocketDocument* ofxLibRocket::getDocumentFromRocket(Rocket::Core::ElementDocument* doc)
 {
 	if(rocketDocuments.find(doc) != rocketDocuments.end()){
+		return rocketDocuments[doc];
+	}else{
+		rocketDocuments[doc] = new ofxLibRocketDocument(doc);
 		return rocketDocuments[doc];
 	}
 	return NULL;
