@@ -36,6 +36,7 @@ view{
 
 view.first{
 	background-color: #000;
+	color: #ff00ff;	
 }
 
 view p{

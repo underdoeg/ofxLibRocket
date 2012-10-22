@@ -145,6 +145,11 @@ int ofxLibRocketElement::getWidth()
 	return rocketElement->GetClientWidth();
 }
 
+ofRectangle ofxLibRocketElement::getBounds()
+{
+	return ofRectangle(getX(), getY(), getWidth(), getHeight());
+}
+
 string ofxLibRocketElement::getId()
 {
 	return rocketElement->GetId().CString();
@@ -162,6 +167,7 @@ void ofxLibRocketElement::addListener(ofxLibRocketElementListener* listener)
 
 void ofxLibRocketElement::removeListener(ofxLibRocketElementListener* listener)
 {
+	
 }
 
 void ofxLibRocketElement::hide()
@@ -174,3 +180,21 @@ void ofxLibRocketElement::show()
 	rocketElement->SetProperty("display", "block");
 }
 
+ofColor ofxLibRocketElement::getBackgroundColor()
+{
+	//Colour<int, 255> color;
+	return convertColorRocket(rocketElement->GetProperty< String >("background-color"));	
+}
+
+ofColor ofxLibRocketElement::getColor()
+{
+	return convertColorRocket(rocketElement->GetProperty< String >("color"));	
+}
+
+ofColor ofxLibRocketElement::convertColorRocket(Rocket::Core::String color)
+{
+	std::vector<string> colors = ofSplitString(color.CString(), ",", true, true);
+	if(colors.size() < 4)
+		return ofColor::white;
+	return ofColor(ofToInt(colors[0]), ofToInt(colors[1]), ofToInt(colors[2]), ofToInt(colors[3]));
+}

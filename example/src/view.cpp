@@ -23,7 +23,7 @@ void View::draw()
 	ofViewport(getX(), getY(), getWidth(), getHeight());
 	ofSetupScreenPerspective(getWidth(), getHeight());
 	ofNoFill();
-	ofSetColor(255);
+	ofSetColor(getColor());
 	ofPushMatrix();
 	ofTranslate(getWidth()*.5, getHeight()*.5, 0);
 	ofRotateX(ofNoise(rotX)*360);
