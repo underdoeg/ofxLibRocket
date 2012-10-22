@@ -20,10 +20,12 @@ void View::update()
 void View::draw()
 {
 	ofPushView();
-	ofViewport(getX(), getY(), getWidth(), getHeight());
+	ofViewport(getBounds());
+	
 	ofSetupScreenPerspective(getWidth(), getHeight());
 	ofNoFill();
 	ofSetColor(getColor());
+	
 	ofPushMatrix();
 	ofTranslate(getWidth()*.5, getHeight()*.5, 0);
 	ofRotateX(ofNoise(rotX)*360);
@@ -31,6 +33,7 @@ void View::draw()
 	float s = (ofNoise(scale)-.5)*30;
 	ofScale(s, s, s);
 	ofBox(200);
+	
 	ofPopMatrix();
 	ofPopView();
 }

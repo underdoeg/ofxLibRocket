@@ -30,6 +30,11 @@
 
 #include "ofMain.h"
 
+class MeshWrapper{
+public:
+	ofMesh* mesh;
+	Rocket::Core::TextureHandle texture;
+};
 
 #define GL_CLAMP_TO_EDGE 0x812F
 
@@ -43,8 +48,9 @@ ofxLibRocketRenderInterface::~ofxLibRocketRenderInterface()
 }
 
 // Called by Rocket when it wants to render geometry that it does not wish to optimise.
-void ofxLibRocketRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int ROCKET_UNUSED(num_vertices), int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
+void ofxLibRocketRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation)
 {
+	/*
 	ofPushMatrix();
 	ofTranslate(translation.x, translation.y);
 
@@ -70,22 +76,87 @@ void ofxLibRocketRenderInterface::RenderGeometry(Rocket::Core::Vertex* vertices,
 	glDisableClientState(GL_COLOR_ARRAY);
 
 	ofPopMatrix();
+	*/
+	ofPushMatrix();
+	ofTranslate(translation.x, translation.y);
+
+	if (!texture) {
+		glDisable(GL_TEXTURE_2D);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	} else {
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, (GLuint) texture);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
+
+	ofMesh mesh;
+
+	for(int i=0; i<num_vertices; i++) {
+		mesh.addVertex(ofVec3f(vertices[i].position.x, vertices[i].position.y, 0));
+		mesh.addColor(ofFloatColor(vertices[i].colour.red/255.f, vertices[i].colour.green/255.f, vertices[i].colour.blue/255.f, vertices[i].colour.alpha/255.f));
+		mesh.addTexCoord(ofVec2f(vertices[i].tex_coord.x, vertices[i].tex_coord.y));		
+	}
+
+	for(int i=0; i<num_indices; i++) {
+		mesh.addIndex(indices[i]);
+	}
+
+	mesh.draw();
+
+	ofPopMatrix();
 }
 
 // Called by Rocket when it wants to compile geometry it believes will be static for the forseeable future.
-Rocket::Core::CompiledGeometryHandle ofxLibRocketRenderInterface::CompileGeometry(Rocket::Core::Vertex* ROCKET_UNUSED(vertices), int ROCKET_UNUSED(num_vertices), int* ROCKET_UNUSED(indices), int ROCKET_UNUSED(num_indices), const Rocket::Core::TextureHandle ROCKET_UNUSED(texture))
+Rocket::Core::CompiledGeometryHandle ofxLibRocketRenderInterface::CompileGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, const Rocket::Core::TextureHandle texture)
 {
-	return (Rocket::Core::CompiledGeometryHandle) NULL;
+	MeshWrapper* wrapper = new MeshWrapper();
+	
+	wrapper->texture = texture;
+	
+	wrapper->mesh = new ofMesh();
+	ofMesh* mesh = wrapper->mesh;
+
+	for(int i=0; i<num_vertices; i++) {
+		mesh->addVertex(ofVec3f(vertices[i].position.x, vertices[i].position.y, 0));
+		mesh->addColor(ofFloatColor(vertices[i].colour.red/255.f, vertices[i].colour.green/255.f, vertices[i].colour.blue/255.f, vertices[i].colour.alpha/255.f));
+		mesh->addTexCoord(ofVec2f(vertices[i].tex_coord.x, vertices[i].tex_coord.y));
+	}
+
+	for(int i=0; i<num_indices; i++) {
+		mesh->addIndex(indices[i]);
+	}
+
+	mesh->draw();
+	return (Rocket::Core::CompiledGeometryHandle) wrapper;
 }
 
 // Called by Rocket when it wants to render application-compiled geometry.
-void ofxLibRocketRenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle ROCKET_UNUSED(geometry), const Rocket::Core::Vector2f& ROCKET_UNUSED(translation))
+void ofxLibRocketRenderInterface::RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry, const Rocket::Core::Vector2f& translation)
 {
+	ofPushMatrix();
+	ofTranslate(translation.x, translation.y);
+	
+	MeshWrapper* wrapper = (MeshWrapper*)geometry;	
+	
+	if (!wrapper->texture) {
+		glDisable(GL_TEXTURE_2D);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	} else {
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, (GLuint) wrapper->texture);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
+	
+	ofMesh* mesh = wrapper->mesh;
+	mesh->draw();
+	
+	ofPopMatrix();
 }
 
 // Called by Rocket when it wants to release application-compiled geometry.
 void ofxLibRocketRenderInterface::ReleaseCompiledGeometry(Rocket::Core::CompiledGeometryHandle ROCKET_UNUSED(geometry))
 {
+	
 }
 
 // Called by Rocket when it wants to enable or disable scissoring to clip content.
@@ -105,8 +176,7 @@ void ofxLibRocketRenderInterface::SetScissorRegion(int x, int y, int width, int 
 
 // Set to byte packing, or the compiler will expand our struct, which means it won't read correctly from file
 #pragma pack(1)
-struct TGAHeader
-{
+struct TGAHeader {
 	char  idLength;
 	char  colourMapType;
 	char  dataType;
@@ -126,10 +196,10 @@ struct TGAHeader
 // Called by Rocket when a texture is required by the library.
 bool ofxLibRocketRenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)
 {
+	
 	Rocket::Core::FileInterface* file_interface = Rocket::Core::GetFileInterface();
 	Rocket::Core::FileHandle file_handle = file_interface->Open(source);
-	if (!file_handle)
-	{
+	if (!file_handle) {
 		return false;
 	}
 
@@ -147,15 +217,13 @@ bool ofxLibRocketRenderInterface::LoadTexture(Rocket::Core::TextureHandle& textu
 	int color_mode = header.bitsPerPixel / 8;
 	int image_size = header.width * header.height * 4; // We always make 32bit textures
 
-	if (header.dataType != 2)
-	{
+	if (header.dataType != 2) {
 		Rocket::Core::Log::Message(Rocket::Core::Log::LT_ERROR, "Only 24/32bit uncompressed TGAs are supported.");
 		return false;
 	}
 
 	// Ensure we have at least 3 colors
-	if (color_mode < 3)
-	{
+	if (color_mode < 3) {
 		Rocket::Core::Log::Message(Rocket::Core::Log::LT_ERROR, "Only 24 and 32bit textures are supported");
 		return false;
 	}
@@ -164,12 +232,10 @@ bool ofxLibRocketRenderInterface::LoadTexture(Rocket::Core::TextureHandle& textu
 	unsigned char* image_dest = new unsigned char[image_size];
 
 	// Targa is BGR, swap to RGB and flip Y axis
-	for (long y = 0; y < header.height; y++)
-	{
+	for (long y = 0; y < header.height; y++) {
 		long read_index = y * header.width * color_mode;
 		long write_index = ((header.imageDescriptor & 32) != 0) ? read_index : (header.height - y - 1) * header.width * color_mode;
-		for (long x = 0; x < header.width; x++)
-		{
+		for (long x = 0; x < header.width; x++) {
 			image_dest[write_index] = image_src[read_index+2];
 			image_dest[write_index+1] = image_src[read_index+1];
 			image_dest[write_index+2] = image_src[read_index];
@@ -199,8 +265,7 @@ bool ofxLibRocketRenderInterface::GenerateTexture(Rocket::Core::TextureHandle& t
 {
 	GLuint texture_id = 0;
 	glGenTextures(1, &texture_id);
-	if (texture_id == 0)
-	{
+	if (texture_id == 0) {
 		printf("Failed to generate textures\n");
 		return false;
 	}
@@ -224,4 +289,3 @@ void ofxLibRocketRenderInterface::ReleaseTexture(Rocket::Core::TextureHandle tex
 {
 	glDeleteTextures(1, (GLuint*) &texture_handle);
 }
-

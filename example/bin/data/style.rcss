@@ -23,6 +23,7 @@ body{
 	display: block;
 	height: 100%;
 	margin-left: 200px;
+
 }
 
 view{
@@ -46,4 +47,5 @@ view p{
 h1{
 	margin: 5px;
 	display: block;
+	color: white;	
 }
