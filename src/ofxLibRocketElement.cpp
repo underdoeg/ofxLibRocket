@@ -5,7 +5,7 @@ using namespace Rocket::Core;
 
 ofxLibRocketElement::ofxLibRocketElement()
 {
-	
+
 }
 
 ofxLibRocketElement::ofxLibRocketElement(Rocket::Core::Element* el)
@@ -19,6 +19,8 @@ ofxLibRocketElement::~ofxLibRocketElement()
 
 void ofxLibRocketElement::setRocketElement(Rocket::Core::Element* el)
 {
+	isMouseDown = false;
+
 	rocketElement = el;
 
 	getRocketElement()->AddEventListener("show", this);
@@ -91,25 +93,31 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 	else if(e.GetType() == "click") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseClick, args);
-	}else if(e.GetType() == "dblclick") {
+	} else if(e.GetType() == "dblclick") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseDoubleClick, args);
-	}else if(e.GetType() == "mouseover") {
+	} else if(e.GetType() == "mouseover") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseEnter, args);
-	}else if(e.GetType() == "mouseout") {
+	} else if(e.GetType() == "mouseout") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseOut, args);
-	}else if(e.GetType() == "mousemove") {
+	} else if(e.GetType() == "mousemove") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
-		ofNotifyEvent(eventMouseMove, args);
-	}else if(e.GetType() == "mouseup") {
+		if(isMouseDown)
+			ofNotifyEvent(eventMouseDrag, args);
+		else
+			ofNotifyEvent(eventMouseMove, args);
+	} else if(e.GetType() == "mouseup") {
+		isMouseDown = false;
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseUp, args);
-	}else if(e.GetType() == "mousedown") {
+	} else if(e.GetType() == "mousedown") {
+		isMouseDown = true;
+		buttonDown = e.GetParameter<int>("button", 0);
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMousePress, args);
-	}else if(e.GetType() == "mousescroll") {
+	} else if(e.GetType() == "mousescroll") {
 		//TODO
 	}
 
@@ -129,11 +137,13 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)
 	return createElement(tagName, std::map<string, string>());
 }
 
-int ofxLibRocketElement::getX(){
+int ofxLibRocketElement::getX()
+{
 	return rocketElement->GetAbsoluteLeft();
 }
 
-int ofxLibRocketElement::getY(){
+int ofxLibRocketElement::getY()
+{
 	return rocketElement->GetAbsoluteTop();
 }
 
@@ -169,11 +179,12 @@ void ofxLibRocketElement::addListener(ofxLibRocketElementListener* listener)
 	ofAddListener(eventHide, listener, &ofxLibRocketElementListener::_hide);
 	ofAddListener(eventResize, listener, &ofxLibRocketElementListener::_resize);
 	ofAddListener(eventShow, listener, &ofxLibRocketElementListener::_show);
-	
+
 	ofAddListener(eventMouseClick, listener, &ofxLibRocketElementListener::_mouseClick);
 	ofAddListener(eventMouseDoubleClick, listener, &ofxLibRocketElementListener::_mouseDoubleClick);
 	ofAddListener(eventMouseEnter, listener, &ofxLibRocketElementListener::_mouseEnter);
 	ofAddListener(eventMouseMove, listener, &ofxLibRocketElementListener::_mouseMove);
+	ofAddListener(eventMouseDrag, listener, &ofxLibRocketElementListener::_mouseDrag);
 	ofAddListener(eventMouseOut, listener, &ofxLibRocketElementListener::_mouseOut);
 	//ofAddListener(eventMouseScroll, listener, &ofxLibRocketElementListener::_mouseScroll);
 	ofAddListener(eventMousePress, listener, &ofxLibRocketElementListener::_mousePress);
@@ -182,7 +193,7 @@ void ofxLibRocketElement::addListener(ofxLibRocketElementListener* listener)
 
 void ofxLibRocketElement::removeListener(ofxLibRocketElementListener* listener)
 {
-	
+
 }
 
 void ofxLibRocketElement::hide()
@@ -198,12 +209,12 @@ void ofxLibRocketElement::show()
 ofColor ofxLibRocketElement::getBackgroundColor()
 {
 	//Colour<int, 255> color;
-	return convertColorRocket(rocketElement->GetProperty< String >("background-color"));	
+	return convertColorRocket(rocketElement->GetProperty< String >("background-color"));
 }
 
 ofColor ofxLibRocketElement::getColor()
 {
-	return convertColorRocket(rocketElement->GetProperty< String >("color"));	
+	return convertColorRocket(rocketElement->GetProperty< String >("color"));
 }
 
 ofColor ofxLibRocketElement::convertColorRocket(Rocket::Core::String color)

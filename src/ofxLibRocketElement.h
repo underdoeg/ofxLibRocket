@@ -162,6 +162,10 @@ protected:
 	virtual void ProcessRocketEvent(Rocket::Core::Event& e) {}
 	void ProcessEvent(Rocket::Core::Event&);
 	Rocket::Core::Element* rocketElement;
+private:
+	bool isMouseDown;
+	int buttonDown;
+
 };
 
 template <class T>

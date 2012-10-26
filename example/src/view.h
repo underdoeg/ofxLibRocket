@@ -11,9 +11,9 @@ public:
 	void draw();
 	void update();
 
-	void onMouseDrag(int x, int y, int button);
-	
 	void onMouseClick(int x, int y, int button);
+	void onMouseMove(int x, int y);
+	void onMouseDrag(int x, int y, int button);
 
 	float rotX;
 	float rotY;

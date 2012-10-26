@@ -38,10 +38,17 @@ void View::draw()
 	ofPopView();
 }
 
-void View::onMouseDrag(int x, int y, int button)
-{
-}
 void View::onMouseClick(int x, int y, int button)
 {
-	cout << "clicked" << endl;
+	//cout << "clicked" << endl;
+}
+
+void View::onMouseMove(int x, int y)
+{
+	//cout << "mouse moved" << endl;
+}
+
+void View::onMouseDrag(int x, int y, int button)
+{
+	//cout << "mouse dragged" << endl;
 }
