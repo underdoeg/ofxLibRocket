@@ -30,6 +30,20 @@ public:
 		return static_cast<T*>(el);
 	}
 	
+	template <class T>
+	ofxLibRocketElementList_<T> getElementsByTagName(string tagName){
+		ofxLibRocketElementList_<T> ret;		
+		ofxLibRocketElementList elements = getElementsByTagName(tagName);
+		ofxLibRocketElementList::iterator it = elements.begin();
+		while(it != elements.end()){
+			T* el = static_cast<T*>(*it);
+			if(el != NULL)
+				ret.push_back(el);
+			it++;
+		}
+		return ret;
+	};
+	
 	ofxLibRocketElementList getElementsByTagName(string tagName);
 	ofxLibRocketElement* getElementByRocket(Rocket::Core::Element* rocketElement);
 	

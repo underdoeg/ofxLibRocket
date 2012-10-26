@@ -13,13 +13,23 @@ void testApp::setup() {
 	libRocket.addCustomElement<View>("view");
 	
 	//load the demo document
-	doc = libRocket.loadDocument("demo.rml");
+	doc = libRocket.loadDocument("demo.html");
 	
 	//attach events to elements
 	ofAddListener(doc->getButton("toggleDebugger")->eventChange, this, &testApp::toggleDebugger);
 	
-	View* view1 = doc->getElementById<View>("view1");
+	//use the following code to get a view
+	//View* view1 = doc->getElementById<View>("view1");
+	//ofxLibRocketElementList_<View> views = doc->getElementsByTagName<View>("view");
 	//view1->hide();
+}
+
+void testApp::toggleDebugger(ofxLibRocketBoolEventArgs& args)
+{
+	if(args.value)
+		libRocket.showDebugger();
+	else
+		libRocket.hideDebugger();
 }
 
 //--------------------------------------------------------------
@@ -73,12 +83,4 @@ void testApp::gotMessage(ofMessage msg) {
 //--------------------------------------------------------------
 void testApp::dragEvent(ofDragInfo dragInfo) {
 
-}
-
-void testApp::toggleDebugger(ofxLibRocketBoolEventArgs& args)
-{
-	if(args.value)
-		libRocket.showDebugger();
-	else
-		libRocket.hideDebugger();
 }
