@@ -37,3 +37,11 @@ void View::draw()
 	ofPopMatrix();
 	ofPopView();
 }
+
+void View::onMouseDrag(int x, int y, int button)
+{
+}
+void View::onMouseClick(int x, int y, int button)
+{
+	cout << "clicked" << endl;
+}

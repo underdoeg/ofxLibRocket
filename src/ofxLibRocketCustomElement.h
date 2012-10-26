@@ -62,7 +62,7 @@ public:
 };
 
 /******************************************************************************************************************/
-class ofxLibRocketCustomElement: public ofxLibRocketElement
+class ofxLibRocketCustomElement: public ofxLibRocketElement, public ofxLibRocketElementListener
 {
 public:
 	ofxLibRocketCustomElement();
@@ -73,7 +73,6 @@ public:
 	virtual void draw() {};
 
 protected:
-	void ProcessEvent(Rocket::Core::Event& e);
 	void OnUpdate();
 	bool isSetup;
 

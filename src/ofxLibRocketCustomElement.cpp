@@ -75,16 +75,12 @@ ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::get()
 ofxLibRocketCustomElement::ofxLibRocketCustomElement()
 {
 	isSetup = false;
+	addListener(this);
 }
 
 ofxLibRocketCustomElement::~ofxLibRocketCustomElement()
 {
 
-}
-
-void ofxLibRocketCustomElement::ProcessEvent(Rocket::Core::Event& e)
-{
-	
 }
 
 void ofxLibRocketCustomElement::OnUpdate()

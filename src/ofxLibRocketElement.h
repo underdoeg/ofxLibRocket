@@ -10,20 +10,71 @@ class ofxLibRocketDocument;
 class ofxLibRocketElementListener
 {
 public:
+	/* ELEMENT EVENTS */
+	virtual void onShow(){};
+	virtual void onHide(){};
+	virtual void onResize(float w, float h){};
+	virtual void onFocus(){};
+	virtual void onBlur(){};
+	//virtual void onScroll(){};
+	
+	virtual void onShow(ofxLibRocketEventArgs &e){};
+	virtual void onHide(ofxLibRocketEventArgs &e){};
+	virtual void onResize(ofxLibRocketResizeEventArgs &e){};
+	virtual void onFocus(ofxLibRocketEventArgs &e){};
+	virtual void onBlur(ofxLibRocketEventArgs &e){};
+	//virtual void on
+	
+	/* MOUSE EVENTS */
+	virtual void onMouseClick(int x, int y, int button) {};
+	virtual void onMouseDoubleClick(int x, int y, int button) {};
 	virtual void onMouseMove(int x, int y) {};
 	virtual void onMousePress(int x, int y, int button) {};
 	virtual void onMouseUp(int x, int y, int button) {};
 	virtual void onMouseDrag(int x, int y, int button) {};
 	virtual void onMouseEnter(int x, int y) {};
 	virtual void onMouseOut(int x, int y) {};
+	virtual void onMouseOver(int x, int y) {};
 
+	virtual void onMouseClick(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onMouseDoubleClick(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseMove(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMousePress(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseUp(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseDrag(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseEnter(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseOut(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onMouseOver(ofxLibRocketMouseEventArgs &e) {};
 private:
+	void _show(ofxLibRocketEventArgs &e){
+		onShow();
+		onShow(e);
+	};
+	void _hide(ofxLibRocketEventArgs &e){
+		onHide();
+		onHide(e);
+	};
+	void _resize(ofxLibRocketResizeEventArgs &e){
+		onResize(e.width, e.height);
+		onResize(e);
+	};
+	void _focus(ofxLibRocketEventArgs &e){
+		onFocus();
+		onFocus(e);
+	};
+	void _blur(ofxLibRocketEventArgs &e){
+		onBlur();
+		onBlur(e);
+	};
+
+	void _mouseClick(ofxLibRocketMouseEventArgs &e) {
+		onMouseClick(e);
+		onMouseClick(e.x, e.y, e.button);
+	};
+	void _mouseDoubleClick(ofxLibRocketMouseEventArgs &e) {
+		onMouseDoubleClick(e);
+		onMouseDoubleClick(e.x, e.y, e.button);
+	};
 	void _mouseMove(ofxLibRocketMouseEventArgs &e) {
 		onMouseMove(e);
 		onMouseMove(e.x, e.y);
@@ -48,6 +99,8 @@ private:
 		onMouseOut(e);
 		onMouseOut(e.x, e.y);
 	};
+	
+	friend class ofxLibRocketElement;	
 };
 
 class ofxLibRocketElement: protected Rocket::Core::EventListener
@@ -65,7 +118,7 @@ public:
 
 	ofEvent<ofxLibRocketEventArgs> eventShow;
 	ofEvent<ofxLibRocketEventArgs> eventHide;
-	ofEvent<ofxLibRocketEventArgs> eventResize;
+	ofEvent<ofxLibRocketResizeEventArgs> eventResize;
 	ofEvent<ofxLibRocketEventArgs> eventScroll;
 	ofEvent<ofxLibRocketEventArgs> eventFocus;
 	ofEvent<ofxLibRocketEventArgs> eventBlur;
@@ -74,9 +127,9 @@ public:
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseDoubleClick;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseMove;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseDrag;
-	ofEvent<ofxLibRocketMouseEventArgs> eventMouseDown;
+	ofEvent<ofxLibRocketMouseEventArgs> eventMousePress;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseUp;
-	ofEvent<ofxLibRocketMouseEventArgs> eventMouseOver;
+	ofEvent<ofxLibRocketMouseEventArgs> eventMouseEnter;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseOut;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseScroll;
 

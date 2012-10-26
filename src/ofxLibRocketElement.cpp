@@ -68,8 +68,10 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 		args.element = this;
 		ofNotifyEvent(eventHide, args);
 	} else if(e.GetType() == "resize") {
-		static ofxLibRocketEventArgs args;
+		static ofxLibRocketResizeEventArgs args;
 		args.element = this;
+		args.width = getWidth();
+		args.height = getHeight();
 		ofNotifyEvent(eventResize, args);
 	} else if(e.GetType() == "scroll") {
 		static ofxLibRocketEventArgs args;
@@ -94,7 +96,7 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 		ofNotifyEvent(eventMouseDoubleClick, args);
 	}else if(e.GetType() == "mouseover") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
-		ofNotifyEvent(eventMouseOver, args);
+		ofNotifyEvent(eventMouseEnter, args);
 	}else if(e.GetType() == "mouseout") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
 		ofNotifyEvent(eventMouseOut, args);
@@ -106,7 +108,7 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 		ofNotifyEvent(eventMouseUp, args);
 	}else if(e.GetType() == "mousedown") {
 		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
-		ofNotifyEvent(eventMouseDown, args);
+		ofNotifyEvent(eventMousePress, args);
 	}else if(e.GetType() == "mousescroll") {
 		//TODO
 	}
@@ -162,7 +164,20 @@ ofxLibRocketDocument* ofxLibRocketElement::getDocument()
 
 void ofxLibRocketElement::addListener(ofxLibRocketElementListener* listener)
 {
-	//ofAddListener(event)
+	ofAddListener(eventBlur, listener, &ofxLibRocketElementListener::_blur);
+	ofAddListener(eventFocus, listener, &ofxLibRocketElementListener::_focus);
+	ofAddListener(eventHide, listener, &ofxLibRocketElementListener::_hide);
+	ofAddListener(eventResize, listener, &ofxLibRocketElementListener::_resize);
+	ofAddListener(eventShow, listener, &ofxLibRocketElementListener::_show);
+	
+	ofAddListener(eventMouseClick, listener, &ofxLibRocketElementListener::_mouseClick);
+	ofAddListener(eventMouseDoubleClick, listener, &ofxLibRocketElementListener::_mouseDoubleClick);
+	ofAddListener(eventMouseEnter, listener, &ofxLibRocketElementListener::_mouseEnter);
+	ofAddListener(eventMouseMove, listener, &ofxLibRocketElementListener::_mouseMove);
+	ofAddListener(eventMouseOut, listener, &ofxLibRocketElementListener::_mouseOut);
+	//ofAddListener(eventMouseScroll, listener, &ofxLibRocketElementListener::_mouseScroll);
+	ofAddListener(eventMousePress, listener, &ofxLibRocketElementListener::_mousePress);
+	ofAddListener(eventMouseUp, listener, &ofxLibRocketElementListener::_mouseUp);
 }
 
 void ofxLibRocketElement::removeListener(ofxLibRocketElementListener* listener)
