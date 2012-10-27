@@ -163,9 +163,15 @@ protected:
 	void ProcessEvent(Rocket::Core::Event&);
 	Rocket::Core::Element* rocketElement;
 private:
+	ofxLibRocketMouseEventArgs rocketMouseEventToOfx(Rocket::Core::Event& e);
+
+
 	bool isMouseDown;
 	int buttonDown;
-
+	int mouseX;
+	int mouseY;
+	int pMouseX;
+	int pMouseY;
 };
 
 template <class T>

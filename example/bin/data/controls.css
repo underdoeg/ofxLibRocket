@@ -22,3 +22,15 @@ option{
 	background-color: #666;
 	margin: 0px;
 }
+
+scrollbarvertical, scrollbarhorizontal{
+	background-color: #333;
+}
+
+scrollbarvertical{
+	width: 7px;
+}
+
+sliderbar{
+	background-color: #555;
+}

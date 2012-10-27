@@ -33,6 +33,7 @@ view{
 	background-color: black;
 	float: left;
 	color: white;
+	overflow: auto;
 }
 
 view.first{
@@ -40,8 +41,17 @@ view.first{
 	color: #ff00ff;	
 }
 
+view#text{
+	color: #666;
+}
+
+view#text p{
+	color: white;
+}
+
 view p{
 	margin: 10px;
+	display: block;
 }
 
 h1{

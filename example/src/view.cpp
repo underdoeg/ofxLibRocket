@@ -28,6 +28,7 @@ void View::draw()
 	
 	ofPushMatrix();
 	ofTranslate(getWidth()*.5, getHeight()*.5, 0);
+	ofTranslate(offset);
 	ofRotateX(ofNoise(rotX)*360);
 	ofRotateY(ofNoise(rotY)*360);
 	float s = (ofNoise(scale)-.5)*30;

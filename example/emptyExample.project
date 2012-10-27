@@ -106,15 +106,14 @@
         <File Name="../libs/libRocket/include/Rocket/Core.h"/>
       </VirtualDirectory>
     </VirtualDirectory>
+    <File Name="src/view.cpp"/>
   </VirtualDirectory>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="src/testApp.cpp"/>
     <File Name="src/testApp.h"/>
     <File Name="src/main.cpp"/>
     <File Name="src/view.h"/>
-    <File Name="src/view.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="config">
     <File Name="Makefile"/>
@@ -140,6 +139,8 @@
       <General OutputFile="" IntermediateDirectory="./Debug" Command="./example" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(WorkspacePath)/bin" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
+      
       
       
       
@@ -190,6 +191,8 @@
       <General OutputFile="" IntermediateDirectory="./Release" Command="" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[
+      
+      
       
       
       
@@ -257,5 +260,6 @@
     <File Name="bin/data/demo.html"/>
     <File Name="bin/data/controls.css"/>
     <File Name="bin/data/style.css"/>
+    <File Name="src/testApp.cpp"/>
   </VirtualDirectory>
 </CodeLite_Project>

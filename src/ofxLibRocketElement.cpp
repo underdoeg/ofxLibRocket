@@ -47,13 +47,17 @@ Rocket::Core::Element* ofxLibRocketElement::getRocketElement()
 }
 
 //little helper function to convert the mouse position and button to the event args
-ofxLibRocketMouseEventArgs rocketMouseEventToOfx(Rocket::Core::Event& e, ofxLibRocketElement* el)
+ofxLibRocketMouseEventArgs ofxLibRocketElement::rocketMouseEventToOfx(Rocket::Core::Event& e)
 {
 	static ofxLibRocketMouseEventArgs args;
-	args.element = el;
-	Vector2f off = el->getRocketElement()->GetAbsoluteOffset();
+	args.element = this;
+	Vector2f off = this->getRocketElement()->GetAbsoluteOffset();
 	args.x = e.GetParameter<int>("mouse_x", 0)-off.x;
 	args.y = e.GetParameter<int>("mouse_y", 0)-off.y;
+	pMouseX = mouseX;
+	pMouseY = mouseY;
+	mouseX = args.x;
+	mouseY = args.y;
 	args.button = e.GetParameter<int>("button", 0);
 	return args;
 }
@@ -91,31 +95,31 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 
 	/* mouse events */
 	else if(e.GetType() == "click") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseClick, args);
 	} else if(e.GetType() == "dblclick") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseDoubleClick, args);
 	} else if(e.GetType() == "mouseover") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseEnter, args);
 	} else if(e.GetType() == "mouseout") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseOut, args);
 	} else if(e.GetType() == "mousemove") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		if(isMouseDown)
 			ofNotifyEvent(eventMouseDrag, args);
 		else
 			ofNotifyEvent(eventMouseMove, args);
 	} else if(e.GetType() == "mouseup") {
 		isMouseDown = false;
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseUp, args);
 	} else if(e.GetType() == "mousedown") {
 		isMouseDown = true;
 		buttonDown = e.GetParameter<int>("button", 0);
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e, this);
+		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMousePress, args);
 	} else if(e.GetType() == "mousescroll") {
 		//TODO

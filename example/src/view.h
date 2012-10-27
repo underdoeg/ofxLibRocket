@@ -15,12 +15,15 @@ public:
 	void onMouseMove(int x, int y);
 	void onMouseDrag(int x, int y, int button);
 
+private:
 	float rotX;
 	float rotY;
 	float rotXSpeed;
 	float rotYSpeed;
 	float scale;
 	float scaleSpeed;
+	
+	ofPoint offset;
 };
 
 #endif // VIEW_H
