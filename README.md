@@ -8,7 +8,7 @@ The wrapper tries to do the integration with openframeworks as easy as possible 
 ##screenshot of the example
 The following is a two column layout that automatically resizes to fill the entire window.  
 
-![alt text](http://uploads.undef.ch/ofxLibRocket/shot1.jpg "screenshot1")
+![alt text](http://uploads.undef.ch/ofxLibRocket/shot1.jpg "screenshot")
 
 ##features
 - html loading for content
@@ -111,8 +111,8 @@ More elements are planned to be integrated as custom elements by ofxLibRocket it
 ##quirks and issues
 ###casting
 One main issue is that depending on your usage, there is some casting going on.
-The reason for this is that in such an open system where new class can registered and identified by a string, it is impossible to keep all elements in dedicated containers.
+The reason for this is that in such an open system where a new class can be registered and identified by a string, it is impossible to keep all elements in dedicated containers.
 They all have to be stored at one global location as their super class.  
-ofxLibRocket provides templated functions to integrate make the casting as easy and seamless as possible but bear in mind that it does happen in the background.
+ofxLibRocket provides templated functions to make the casting as easy and seamless as possible but bear in mind that it does happen in the background.
 ###tag names have to be all lowercase
 Camelcase tag names do not work. So instead of viewContainer, write viewcontainer or view-container.
