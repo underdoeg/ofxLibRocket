@@ -22,6 +22,7 @@
   
   
   
+  
   ]]>
   </Environment>
   <Project Name="emptyExample" Path="emptyExample.project" Active="Yes"/>
@@ -29,9 +30,11 @@
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Project Name="linux" ConfigName="Debug"/>
       <Project Name="emptyExample" ConfigName="Debug"/>
+      <Project Name="emptyExample" ConfigName="Debug"/>
     </WorkspaceConfiguration>
     <WorkspaceConfiguration Name="Release" Selected="yes">
       <Project Name="linux" ConfigName="Release"/>
+      <Project Name="emptyExample" ConfigName="Release"/>
       <Project Name="emptyExample" ConfigName="Release"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
