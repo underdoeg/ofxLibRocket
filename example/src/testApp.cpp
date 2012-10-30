@@ -11,7 +11,7 @@ void testApp::setup() {
 	
 	//custom elements must be added before loading a document
 	libRocket.addCustomElement<View>("view");
-	
+    
 	//load the demo document
 	doc = libRocket.loadDocument("demo.html");
 	

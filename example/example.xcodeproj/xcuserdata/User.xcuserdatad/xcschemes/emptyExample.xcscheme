@@ -15,16 +15,16 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-               BuildableName = "ofxLibRocketExample.app"
-               BlueprintName = "ofxLibRocketExample"
-               ReferencedContainer = "container:ofxLibRocketExample.xcodeproj">
+               BuildableName = "emptyExample.app"
+               BlueprintName = "emptyExample"
+               ReferencedContainer = "container:example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
@@ -33,15 +33,15 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxLibRocketExample.app"
-            BlueprintName = "ofxLibRocketExample"
-            ReferencedContainer = "container:ofxLibRocketExample.xcodeproj">
+            BuildableName = "emptyExample.app"
+            BlueprintName = "emptyExample"
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Debug"
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxLibRocketExample.app"
-            BlueprintName = "ofxLibRocketExample"
-            ReferencedContainer = "container:ofxLibRocketExample.xcodeproj">
+            BuildableName = "emptyExample.app"
+            BlueprintName = "emptyExample"
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -64,15 +64,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E4B69B5A0A3A1756003C02F2"
-            BuildableName = "ofxLibRocketExample.app"
-            BlueprintName = "ofxLibRocketExample"
-            ReferencedContainer = "container:ofxLibRocketExample.xcodeproj">
+            BuildableName = "emptyExample.app"
+            BlueprintName = "emptyExample"
+            ReferencedContainer = "container:example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -80,7 +80,7 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

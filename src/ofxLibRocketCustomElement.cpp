@@ -23,6 +23,7 @@ void ofxLibRocketCustomElementWrapper::OnRender()
 
 /******************************************************************************************************************************************************************************/
 
+
 map<string, ofxLibRocketCustomElementInstancer*> ofxLibRocketCustomElementHandler::instancers;
 ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::singleton = NULL;
 

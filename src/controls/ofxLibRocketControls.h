@@ -1,7 +1,7 @@
 #ifndef OFXLIBROCKETCONTROLS_H
 #define OFXLIBROCKETCONTROLS_H
 
-#include "ElementFormControlInput.h"
+#include "Rocket/Controls/ElementFormControlInput.h"
 #include "ofxLibRocketElement.h"
 
 class ofxLibRocketControl: public ofxLibRocketElement{
