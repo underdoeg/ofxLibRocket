@@ -89,6 +89,9 @@
 		CE21CDF8163FFB5A0010EBA3 /* ofxLibRocketSystemInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxLibRocketSystemInterface.h; sourceTree = "<group>"; };
 		CE21CE011640056B0010EBA3 /* view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = view.cpp; sourceTree = "<group>"; };
 		CE21CE021640056B0010EBA3 /* view.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = view.h; sourceTree = "<group>"; };
+		CE21CE041640120F0010EBA3 /* controls.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = controls.css; sourceTree = "<group>"; };
+		CE21CE051640120F0010EBA3 /* demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
+		CE21CE061640120F0010EBA3 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
 		E45BE9720E8CC7DD009D7055 /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
@@ -112,20 +115,6 @@
 		FA59308C1522918E003D9887 /* libRocketControls.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRocketControls.a; path = osx/libRocketControls.a; sourceTree = "<group>"; };
 		FA59308D1522918E003D9887 /* libRocketCore.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRocketCore.a; path = osx/libRocketCore.a; sourceTree = "<group>"; };
 		FA59308E1522918E003D9887 /* libRocketDebugger.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libRocketDebugger.a; path = osx/libRocketDebugger.a; sourceTree = "<group>"; };
-		FA59309A152291FC003D9887 /* cursor.rml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cursor.rml; sourceTree = "<group>"; };
-		FA59309B152291FC003D9887 /* Delicious-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delicious-Bold.otf"; sourceTree = "<group>"; };
-		FA59309C152291FC003D9887 /* Delicious-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delicious-BoldItalic.otf"; sourceTree = "<group>"; };
-		FA59309D152291FC003D9887 /* Delicious-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delicious-Italic.otf"; sourceTree = "<group>"; };
-		FA59309E152291FC003D9887 /* Delicious-Roman.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Delicious-Roman.otf"; sourceTree = "<group>"; };
-		FA59309F152291FC003D9887 /* demo.rml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = demo.rml; sourceTree = "<group>"; };
-		FA5930A0152291FC003D9887 /* invader.rcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = invader.rcss; sourceTree = "<group>"; };
-		FA5930A1152291FC003D9887 /* invader.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = invader.tga; sourceTree = "<group>"; };
-		FA5930A2152291FC003D9887 /* present.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = present.tga; sourceTree = "<group>"; };
-		FA5930A3152291FC003D9887 /* rkt.rcss */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rkt.rcss; sourceTree = "<group>"; };
-		FA5930A4152291FC003D9887 /* window.rml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = window.rml; sourceTree = "<group>"; };
-		FA5930A5152291FC003D9887 /* demo.rml */ = {isa = PBXFileReference; explicitFileType = text.html.other; fileEncoding = 4; path = demo.rml; sourceTree = "<group>"; };
-		FA5930A6152291FC003D9887 /* style.rcss */ = {isa = PBXFileReference; explicitFileType = text.css; fileEncoding = 4; path = style.rcss; sourceTree = "<group>"; };
-		FA5930A7152291FC003D9887 /* window.rml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = window.rml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,31 +277,12 @@
 		FA593098152291FC003D9887 /* data */ = {
 			isa = PBXGroup;
 			children = (
-				FA593099152291FC003D9887 /* demo */,
-				FA5930A5152291FC003D9887 /* demo.rml */,
-				FA5930A6152291FC003D9887 /* style.rcss */,
-				FA5930A7152291FC003D9887 /* window.rml */,
+				CE21CE041640120F0010EBA3 /* controls.css */,
+				CE21CE051640120F0010EBA3 /* demo.html */,
+				CE21CE061640120F0010EBA3 /* style.css */,
 			);
 			name = data;
 			path = bin/data;
-			sourceTree = "<group>";
-		};
-		FA593099152291FC003D9887 /* demo */ = {
-			isa = PBXGroup;
-			children = (
-				FA59309A152291FC003D9887 /* cursor.rml */,
-				FA59309B152291FC003D9887 /* Delicious-Bold.otf */,
-				FA59309C152291FC003D9887 /* Delicious-BoldItalic.otf */,
-				FA59309D152291FC003D9887 /* Delicious-Italic.otf */,
-				FA59309E152291FC003D9887 /* Delicious-Roman.otf */,
-				FA59309F152291FC003D9887 /* demo.rml */,
-				FA5930A1152291FC003D9887 /* invader.tga */,
-				FA5930A2152291FC003D9887 /* present.tga */,
-				FA5930A3152291FC003D9887 /* rkt.rcss */,
-				FA5930A4152291FC003D9887 /* window.rml */,
-				FA5930A0152291FC003D9887 /* invader.rcss */,
-			);
-			path = demo;
 			sourceTree = "<group>";
 		};
 		FAE30B2015228A4D00FC5902 /* lib */ = {
