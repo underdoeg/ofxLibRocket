@@ -22,7 +22,14 @@ void ofxLibRocketVideo::draw()
 	if(player.isLoaded()) {
 		if(getAttributeAsBool("fit")) {
 			if(getAttributeAsBool("aspect")) {
-				player.draw(0,0);
+				ofLogWarning("ofxLibRocket", "video aspect = true is not implemented yet");
+				/*float s = 1;
+				if(player.getWidth()<player.getHeight()){
+					s = getWidth()/player.getWidth();
+				}else{
+					s = getHeight()/player.getHeight();
+				}
+				player.draw(0,0, player.getWidth()*s, player.getHeight()*s);*/
 			} else {
 				player.draw(0,0, getWidth(), getHeight());
 			}
