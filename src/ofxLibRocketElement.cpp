@@ -228,3 +228,35 @@ ofColor ofxLibRocketElement::convertColorRocket(Rocket::Core::String color)
 		return ofColor::white;
 	return ofColor(ofToInt(colors[0]), ofToInt(colors[1]), ofToInt(colors[2]), ofToInt(colors[3]));
 }
+
+/*** ATTRIBUTES ****/
+
+float ofxLibRocketElement::getAttributeAsFloat(string attribute)
+{
+	return rocketElement->GetAttribute<float>(attribute.c_str(), 0.);
+}
+
+int ofxLibRocketElement::getAttributeAsInt(string attribute)
+{
+	return rocketElement->GetAttribute<int>(attribute.c_str(), 0);
+}
+
+string ofxLibRocketElement::getAttributeAsString(string attribute)
+{
+	return rocketElement->GetAttribute<String>(attribute.c_str(), "").CString();
+}
+
+void ofxLibRocketElement::setAttributeAsFloat(string attribute, float value)
+{
+	rocketElement->SetAttribute<float>(attribute.c_str(), value);
+}
+
+void ofxLibRocketElement::setAttributeAsInt(string attribute, int value)
+{
+	rocketElement->SetAttribute<int>(attribute.c_str(), value);
+}
+
+void ofxLibRocketElement::setAttributeAsString(string attribute, string value)
+{
+	rocketElement->SetAttribute<String>(attribute.c_str(), value.c_str());
+}

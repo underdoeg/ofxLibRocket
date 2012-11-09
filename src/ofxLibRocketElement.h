@@ -156,6 +156,14 @@ public:
 	void addListener(ofxLibRocketElementListener* listener);
 	void removeListener(ofxLibRocketElementListener* listener);
 	
+	string getAttributeAsString(string attribute);
+	int getAttributeAsInt(string attribute);
+	float getAttributeAsFloat(string attribute);
+	
+	void setAttributeAsString(string attribute, string value);
+	void setAttributeAsInt(string attribute, int value);
+	void setAttributeAsFloat(string attribute, float value);
+	
 protected:
 	ofColor convertColorRocket(Rocket::Core::String color);
 
