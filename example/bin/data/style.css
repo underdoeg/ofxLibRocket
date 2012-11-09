@@ -26,7 +26,7 @@ body{
 
 }
 
-view{
+view, video{
 	width: 50%;
 	height: 50%;
 	display: block;
@@ -36,16 +36,19 @@ view{
 	overflow: auto;
 }
 
-view.first{
+.first{
 	background-color: #000;
-	color: #ff00ff;	
+	color: #ff00ff;
+	width: 50px;
 }
 
-view#text{
-	color: #666;
+#text{
+	color: #660;
+	background-color: red;
+	width: 100px;
 }
 
-view#text p{
+#text p{
 	color: white;
 }
 
@@ -57,5 +60,8 @@ view p{
 h1{
 	margin: 5px;
 	display: block;
-	color: white;	
+	color: white;
+}
+
+video{
 }

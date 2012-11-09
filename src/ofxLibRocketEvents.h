@@ -3,6 +3,7 @@
 	
 #include "Rocket/Core.h"
 #include "ofMain.h"
+#include "ofxLibRocketUtils.h"
 
 class ofxLibRocketElement;
 class ofxLibRocketSlider;
@@ -46,6 +47,12 @@ class ofxLibRocketStringEventArgs: public ofxLibRocketEventArgs
 {
 public:
 	string value;
+};
+
+class ofxLibRocketStringListEventArgs: public ofxLibRocketEventArgs
+{
+public:
+	ofxLibRocketStringList value;
 };
 
 #endif // OFXLIBROCKETEVENTS_H

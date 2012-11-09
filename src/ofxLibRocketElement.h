@@ -4,6 +4,7 @@
 #include "ofxLibRocketEvents.h"
 #include "ofMain.h"
 #include "Rocket/Core.h"
+#include "ofxLibRocketUtils.h"
 
 class ofxLibRocketDocument;
 
@@ -35,7 +36,7 @@ public:
 	virtual void onMouseEnter(int x, int y) {};
 	virtual void onMouseOut(int x, int y) {};
 	virtual void onMouseOver(int x, int y) {};
-	virtual void onAttributeChange(string attribute) {};
+	virtual void onAttributeChange(ofxLibRocketStringList attribute) {};
 
 	virtual void onMouseClick(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseDoubleClick(ofxLibRocketMouseEventArgs &e) {};
@@ -46,7 +47,7 @@ public:
 	virtual void onMouseEnter(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseOut(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseOver(ofxLibRocketMouseEventArgs &e) {};
-	virtual void onAttributeChange(ofxLibRocketStringEventArgs &e) {};
+	virtual void onAttributeChange(ofxLibRocketStringListEventArgs &e) {};
 private:
 	void _show(ofxLibRocketEventArgs &e){
 		onShow();
@@ -102,7 +103,7 @@ private:
 		onMouseOut(e.x, e.y);
 	};
 	
-	void _attributeChange(ofxLibRocketStringEventArgs &e){
+	void _attributeChange(ofxLibRocketStringListEventArgs &e){
 		onAttributeChange(e.value);
 		onAttributeChange(e);
 	}
@@ -140,12 +141,13 @@ public:
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseOut;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseScroll;
 	
-	ofEvent<ofxLibRocketStringEventArgs> eventAttributeChange;
+	ofEvent<ofxLibRocketStringListEventArgs> eventAttributeChange;
 
 	int getWidth();
 	int getHeight();
 	int getX();
 	int getY();
+	ofPoint getPosition();
 
 	ofRectangle getBounds();
 	
@@ -168,17 +170,18 @@ public:
 	string getAttributeAsString(string attribute);
 	int getAttributeAsInt(string attribute);
 	float getAttributeAsFloat(string attribute);
+	bool getAttributeAsBool(string attribute);
 	
 	void setAttributeAsString(string attribute, string value);
 	void setAttributeAsInt(string attribute, int value);
 	void setAttributeAsFloat(string attribute, float value);
+	void setAttributeAsBool(string attribute, bool value);
 	
 protected:
 	ofColor convertColorRocket(Rocket::Core::String color);
 
 	virtual void ProcessRocketEvent(Rocket::Core::Event& e) {}
 	void ProcessEvent(Rocket::Core::Event&);
-	void OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes);
 	
 	Rocket::Core::Element* rocketElement;
 private:

@@ -151,6 +151,11 @@ int ofxLibRocketElement::getY()
 	return rocketElement->GetAbsoluteTop();
 }
 
+ofPoint ofxLibRocketElement::getPosition()
+{
+	return ofPoint(getX(), getY());
+}
+
 int ofxLibRocketElement::getHeight()
 {
 	return rocketElement->GetClientHeight();
@@ -247,6 +252,11 @@ string ofxLibRocketElement::getAttributeAsString(string attribute)
 	return rocketElement->GetAttribute<String>(attribute.c_str(), "").CString();
 }
 
+bool ofxLibRocketElement::getAttributeAsBool(string attribute)
+{
+	return rocketElement->GetAttribute<bool>(attribute.c_str(), false);
+}
+
 void ofxLibRocketElement::setAttributeAsFloat(string attribute, float value)
 {
 	rocketElement->SetAttribute<float>(attribute.c_str(), value);
@@ -262,14 +272,8 @@ void ofxLibRocketElement::setAttributeAsString(string attribute, string value)
 	rocketElement->SetAttribute<String>(attribute.c_str(), value.c_str());
 }
 
-void ofxLibRocketElement::OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes)
+void ofxLibRocketElement::setAttributeAsBool(string attribute, bool value)
 {
-	Rocket::Core::AttributeNameList::iterator it = changed_attributes.begin();
-	while(it != changed_attributes.end()){
-		static ofxLibRocketStringEventArgs args;
-		args.element = this;
-		args.value = (*it).CString();
-		ofNotifyEvent(eventAttributeChange, args);
-		it++;
-	}
+	rocketElement->SetAttribute<bool>(attribute.c_str(), value);
 }
+

@@ -5,7 +5,7 @@
 using namespace Rocket::Core;
 
 ofxLibRocketCustomElementWrapper::ofxLibRocketCustomElementWrapper(string tagName):Element(tagName.c_str())
-{	
+{
 	customElement = NULL;
 }
 
@@ -18,11 +18,16 @@ void ofxLibRocketCustomElementWrapper::OnUpdate()
 void ofxLibRocketCustomElementWrapper::OnRender()
 {
 	if(customElement)
-		customElement->draw();
+		customElement->drawWrapper();
+}
+
+void ofxLibRocketCustomElementWrapper::OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes)
+{
+	if(customElement)
+		customElement->OnAttributeChange(changed_attributes);
 }
 
 /******************************************************************************************************************************************************************************/
-
 
 map<string, ofxLibRocketCustomElementInstancer*> ofxLibRocketCustomElementHandler::instancers;
 ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::singleton = NULL;
@@ -39,20 +44,20 @@ Rocket::Core::Element* ofxLibRocketCustomElementHandler::InstanceElement(Rocket:
 {
 	if(parent == NULL)
 		return NULL;
-	if(instancers.find(tag.CString()) != instancers.end()){		
+	if(instancers.find(tag.CString()) != instancers.end()) {
 		ofxLibRocketDocument* doc = ofxLibRocket::getDocumentFromRocket(parent->GetOwnerDocument());
-		ofxLibRocketCustomElementWrapper* elRet = new ofxLibRocketCustomElementWrapper(tag.CString());		
+		ofxLibRocketCustomElementWrapper* elRet = new ofxLibRocketCustomElementWrapper(tag.CString());
 		ofxLibRocketCustomElement* el = instancers[tag.CString()]->createInstance();
 		el->setRocketElement(elRet);
-		
+
 		if(doc)
 			doc->addElement(el);
-		
+
 		elRet->customElement = el;
 		el->setup();
 		return elRet;
 	}
-	return NULL; //shouldn't happen	
+	return NULL; //shouldn't happen
 }
 
 void ofxLibRocketCustomElementHandler::Release()
@@ -61,7 +66,7 @@ void ofxLibRocketCustomElementHandler::Release()
 
 void ofxLibRocketCustomElementHandler::ReleaseElement(Rocket::Core::Element* element)
 {
-	
+
 }
 
 ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::get()
@@ -86,8 +91,29 @@ ofxLibRocketCustomElement::~ofxLibRocketCustomElement()
 
 void ofxLibRocketCustomElement::OnUpdate()
 {
-	if(!isSetup){
+	if(!isSetup) {
 		setup();
 		isSetup = true;
 	}
+}
+
+void ofxLibRocketCustomElement::OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes)
+{
+	Rocket::Core::AttributeNameList::iterator it = changed_attributes.begin();
+	static ofxLibRocketStringListEventArgs args;
+	args.element = this;
+	while(it != changed_attributes.end()) {
+		args.value.add((*it).CString());
+		it++;
+	}
+	ofNotifyEvent(eventAttributeChange, args);
+
+}
+
+void ofxLibRocketCustomElement::drawWrapper()
+{
+	ofPushMatrix();
+	ofTranslate(getPosition());
+	draw();
+	ofPopMatrix();
 }

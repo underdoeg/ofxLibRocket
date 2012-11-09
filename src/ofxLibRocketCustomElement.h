@@ -58,6 +58,7 @@ public:
 	ofxLibRocketCustomElementWrapper(string tagName);
 	void OnRender();
 	void OnUpdate();
+	void OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes);
 	ofxLibRocketCustomElement* customElement;
 };
 
@@ -73,12 +74,16 @@ public:
 	virtual void draw() {};
 
 protected:
-	void OnUpdate();
-	bool isSetup;
+	void drawWrapper();
 
 private:
+	void OnUpdate();
+	bool isSetup;
+	void OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes);
+
 
 	friend class ofxLibRocketCustomElementHandler;
+	friend class ofxLibRocketCustomElementWrapper;
 };
 
 #endif // OFXLIBROCKETCUSTOMELEMENT_H

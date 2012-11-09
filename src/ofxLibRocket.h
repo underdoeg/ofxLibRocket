@@ -9,6 +9,7 @@
 #include "Rocket/Debugger.h"
 #include <Rocket/Controls.h>
 #include "ofxlibrocketslider2d.h"
+#include "ofxLibRocketVideo.h"
 #include "ofxLibRocketCustomElement.h"
 #include "ofMain.h"
 

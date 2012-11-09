@@ -22,6 +22,7 @@ ofxLibRocket::ofxLibRocket()
 
 	//add default ofxLibRocketControls
 	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider2d>("slider2d");
+	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketVideo>("video");
 }
 
 ofxLibRocket::~ofxLibRocket()
