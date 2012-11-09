@@ -141,6 +141,8 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)
 	return createElement(tagName, std::map<string, string>());
 }
 
+/******************* WIDTH AND HEIGHT ***********************/
+
 int ofxLibRocketElement::getX()
 {
 	return rocketElement->GetAbsoluteLeft();
@@ -170,6 +172,42 @@ ofRectangle ofxLibRocketElement::getBounds()
 {
 	return ofRectangle(getX(), getY(), getWidth(), getHeight());
 }
+
+/**/
+
+/*
+ofRectangle ofxLibRocketElement::getInnerBounds()
+{
+	return ofRectangle(getInnerX(), getInnerY(), getInnerWidth(), getInnerHeight());
+}
+
+int ofxLibRocketElement::getInnerHeight()
+{
+	return rocketElement->GetClientHeight();
+}
+
+ofPoint ofxLibRocketElement::getInnerPosition()
+{
+	return ofPoint(getInnerX(), getInnerY());
+}
+
+int ofxLibRocketElement::getInnerWidth()
+{
+	return rocketElement->GetClientWidth();
+}
+
+int ofxLibRocketElement::getInnerX()
+{
+	return rocketElement->GetOffsetLeft();
+}
+
+int ofxLibRocketElement::getInnerY()
+{
+	return rocketElement->GetClientTop();
+}
+*/
+
+/******************************************/
 
 string ofxLibRocketElement::getId()
 {
@@ -276,4 +314,5 @@ void ofxLibRocketElement::setAttributeAsBool(string attribute, bool value)
 {
 	rocketElement->SetAttribute<bool>(attribute.c_str(), value);
 }
+
 

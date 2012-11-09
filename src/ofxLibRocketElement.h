@@ -148,8 +148,16 @@ public:
 	int getX();
 	int getY();
 	ofPoint getPosition();
-
 	ofRectangle getBounds();
+	
+	/*
+	int getInnerWidth();
+	int getInnerHeight();
+	int getInnerX();
+	int getInnerY();
+	ofPoint getInnerPosition();
+	ofRectangle getInnerBounds();
+	*/
 	
 	ofColor getColor();
 	ofColor getBackgroundColor();
