@@ -35,6 +35,7 @@ public:
 	virtual void onMouseEnter(int x, int y) {};
 	virtual void onMouseOut(int x, int y) {};
 	virtual void onMouseOver(int x, int y) {};
+	virtual void onAttributeChange(string attribute) {};
 
 	virtual void onMouseClick(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseDoubleClick(ofxLibRocketMouseEventArgs &e) {};
@@ -45,6 +46,7 @@ public:
 	virtual void onMouseEnter(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseOut(ofxLibRocketMouseEventArgs &e) {};
 	virtual void onMouseOver(ofxLibRocketMouseEventArgs &e) {};
+	virtual void onAttributeChange(ofxLibRocketStringEventArgs &e) {};
 private:
 	void _show(ofxLibRocketEventArgs &e){
 		onShow();
@@ -100,6 +102,11 @@ private:
 		onMouseOut(e.x, e.y);
 	};
 	
+	void _attributeChange(ofxLibRocketStringEventArgs &e){
+		onAttributeChange(e.value);
+		onAttributeChange(e);
+	}
+	
 	friend class ofxLibRocketElement;	
 };
 
@@ -132,6 +139,8 @@ public:
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseEnter;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseOut;
 	ofEvent<ofxLibRocketMouseEventArgs> eventMouseScroll;
+	
+	ofEvent<ofxLibRocketStringEventArgs> eventAttributeChange;
 
 	int getWidth();
 	int getHeight();
@@ -169,6 +178,8 @@ protected:
 
 	virtual void ProcessRocketEvent(Rocket::Core::Event& e) {}
 	void ProcessEvent(Rocket::Core::Event&);
+	void OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes);
+	
 	Rocket::Core::Element* rocketElement;
 private:
 	ofxLibRocketMouseEventArgs rocketMouseEventToOfx(Rocket::Core::Event& e);

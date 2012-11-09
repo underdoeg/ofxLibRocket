@@ -193,6 +193,7 @@ void ofxLibRocketElement::addListener(ofxLibRocketElementListener* listener)
 	//ofAddListener(eventMouseScroll, listener, &ofxLibRocketElementListener::_mouseScroll);
 	ofAddListener(eventMousePress, listener, &ofxLibRocketElementListener::_mousePress);
 	ofAddListener(eventMouseUp, listener, &ofxLibRocketElementListener::_mouseUp);
+	ofAddListener(eventAttributeChange, listener, &ofxLibRocketElementListener::_attributeChange);
 }
 
 void ofxLibRocketElement::removeListener(ofxLibRocketElementListener* listener)
@@ -259,4 +260,16 @@ void ofxLibRocketElement::setAttributeAsInt(string attribute, int value)
 void ofxLibRocketElement::setAttributeAsString(string attribute, string value)
 {
 	rocketElement->SetAttribute<String>(attribute.c_str(), value.c_str());
+}
+
+void ofxLibRocketElement::OnAttributeChange(const Rocket::Core::AttributeNameList& changed_attributes)
+{
+	Rocket::Core::AttributeNameList::iterator it = changed_attributes.begin();
+	while(it != changed_attributes.end()){
+		static ofxLibRocketStringEventArgs args;
+		args.element = this;
+		args.value = (*it).CString();
+		ofNotifyEvent(eventAttributeChange, args);
+		it++;
+	}
 }
