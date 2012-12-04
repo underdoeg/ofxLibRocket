@@ -19,10 +19,10 @@ ofxLibRocketElement* ofxLibRocketDocument::getElementById(string id)
 	return getElementByRocket(rocketElement);
 }
 
-ofxLibRocketSlider* ofxLibRocketDocument::createSlider(string name, float min, float max, float step)
-{
-	
-}
+//ofxLibRocketSlider* ofxLibRocketDocument::createSlider(string name, float min, float max, float step)
+//{
+//	
+//}
 
 ofxLibRocketSlider* ofxLibRocketDocument::getSlider(string id)
 {
