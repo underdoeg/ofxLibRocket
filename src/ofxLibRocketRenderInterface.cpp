@@ -153,27 +153,9 @@ void ofxLibRocketRenderInterface::EnableScissorRegion(bool enable)
 // Called by Rocket when it wants to change the scissor region.
 void ofxLibRocketRenderInterface::SetScissorRegion(int x, int y, int width, int height)
 {
+	//ofViewport(x, ofGetHeight() - (y + height), width, height);
 	glScissor(x, ofGetHeight() - (y + height), width, height);
 }
-
-// Set to byte packing, or the compiler will expand our struct, which means it won't read correctly from file
-#pragma pack(1)
-struct TGAHeader {
-	char  idLength;
-	char  colourMapType;
-	char  dataType;
-	short int colourMapOrigin;
-	short int colourMapLength;
-	char  colourMapDepth;
-	short int xOrigin;
-	short int yOrigin;
-	short int width;
-	short int height;
-	char  bitsPerPixel;
-	char  imageDescriptor;
-};
-// Restore packing
-#pragma pack()
 
 // Called by Rocket when a texture is required by the library.
 bool ofxLibRocketRenderInterface::LoadTexture(Rocket::Core::TextureHandle& texture_handle, Rocket::Core::Vector2i& texture_dimensions, const Rocket::Core::String& source)

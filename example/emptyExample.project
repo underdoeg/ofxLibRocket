@@ -273,7 +273,7 @@
   </VirtualDirectory>
   <VirtualDirectory Name="templates">
     <File Name="bin/data/demo.html"/>
-    <File Name="bin/data/controls.css"/>
     <File Name="bin/data/style.css"/>
+    <File Name="bin/data/controls.css"/>
   </VirtualDirectory>
 </CodeLite_Project>
