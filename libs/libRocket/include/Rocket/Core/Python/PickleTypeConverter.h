@@ -25,43 +25,62 @@
  *
  */
 
-#ifndef ROCKETCOREEVENTLISTENERINSTANCER_H
-#define ROCKETCOREEVENTLISTENERINSTANCER_H
+#ifndef ROCKETCOREPICKLETYPECONVERTER_H
+#define ROCKETCOREPICKLETYPECONVERTER_H
 
-#include <Rocket/Core/ReferenceCountable.h>
-#include <Rocket/Core/String.h>
-#include <Rocket/Core/Header.h>
-#include <Rocket/Core/Element.h>
+#include <Rocket/Core/TypeConverter.h>
 
 namespace Rocket {
 namespace Core {
-
-class EventListener;
+namespace Python {
 
 /**
-	Abstract instancer interface for instancing event listeners. This is required to be overridden for scripting
-	systems.
+	Generic Python Pickler that does string conversion using an Rocket::Core::TypeConverter.
 
 	@author Lloyd Weehuizen
  */
 
-class ROCKETCORE_API EventListenerInstancer : public ReferenceCountable
+template <typename T>
+class PickleTypeConverter : public python::pickle_suite
 {
-public:
-	virtual ~EventListenerInstancer();
+public:	
+	static python::tuple getstate(python::object obj)
+	{
+		T& object = python::extract<T&>(obj)();
+		
+		String buffer;
+		TypeConverter< T, String >::Convert(object, buffer);
 
-	/// Instance an event listener object.
-	/// @param value Value of the event.
-	/// @param element Element that triggers the events.
-	virtual EventListener* InstanceEventListener(const String& value, Element* element) = 0;
+		return python::make_tuple(buffer.CString());
+	}
 
-	/// Releases this event listener instancer.
-	virtual void Release() = 0;
+	static void setstate(python::object obj, python::tuple state)
+	{
+		T& object = python::extract< T& >(obj)();	
 
-protected:
-	virtual void OnReferenceDeactivate();
+		int len = python::extract< int >(state.attr( "__len__" )());
+		if (len != 1)
+		{
+			PyErr_SetObject(PyExc_ValueError,
+							("expected 1-item tuple in call to __setstate__; got %s"
+							% state).ptr()
+				);
+			python::throw_error_already_set();
+		}
+		
+		const char* cstring = python::extract<const char*>(state[0]);
+		String string(cstring);
+		TypeConverter<String, T>::Convert(string, object);
+	}
+
+	static bool getstate_manages_dict()
+	{
+		// Tell boost we've taken care of the dictionary
+		return true; 
+	}
 };
 
+}
 }
 }
 

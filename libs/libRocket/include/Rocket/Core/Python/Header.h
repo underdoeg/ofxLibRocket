@@ -25,37 +25,23 @@
  *
  */
 
-#ifndef ROCKETCORESTRING_H
-#define ROCKETCORESTRING_H
+#ifndef ROCKETCOREPYTHONHEADER_H
+#define ROCKETCOREPYTHONHEADER_H
 
-#include <Rocket/Core/Header.h>
-#include <Rocket/Core/StringBase.h>
-#include <stdarg.h>
-#include <string.h>
-#include <vector>
+#include <Rocket/Core/Platform.h>
 
-namespace Rocket {
-namespace Core {
-
-typedef StringBase< char > String;
-typedef std::vector< String > StringList;
-
-// Template specialisation of the constructor and FormatString() methods that use variable argument lists.
-template<>
-ROCKETCORE_API StringBase<char>::StringBase(StringBase<char>::size_type max_size, const char* fmt, ...);
-template<>
-ROCKETCORE_API int StringBase<char>::FormatString(StringBase<char>::size_type max_size, const char* fmt, ...);
-
-// Global operators for adding C strings to strings.
-ROCKETCORE_API String operator+(const char* cstring, const String& string);
-
-// Redefine Windows APIs as their STDC counterparts.
-#ifdef ROCKET_PLATFORM_WIN32
-	#define strcasecmp stricmp
-	#define strncasecmp strnicmp
+#if !defined STATIC_LIB
+#if defined ROCKET_PLATFORM_WIN32
+	#if defined RocketCorePython_EXPORTS
+		#define ROCKETCOREPYTHON_API __declspec(dllexport)
+	#else
+		#define ROCKETCOREPYTHON_API __declspec(dllimport)
+	#endif
+#else
+	#define ROCKETCOREPYTHON_API __attribute__((visibility("default")))
 #endif
-
-}
-}
+#else
+	#define ROCKETCOREPYTHON_API
+#endif
 
 #endif

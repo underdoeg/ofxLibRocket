@@ -65,7 +65,7 @@
 #include <Rocket/Core/PropertyParser.h>
 #include <Rocket/Core/PropertySpecification.h>
 #include <Rocket/Core/RenderInterface.h>
-#include <Rocket/Core/RString.h>
+#include <Rocket/Core/String.h>
 #include <Rocket/Core/StyleSheet.h>
 #include <Rocket/Core/StyleSheetKeywords.h>
 #include <Rocket/Core/StyleSheetSpecification.h>

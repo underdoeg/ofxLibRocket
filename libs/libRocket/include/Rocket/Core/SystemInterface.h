@@ -30,7 +30,7 @@
 
 #include <Rocket/Core/Log.h>
 #include <Rocket/Core/ReferenceCountable.h>
-#include <Rocket/Core/RString.h>
+#include <Rocket/Core/String.h>
 #include <Rocket/Core/Header.h>
 
 namespace Rocket {

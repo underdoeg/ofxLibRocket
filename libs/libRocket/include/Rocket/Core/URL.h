@@ -29,7 +29,7 @@
 #define ROCKETCOREURL_H
 
 #include <Rocket/Core/Header.h>
-#include <Rocket/Core/RString.h>
+#include <Rocket/Core/String.h>
 #include <map>
 
 namespace Rocket {

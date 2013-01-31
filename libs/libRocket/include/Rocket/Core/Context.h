@@ -33,7 +33,7 @@
 #include <Rocket/Core/ReferenceCountable.h>
 #include <Rocket/Core/ElementReference.h>
 #include <Rocket/Core/Input.h>
-#include <Rocket/Core/RString.h>
+#include <Rocket/Core/String.h>
 #include <Rocket/Core/ScriptInterface.h>
 
 namespace Rocket {

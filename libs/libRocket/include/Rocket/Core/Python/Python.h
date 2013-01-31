@@ -25,44 +25,28 @@
  *
  */
 
-#ifndef ROCKETCOREEVENTLISTENERINSTANCER_H
-#define ROCKETCOREEVENTLISTENERINSTANCER_H
+#ifndef ROCKETCOREPYTHON_H
+#define ROCKETCOREPYTHON_H
 
-#include <Rocket/Core/ReferenceCountable.h>
-#include <Rocket/Core/String.h>
-#include <Rocket/Core/Header.h>
-#include <Rocket/Core/Element.h>
+// RocketCore platform header for the ROCKET_PLATFORM_* define.
+#include <Rocket/Core/Platform.h>
 
-namespace Rocket {
-namespace Core {
+// Python header includes
+#include <Python.h>
 
-class EventListener;
+#ifdef ROCKET_PLATFORM_WIN32
+	#pragma warning(push)
+	#pragma warning(disable: 4244)
+#endif
 
-/**
-	Abstract instancer interface for instancing event listeners. This is required to be overridden for scripting
-	systems.
+// Prevent Boost from auto-linking with the wrong library.
+#define BOOST_ALL_NO_LIB
+#include <boost/python.hpp>
+// remap boost::python to python for easier access
+namespace python = boost::python;
 
-	@author Lloyd Weehuizen
- */
-
-class ROCKETCORE_API EventListenerInstancer : public ReferenceCountable
-{
-public:
-	virtual ~EventListenerInstancer();
-
-	/// Instance an event listener object.
-	/// @param value Value of the event.
-	/// @param element Element that triggers the events.
-	virtual EventListener* InstanceEventListener(const String& value, Element* element) = 0;
-
-	/// Releases this event listener instancer.
-	virtual void Release() = 0;
-
-protected:
-	virtual void OnReferenceDeactivate();
-};
-
-}
-}
+#ifdef ROCKET_PLATFORM_WIN32
+	#pragma warning(pop)
+#endif
 
 #endif

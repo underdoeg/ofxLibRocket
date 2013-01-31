@@ -30,7 +30,7 @@
 
 #include <Rocket/Core/Header.h>
 #include <Rocket/Core/Types.h>
-#include <Rocket/Core/RString.h>
+#include <Rocket/Core/String.h>
 #include <stdarg.h>
 
 namespace Rocket {

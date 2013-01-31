@@ -29,7 +29,7 @@
 #define ROCKETCONTROLSDATASOURCELISTENER_H
 
 #include <Rocket/Controls/Header.h>
-#include <Rocket/Core/RString.h>
+#include <Rocket/Core/String.h>
 
 namespace Rocket {
 namespace Controls {

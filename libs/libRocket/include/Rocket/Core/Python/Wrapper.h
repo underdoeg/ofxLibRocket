@@ -25,43 +25,42 @@
  *
  */
 
-#ifndef ROCKETCOREEVENTLISTENERINSTANCER_H
-#define ROCKETCOREEVENTLISTENERINSTANCER_H
+#ifndef ROCKETCOREPYTHONWRAPPER_H
+#define ROCKETCOREPYTHONWRAPPER_H
 
-#include <Rocket/Core/ReferenceCountable.h>
-#include <Rocket/Core/String.h>
-#include <Rocket/Core/Header.h>
-#include <Rocket/Core/Element.h>
+#include <Rocket/Core/Debug.h>
+#include <Rocket/Core/Python/Python.h>
+
+#include <boost/none.hpp>
 
 namespace Rocket {
 namespace Core {
-
-class EventListener;
+namespace Python {
 
 /**
-	Abstract instancer interface for instancing event listeners. This is required to be overridden for scripting
-	systems.
+	Generic Python Wrapper, using boost preprocessor iteration for constructor params
+	
+	Defines a basic wrapper, then template overloads it for each variation of the
+	number of arguments.
 
 	@author Lloyd Weehuizen
  */
 
-class ROCKETCORE_API EventListenerInstancer : public ReferenceCountable
-{
-public:
-	virtual ~EventListenerInstancer();
+struct WrapperNone {};
 
-	/// Instance an event listener object.
-	/// @param value Value of the event.
-	/// @param element Element that triggers the events.
-	virtual EventListener* InstanceEventListener(const String& value, Element* element) = 0;
+#define WRAPPER_MAX_ARGS	6
 
-	/// Releases this event listener instancer.
-	virtual void Release() = 0;
+#define WRAPPER_TEMPLATE_ARG(z, n, d) BOOST_PP_COMMA_IF(n) typename T##n = WrapperNone
 
-protected:
-	virtual void OnReferenceDeactivate();
-};
+template <typename T, BOOST_PP_REPEAT_1( BOOST_PP_INC(WRAPPER_MAX_ARGS), WRAPPER_TEMPLATE_ARG, N) >
+class Wrapper {};
 
+#undef WRAPPER_TEMPLATE_ARG
+
+#define BOOST_PP_ITERATION_PARAMS_1 (3, (0, WRAPPER_MAX_ARGS, <Rocket/Core/Python/WrapperIter.h>))
+#include BOOST_PP_ITERATE()
+
+}
 }
 }
 

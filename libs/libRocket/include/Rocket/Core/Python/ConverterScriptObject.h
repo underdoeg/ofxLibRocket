@@ -25,43 +25,52 @@
  *
  */
 
-#ifndef ROCKETCOREEVENTLISTENERINSTANCER_H
-#define ROCKETCOREEVENTLISTENERINSTANCER_H
+#ifndef ROCKETCOREPYTHONCONVERTERSCRIPTOBJECT_H
+#define ROCKETCOREPYTHONCONVERTERSCRIPTOBJECT_H
 
-#include <Rocket/Core/ReferenceCountable.h>
-#include <Rocket/Core/String.h>
-#include <Rocket/Core/Header.h>
-#include <Rocket/Core/Element.h>
+#include <Rocket/Core/Python/Python.h>
 
 namespace Rocket {
 namespace Core {
-
-class EventListener;
+namespace Python {
 
 /**
-	Abstract instancer interface for instancing event listeners. This is required to be overridden for scripting
-	systems.
+	Templated class for converting from a script object to a python object
+	
+	Simply construct this class in your application start up and it
+	will do the necessary registration of the object with the boost
+	type conversion repository.
 
 	@author Lloyd Weehuizen
  */
 
-class ROCKETCORE_API EventListenerInstancer : public ReferenceCountable
+template <typename T>
+struct ConverterScriptObject
 {
-public:
-	virtual ~EventListenerInstancer();
+	ConverterScriptObject()
+	{
+		// Register custom RKTElement to python converter
+		boost::python::to_python_converter< T*, ConverterScriptObject< T > >();
+	}
 
-	/// Instance an event listener object.
-	/// @param value Value of the event.
-	/// @param element Element that triggers the events.
-	virtual EventListener* InstanceEventListener(const String& value, Element* element) = 0;
+	static PyObject* convert(T* object)
+	{
+		PyObject* pyobject = Py_None;
+		if (object)
+		{
+			PyObject* script_object = (PyObject*)object->GetScriptObject();
+			if (script_object) 
+			{
+				pyobject = script_object;
+			}
+		}
 
-	/// Releases this event listener instancer.
-	virtual void Release() = 0;
-
-protected:
-	virtual void OnReferenceDeactivate();
+		Py_INCREF(pyobject);
+		return pyobject;
+	}
 };
 
+}
 }
 }
 
