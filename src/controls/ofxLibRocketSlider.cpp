@@ -29,7 +29,8 @@ void ofxLibRocketSlider::onMousePress(int x, int y, int button)
 
 void ofxLibRocketSlider::onMouseDrag(int x, int y, int button)
 {
-	handler->setPosition(20, 0);
+	float w = handler->getWidth()*.5;
+	handler->setPosition(x-w, getInnerBounds().y);
 }
 
 void ofxLibRocketSlider::onMouseUp(int x, int y, int button)

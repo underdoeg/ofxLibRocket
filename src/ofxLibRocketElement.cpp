@@ -49,11 +49,10 @@ Rocket::Core::Element* ofxLibRocketElement::getRocketElement()
 //little helper function to convert the mouse position and button to the event args
 ofxLibRocketMouseEventArgs ofxLibRocketElement::rocketMouseEventToOfx(Rocket::Core::Event& e)
 {
-	static ofxLibRocketMouseEventArgs args;
+	ofxLibRocketMouseEventArgs args;
 	args.element = this;
-	Vector2f off = this->getRocketElement()->GetAbsoluteOffset();
-	args.x = e.GetParameter<int>("mouse_x", 0)-off.x;
-	args.y = e.GetParameter<int>("mouse_y", 0)-off.y;
+	args.x = e.GetParameter<float>("mouse_x", 0.f)-this->getRocketElement()->GetAbsoluteLeft();
+	args.y = e.GetParameter<float>("mouse_y", 0.f)-this->getRocketElement()->GetAbsoluteTop();
 	pMouseX = mouseX;
 	pMouseY = mouseY;
 	mouseX = args.x;
@@ -66,60 +65,60 @@ void ofxLibRocketElement::ProcessEvent(Rocket::Core::Event& e)
 {
 	/* basic events */
 	if(e.GetType() == "show") {
-		static ofxLibRocketEventArgs args;
+		ofxLibRocketEventArgs args;
 		args.element = this;
 		ofNotifyEvent(eventShow, args);
 	} else if(e.GetType() == "hide") {
-		static ofxLibRocketEventArgs args;
+		ofxLibRocketEventArgs args;
 		args.element = this;
 		ofNotifyEvent(eventHide, args);
 	} else if(e.GetType() == "resize") {
-		static ofxLibRocketResizeEventArgs args;
+		ofxLibRocketResizeEventArgs args;
 		args.element = this;
 		args.width = getWidth();
 		args.height = getHeight();
 		ofNotifyEvent(eventResize, args);
 	} else if(e.GetType() == "scroll") {
-		static ofxLibRocketEventArgs args;
+		ofxLibRocketEventArgs args;
 		args.element = this;
 		ofNotifyEvent(eventScroll, args);
 	} else if(e.GetType() == "focus") {
-		static ofxLibRocketEventArgs args;
+		ofxLibRocketEventArgs args;
 		args.element = this;
 		ofNotifyEvent(eventFocus, args);
 	} else if(e.GetType() == "blur") {
-		static ofxLibRocketEventArgs args;
+		ofxLibRocketEventArgs args;
 		args.element = this;
 		ofNotifyEvent(eventBlur, args);
 	}
 
 	/* mouse events */
 	else if(e.GetType() == "click") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
+		ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseClick, args);
 	} else if(e.GetType() == "dblclick") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
+		ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseDoubleClick, args);
 	} else if(e.GetType() == "mouseover") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
+		ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseEnter, args);
 	} else if(e.GetType() == "mouseout") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
+		ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseOut, args);
 	} else if(e.GetType() == "mousemove") {
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
+		ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		if(isMouseDown)
 			ofNotifyEvent(eventMouseDrag, args);
 		else
 			ofNotifyEvent(eventMouseMove, args);
 	} else if(e.GetType() == "mouseup") {
 		isMouseDown = false;
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
+		ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMouseUp, args);
 	} else if(e.GetType() == "mousedown") {
 		isMouseDown = true;
 		buttonDown = e.GetParameter<int>("button", 0);
-		static ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
+		ofxLibRocketMouseEventArgs args = rocketMouseEventToOfx(e);
 		ofNotifyEvent(eventMousePress, args);
 	} else if(e.GetType() == "mousescroll") {
 		//TODO
@@ -148,12 +147,12 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)
 
 /******************* WIDTH AND HEIGHT ***********************/
 
-int ofxLibRocketElement::getX()
+float ofxLibRocketElement::getX()
 {
 	return rocketElement->GetAbsoluteLeft();
 }
 
-int ofxLibRocketElement::getY()
+float ofxLibRocketElement::getY()
 {
 	return rocketElement->GetAbsoluteTop();
 }
@@ -163,12 +162,12 @@ ofVec2f ofxLibRocketElement::getPosition()
 	return ofPoint(getX(), getY());
 }
 
-int ofxLibRocketElement::getHeight()
+float ofxLibRocketElement::getHeight()
 {
 	return rocketElement->GetClientHeight();
 }
 
-int ofxLibRocketElement::getWidth()
+float ofxLibRocketElement::getWidth()
 {
 	return rocketElement->GetClientWidth();
 }
@@ -192,15 +191,12 @@ void ofxLibRocketElement::setBounds(ofVec2f bounds)
 {
 }
 
-/**/
-
-/*
 ofRectangle ofxLibRocketElement::getInnerBounds()
 {
 	return ofRectangle(getInnerX(), getInnerY(), getInnerWidth(), getInnerHeight());
 }
 
-int ofxLibRocketElement::getInnerHeight()
+float ofxLibRocketElement::getInnerHeight()
 {
 	return rocketElement->GetClientHeight();
 }
@@ -210,21 +206,20 @@ ofPoint ofxLibRocketElement::getInnerPosition()
 	return ofPoint(getInnerX(), getInnerY());
 }
 
-int ofxLibRocketElement::getInnerWidth()
+float ofxLibRocketElement::getInnerWidth()
 {
 	return rocketElement->GetClientWidth();
 }
 
-int ofxLibRocketElement::getInnerX()
+float ofxLibRocketElement::getInnerX()
 {
 	return rocketElement->GetOffsetLeft();
 }
 
-int ofxLibRocketElement::getInnerY()
+float ofxLibRocketElement::getInnerY()
 {
 	return rocketElement->GetClientTop();
 }
-*/
 
 /******************************************/
 

@@ -143,10 +143,10 @@ public:
 	
 	ofEvent<ofxLibRocketStringListEventArgs> eventAttributeChange;
 
-	int getWidth();
-	int getHeight();
-	int getX();
-	int getY();
+	float getWidth();
+	float getHeight();
+	float getX();
+	float getY();
 	ofVec2f getPosition();
 	ofRectangle getBounds();
 	
@@ -154,14 +154,12 @@ public:
 	void setPosition(ofVec2f pos);
 	void setBounds(ofVec2f bounds);
 	
-	/*
-	int getInnerWidth();
-	int getInnerHeight();
-	int getInnerX();
-	int getInnerY();
+	float getInnerWidth();
+	float getInnerHeight();
+	float getInnerX();
+	float getInnerY();
 	ofPoint getInnerPosition();
 	ofRectangle getInnerBounds();
-	*/
 	
 	ofColor getColor();
 	ofColor getBackgroundColor();
