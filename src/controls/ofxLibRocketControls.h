@@ -12,7 +12,7 @@ protected:
 };
 
 /************************************************************************************/
-
+/*
 class ofxLibRocketSlider:public ofxLibRocketControl{
 public:
 	enum ORIENTATION{HORIZONTAL, VERTICAL};
@@ -32,6 +32,7 @@ private:
 	virtual void ProcessRocketEvent(Rocket::Core::Event&);	
 	float* floatPtr;
 };
+*/
 
 /************************************************************************************/
 

@@ -147,8 +147,12 @@ public:
 	int getHeight();
 	int getX();
 	int getY();
-	ofPoint getPosition();
+	ofVec2f getPosition();
 	ofRectangle getBounds();
+	
+	void setPosition(float x, float y);
+	void setPosition(ofVec2f pos);
+	void setBounds(ofVec2f bounds);
 	
 	/*
 	int getInnerWidth();
@@ -184,6 +188,8 @@ public:
 	void setAttributeAsInt(string attribute, int value);
 	void setAttributeAsFloat(string attribute, float value);
 	void setAttributeAsBool(string attribute, bool value);
+	
+	void setText(string text);
 	
 protected:
 	ofColor convertColorRocket(Rocket::Core::String color);

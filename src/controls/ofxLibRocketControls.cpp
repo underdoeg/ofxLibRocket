@@ -10,6 +10,7 @@ ofxLibRocketControl::ofxLibRocketControl(Rocket::Core::Element* e):ofxLibRocketE
 
 /************************************************************************************/
 
+/*
 ofxLibRocketSlider::ofxLibRocketSlider(Rocket::Core::Element* e):ofxLibRocketControl(e)
 {
 	rocketElement->AddEventListener("change", this);
@@ -69,6 +70,7 @@ void ofxLibRocketSlider::setValue(float value)
 {
 	rocketElement->SetAttribute<float>("value", value);
 }
+*/
 
 /********************************************************************************************************************/
 

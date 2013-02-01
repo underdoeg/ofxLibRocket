@@ -1,3 +1,4 @@
+*.workspace.*
 example/bin/example
 *.so
 *.session
@@ -11,4 +12,4 @@ example/bin/example
 *1v3
 *.pbxuser
 *.tags
-example/example.xcodeproj/phwhitfield.pbxuser
+example/example.xcodeproj/*.pbxuser

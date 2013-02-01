@@ -1,4 +1,4 @@
-button, select, option{
+button, select, option, input, slider{
 	display: block;
 	margin: 0px;
 	margin-left: 3px;
@@ -21,6 +21,19 @@ button:on{
 option{
 	background-color: #666;
 	margin: 0px;
+}
+
+slider{
+	height: 20px;
+}
+
+slider handler{
+	height: 100%;
+	width: 20px;
+	background-color: black;
+	display: block;
+	color: white;
+	text-align: center;
 }
 
 scrollbarvertical, scrollbarhorizontal{

@@ -132,8 +132,13 @@ ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName, std::map
 {
 	XMLAttributes rocketAttributes();
 	Element* el = Factory::InstanceElement(getRocketElement(), "*", tagName.c_str(), XMLAttributes());
+	cout << "here " << el << endl;
+	if(el == NULL){
+		ofLogError(OFX_LIBROCKET_LOG, "could not create new element with tag name "+tagName);
+		return NULL;
+	}
 	getRocketElement()->AppendChild(el);
-	return new ofxLibRocketElement();
+	return new ofxLibRocketElement(el);
 }
 
 ofxLibRocketElement* ofxLibRocketElement::createElement(string tagName)
@@ -153,7 +158,7 @@ int ofxLibRocketElement::getY()
 	return rocketElement->GetAbsoluteTop();
 }
 
-ofPoint ofxLibRocketElement::getPosition()
+ofVec2f ofxLibRocketElement::getPosition()
 {
 	return ofPoint(getX(), getY());
 }
@@ -171,6 +176,20 @@ int ofxLibRocketElement::getWidth()
 ofRectangle ofxLibRocketElement::getBounds()
 {
 	return ofRectangle(getX(), getY(), getWidth(), getHeight());
+}
+
+void ofxLibRocketElement::setPosition(ofVec2f pos)
+{
+	rocketElement->SetOffset(toRocket(pos), rocketElement->GetParentNode());
+}
+
+void ofxLibRocketElement::setPosition(float x, float y)
+{
+	setPosition(ofVec2f(x, y));
+}
+
+void ofxLibRocketElement::setBounds(ofVec2f bounds)
+{
 }
 
 /**/
@@ -315,4 +334,8 @@ void ofxLibRocketElement::setAttributeAsBool(string attribute, bool value)
 	rocketElement->SetAttribute<bool>(attribute.c_str(), value);
 }
 
+void ofxLibRocketElement::setText(string text)
+{
+	rocketElement->SetInnerRML(text.c_str());
+}
 

@@ -5,6 +5,15 @@
       <![CDATA[00010001N0005Debug000000000000]]>
     </Plugin>
   </Plugins>
+  <Reconciliation>
+    <Regexes/>
+    <Excludepaths/>
+    <Ignorefiles/>
+    <Extensions>
+      <![CDATA[cpp;c;h;hpp;xrc;wxcp;fbp]]>
+    </Extensions>
+    <Topleveldir>../example</Topleveldir>
+  </Reconciliation>
   <VirtualDirectory Name="libRocket">
     <VirtualDirectory Name="include">
       <VirtualDirectory Name="Rocket">
@@ -245,6 +254,35 @@
     </Configuration>
   </Settings>
   <VirtualDirectory Name="ofxLibRocket">
+    <VirtualDirectory Name="libs">
+      <VirtualDirectory Name="libRocket">
+        <VirtualDirectory Name="include">
+          <VirtualDirectory Name="Rocket">
+            <VirtualDirectory Name="Core">
+              <VirtualDirectory Name="Python">
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/Utilities.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/ConverterScriptObject.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/PickleTypeConverter.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/ElementWrapper.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/NameIndexInterface.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/VectorInterface.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/ElementInstancer.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/WrapperIter.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/Header.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/Python.h"/>
+                <File Name="../libs/libRocket/include/Rocket/Core/Python/Wrapper.h"/>
+              </VirtualDirectory>
+              <File Name="../libs/libRocket/include/Rocket/Core/String.h"/>
+            </VirtualDirectory>
+          </VirtualDirectory>
+        </VirtualDirectory>
+      </VirtualDirectory>
+    </VirtualDirectory>
+    <VirtualDirectory Name="example">
+      <VirtualDirectory Name="bin">
+        <File Name="bin/example"/>
+      </VirtualDirectory>
+    </VirtualDirectory>
     <File Name="../src/ofxLibRocket.h"/>
     <File Name="../src/ofxLibRocket.cpp"/>
     <File Name="../src/ofxLibRocketRenderInterface.h"/>
@@ -260,6 +298,8 @@
       <File Name="../src/controls/ofxlibrocketslider2d.cpp"/>
       <File Name="../src/controls/ofxLibRocketControls.cpp"/>
       <File Name="../src/controls/ofxLibRocketControls.h"/>
+      <File Name="../src/controls/ofxLibRocketSlider.h"/>
+      <File Name="../src/controls/ofxLibRocketSlider.cpp"/>
     </VirtualDirectory>
     <File Name="../src/ofxLibRocketCustomElement.cpp"/>
     <File Name="../src/ofxLibRocketCustomElement.h"/>

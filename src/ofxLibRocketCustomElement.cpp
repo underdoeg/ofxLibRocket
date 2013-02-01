@@ -76,7 +76,9 @@ ofxLibRocketCustomElementHandler* ofxLibRocketCustomElementHandler::get()
 	return singleton;
 }
 
-/*********************************************************************************/
+/**********************************************************************************************************************************************************/
+/* OFX_LIB_ROCKET_CUSTOM_ELEMENT 																														  */
+/**********************************************************************************************************************************************************/
 
 ofxLibRocketCustomElement::ofxLibRocketCustomElement()
 {
@@ -107,7 +109,6 @@ void ofxLibRocketCustomElement::OnAttributeChange(const Rocket::Core::AttributeN
 		it++;
 	}
 	ofNotifyEvent(eventAttributeChange, args);
-
 }
 
 void ofxLibRocketCustomElement::drawWrapper()

@@ -6,7 +6,7 @@
 #include "ofxLibRocketUtils.h"
 
 class ofxLibRocketElement;
-class ofxLibRocketSlider;
+//class ofxLibRocketSlider;
 
 class ofxLibRocketEventArgs: public ofEventArgs
 {
@@ -24,13 +24,14 @@ class ofxLibRocketResizeEventArgs: public ofxLibRocketEventArgs, public ofResize
 
 };
 
+/*
 class ofxLibRocketSliderEventArgs: public ofEventArgs
 {
 public:
 	ofxLibRocketElement* element;
 	ofxLibRocketSlider* slider;
 };
-
+*/
 class ofxLibRocketFloatEventArgs: public ofxLibRocketEventArgs
 {
 public:

@@ -14,6 +14,7 @@
 #include "ofMain.h"
 
 #define OFX_LIBROCKET_MAX_KEYS 1024
+#define OFX_LIBROCKET_LOG "ofxLibRocket"
 
 class ofxLibRocket: private Rocket::Core::Plugin{
 
