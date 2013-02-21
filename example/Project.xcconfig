@@ -5,5 +5,5 @@ OF_PATH = ../../..
 //THIS HAS ALL THE HEADER AND LIBS FOR OF CORE
 #include "../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig"
 
-OTHER_LDFLAGS = $(OF_CORE_LIBS) 
-HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS)
+OTHER_LDFLAGS = $(OF_CORE_LIBS) "../../../addons/ofxLibRocket/libs/libRocket/lib/osx/libRocketCore.a" "../../../addons/ofxLibRocket/libs/libRocket/lib/osx/libRocketControls.a" "../../../addons/ofxLibRocket/libs/libRocket/lib/osx/libRocketDebugger.a"
+HEADER_SEARCH_PATHS = $(OF_CORE_HEADERS) "../../../addons/ofxLibRocket/libs/libRocket/include/"
