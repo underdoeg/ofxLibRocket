@@ -13,3 +13,5 @@ example/bin/example
 *.pbxuser
 *.tags
 example/example.xcodeproj/*.pbxuser
+*/*/xcuserdata
+*/*/*/xcuserdata
