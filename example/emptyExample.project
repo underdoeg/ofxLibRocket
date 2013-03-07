@@ -294,12 +294,7 @@
     <File Name="../src/ofxLibRocketElement.cpp"/>
     <File Name="../src/ofxLibRocketDocument.cpp"/>
     <VirtualDirectory Name="controls">
-      <File Name="../src/controls/ofxlibrocketslider2d.h"/>
-      <File Name="../src/controls/ofxlibrocketslider2d.cpp"/>
-      <File Name="../src/controls/ofxLibRocketControls.cpp"/>
-      <File Name="../src/controls/ofxLibRocketControls.h"/>
-      <File Name="../src/controls/ofxLibRocketSlider.h"/>
-      <File Name="../src/controls/ofxLibRocketSlider.cpp"/>
+      <File Name="ofxLibRocketControls.h"/>
     </VirtualDirectory>
     <File Name="../src/ofxLibRocketCustomElement.cpp"/>
     <File Name="../src/ofxLibRocketCustomElement.h"/>
