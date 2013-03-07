@@ -1,4 +1,7 @@
 #ofxLibRocket
+
+NOTICE: This branch uses the new ofParameter which is only available in the develop branch
+
 ##about
 
 ofxLibRocket is a wrapper around the excellent librocket library (http://librocket.com/), an html and css layouting engine for c++.  
