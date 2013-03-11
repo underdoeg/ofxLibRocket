@@ -8,7 +8,6 @@
 #include "Rocket/Core.h"
 #include "Rocket/Debugger.h"
 #include <Rocket/Controls.h>
-#include "ofxlibrocketslider2d.h"
 #include "ofxLibRocketVideo.h"
 #include "ofxLibRocketCustomElement.h"
 #include "ofMain.h"
@@ -16,7 +15,7 @@
 #define OFX_LIBROCKET_MAX_KEYS 1024
 #define OFX_LIBROCKET_LOG "ofxLibRocket"
 
-class ofxLibRocket: private Rocket::Core::Plugin{
+class ofxLibRocket: private Rocket::Core::Plugin {
 
 public:
 	ofxLibRocket();
@@ -30,9 +29,9 @@ public:
 
 	//always load font before calling setup
 	void loadFont(string file);
-	
+
 	ofxLibRocketDocument* loadDocument(string docPath);
-	
+
 	void keyPressed  (ofKeyEventArgs& e);
 	void keyReleased(ofKeyEventArgs& e);
 	void mouseMoved(ofMouseEventArgs& e);
@@ -53,24 +52,24 @@ public:
 
 	void registerOfEvents();
 	void unregisterOfEvents();
-	
+
 	void initialiseKeyMap();
-	
+
 	void toggleDebugger();
 	void showDebugger();
 	void hideDebugger();
-	
+
 	template <class T>
-	void addCustomElement(string tagName){
+	void addCustomElement(string tagName) {
 		ofxLibRocketCustomElementHandler::addCustomElement<T>(tagName);
 	}
-	
+
 	static ofxLibRocketDocument* getDocumentFromRocket(Rocket::Core::ElementDocument* doc);
-	
+
 private:
 	void OnDocumentLoad(Rocket::Core::ElementDocument* document);
 	void OnElementCreate(Rocket::Core::Element* element);
-	
+
 
 	int getKeyModifier();
 	bool keyState[OFX_LIBROCKET_MAX_KEYS];
@@ -80,7 +79,7 @@ private:
 	ofxLibRocketRenderInterface renderer;
 	ofxLibRocketSystemInterface systemInterface;
 	Rocket::Core::Context* context;
-	
+
 };
 
 #endif // OFXLIBROCKET_H

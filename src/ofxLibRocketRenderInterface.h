@@ -19,8 +19,6 @@ public:
 	void RenderCompiledGeometry(Rocket::Core::CompiledGeometryHandle geometry, const Rocket::Core::Vector2f& translation);
 	void RenderGeometry(Rocket::Core::Vertex* vertices, int num_vertices, int* indices, int num_indices, Rocket::Core::TextureHandle texture, const Rocket::Core::Vector2f& translation);
 	void SetScissorRegion(int x, int y, int width, int height);
-
-
 };
 
 #endif // OFXLIBROCKETRENDERINTERFACE_H

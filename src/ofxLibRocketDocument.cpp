@@ -35,6 +35,8 @@ ofxLibRocketSlider* ofxLibRocketDocument::getSlider(string id)
 	return NULL;
 }*/
 
+
+/*
 ofxLibRocketButton* ofxLibRocketDocument::getButton(string id)
 {
 	Rocket::Core::Element* el = rocketDocument->GetElementById(id.c_str());
@@ -44,7 +46,9 @@ ofxLibRocketButton* ofxLibRocketDocument::getButton(string id)
 	}
 	return NULL;
 }
+*/
 
+/*
 ofxLibRocketTextField* ofxLibRocketDocument::getTextField(string id)
 {
 	Rocket::Core::Element* el = rocketDocument->GetElementById(id.c_str());
@@ -53,7 +57,7 @@ ofxLibRocketTextField* ofxLibRocketDocument::getTextField(string id)
 			return new ofxLibRocketTextField(el);
 	}
 	return NULL;
-}
+}*/
 
 void ofxLibRocketDocument::hide()
 {

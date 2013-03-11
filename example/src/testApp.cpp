@@ -16,7 +16,7 @@ void testApp::setup() {
 	doc = libRocket.loadDocument("demo.html");
 	
 	//attach events to elements
-	ofAddListener(doc->getButton("toggleDebugger")->eventChange, this, &testApp::toggleDebugger);
+	//ofAddListener(doc->getButton("toggleDebugger")->eventChange, this, &testApp::toggleDebugger);
 	
 	//use the following code to get a view
 	//View* view1 = doc->getElementById<View>("view1");

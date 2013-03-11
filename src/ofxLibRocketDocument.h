@@ -5,6 +5,7 @@
 #include "ofMain.h"
 #include "Rocket/Core.h"
 #include "ofxLibRocketControls.h"
+#include "ofxLibRocketElement.h"
 
 class ofxLibRocketDocument
 {
@@ -15,9 +16,9 @@ public:
 //	ofxLibRocketSlider* getSlider(string id);
 //	ofxLibRocketSlider* createSlider(string id, float min=0, float max=1, float step=.01);
 	
-	ofxLibRocketButton* getButton(string id);
+	//ofxLibRocketButton* getButton(string id);
 	
-	ofxLibRocketTextField* getTextField(string id);
+	//ofxLibRocketTextField* getTextField(string id);
 	
 	ofxLibRocketElement* getElementById(string id);
 	

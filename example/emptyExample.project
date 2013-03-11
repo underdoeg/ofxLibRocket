@@ -294,7 +294,7 @@
     <File Name="../src/ofxLibRocketElement.cpp"/>
     <File Name="../src/ofxLibRocketDocument.cpp"/>
     <VirtualDirectory Name="controls">
-      <File Name="ofxLibRocketControls.h"/>
+      <File Name="../src/controls/ofxLibRocketControls.h"/>
     </VirtualDirectory>
     <File Name="../src/ofxLibRocketCustomElement.cpp"/>
     <File Name="../src/ofxLibRocketCustomElement.h"/>

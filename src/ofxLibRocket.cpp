@@ -1,5 +1,4 @@
 #include "ofxLibRocket.h"
-#include "ofxLibRocketSlider.h"
 
 using namespace Rocket::Core;
 
@@ -22,8 +21,8 @@ ofxLibRocket::ofxLibRocket()
 	Rocket::Controls::Initialise();
 
 	//add default ofxLibRocketControls
-	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider>("slider");
-	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider2d>("slider2d");
+	//ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider>("slider");
+	//ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider2d>("slider2d");
 	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketVideo>("video");
 }
 
