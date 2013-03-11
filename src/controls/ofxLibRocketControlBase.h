@@ -23,11 +23,12 @@ private:
 	ofParameter<T> param;
 };
 
+
+
 template <class T>
 ofxLibRocketControlBase<T>::ofxLibRocketControlBase(){
 	registerListener();
 }
-
 
 template <class T>
 T ofxLibRocketControlBase<T>::getValue(){

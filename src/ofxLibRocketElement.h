@@ -189,6 +189,10 @@ public:
 	
 	void setText(string text);
 	
+	void enableClass(string className);
+	void disableClass(string className);
+	void setClass(string className, bool state);
+	
 protected:
 	ofColor convertColorRocket(Rocket::Core::String color);
 

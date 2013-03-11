@@ -334,3 +334,17 @@ void ofxLibRocketElement::setText(string text)
 	rocketElement->SetInnerRML(text.c_str());
 }
 
+void ofxLibRocketElement::disableClass(string className)
+{
+	setClass(className, false);
+}
+
+void ofxLibRocketElement::enableClass(string className)
+{
+	setClass(className, true);
+}
+
+void ofxLibRocketElement::setClass(string className, bool state)
+{
+	rocketElement->SetClass(className.c_str(), state);
+}

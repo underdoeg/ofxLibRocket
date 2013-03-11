@@ -8,7 +8,9 @@ class ofxLibRocketButton : public ofxLibRocketControlBase<bool>
 public:
 	ofxLibRocketButton();
 	~ofxLibRocketButton();
-
+	
+	void setup();
+	
 	void valueChanged(bool val);
 };
 

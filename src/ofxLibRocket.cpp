@@ -18,14 +18,14 @@ ofxLibRocket::ofxLibRocket()
 
 
 	Rocket::Core::Initialise();
-	//Rocket::Controls::Initialise();
+	Rocket::Controls::Initialise();
 
 	//add default ofxLibRocketControls
 	//ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider>("slider");
 	//ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketSlider2d>("slider2d");
 	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketVideo>("video");
 
-	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketButton>("buttonli");
+	ofxLibRocketCustomElementHandler::addCustomElement<ofxLibRocketButton>("button");
 }
 
 ofxLibRocket::~ofxLibRocket()
