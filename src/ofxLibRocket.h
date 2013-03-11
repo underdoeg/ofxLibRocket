@@ -5,6 +5,7 @@
 #include "ofxLibRocketControls.h"
 #include "ofxLibRocketSystemInterface.h"
 #include "ofxLibRocketRenderInterface.h"
+#include "ofxLibRocketControls.h"
 #include "Rocket/Core.h"
 #include "Rocket/Debugger.h"
 #include <Rocket/Controls.h>

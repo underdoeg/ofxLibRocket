@@ -22,6 +22,9 @@ void testApp::setup() {
 	//View* view1 = doc->getElementById<View>("view1");
 	//ofxLibRocketElementList_<View> views = doc->getElementsByTagName<View>("view");
 	//view1->hide();
+
+	ofxLibRocketButton button;
+	cout << "VALUE " << button.getValue() << endl;
 }
 
 void testApp::toggleDebugger(ofxLibRocketBoolEventArgs& args)
